@@ -1,36 +1,38 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import { Button, Navbar, Nav, Form, FormControl} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 // import './App.css';
 
 //landing page
 function App() {
   return (
-    <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/Sign Up">Sign up</Link>
-          </li>
-          <li>
-            <Link to="/Sign In">Sign In</Link>
-          </li>
-        </ul>
-      </nav>
-      <Switch>
-        <Route path="/Sign Up">
-          <SignUp />
-        </Route>
-        <Route path="/Sign In">
-          <SignIn />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      <Router>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">Biz Wiz</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="#home"><Link to="/">Home</Link></Nav.Link>
+              <Nav.Link href="#link"><Link to="/Sign Up">Sign up</Link></Nav.Link>
+              <Nav.Link href="#link"><Link to="/Sign In">Sign In</Link></Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <Switch>
+          <Route path="/Sign Up">
+            <SignUp />
+          </Route>
+          <Route path="/Sign In">
+            <SignIn />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
@@ -42,7 +44,15 @@ function Home() {
       <h3>For Small Businesses</h3>
       <div>
         <Router>
-          <Link to="/SearchBusinesses">Search for Businesses</Link>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Brand href="#home">Biz Wiz</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Nav.Link href="#home"><Link to="/SearchBusinesses">Search for Businesses</Link></Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
           <Switch>
             <Route path="/SearchBusinesses"><SearchBusiness /></Route>
           </Switch>
@@ -67,21 +77,17 @@ function SignUp() {
 function SignIn() {
   return(
     <div>
-      <h2>Sign In</h2>
-      <div>
-        TODO: Sign in form
-      </div>
       <Router>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/CreatePost">Create Post</Link>
-            </li>
-            <li>
-              <Link to="/SearchBusiness">Search Business</Link>
-            </li>
-          </ul>
-        </nav>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">Biz Wiz</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="#home"><Link to="/CreatePost">Create Post</Link></Nav.Link>
+              <Nav.Link href="#home"><Link to="/SearchBusinesses">Search for Businesses</Link></Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
         <Switch>
           <Route path="/CreatePost">
             <CreatePost />
@@ -91,6 +97,10 @@ function SignIn() {
           </Route>
         </Switch>
       </Router>
+      <h2>Sign In</h2>
+      <div>
+        TODO: Sign in form
+      </div>
       <div>
         <h1>Business Name</h1>
         <div> {/*To be replaced with function that adjusts to the amount of posts there are */}
