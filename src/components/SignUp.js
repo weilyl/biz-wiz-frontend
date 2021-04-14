@@ -9,7 +9,7 @@ function SignUp() {
         {/* <Form noValidate validated={validated} onSubmit={handleSubmit}> */}
         <Form>
         <Form.Row>
-          <Form.Group as={Col} md="4" controlId="validationCustom01">
+          <Form.Group as={Col} md="3" controlId="validationCustom01">
             <Form.Label>First name</Form.Label>
             <Form.Control
               required
@@ -19,7 +19,7 @@ function SignUp() {
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustom02">
+          <Form.Group as={Col} md="3" controlId="validationCustom02">
             <Form.Label>Last name</Form.Label>
             <Form.Control
               required
@@ -29,7 +29,7 @@ function SignUp() {
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+          <Form.Group as={Col} md="3" controlId="validationCustomUsername">
             <Form.Label>Business Name</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Prepend>
@@ -46,7 +46,20 @@ function SignUp() {
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
+          <Form.Group as={Col} md="3" controlId="validationCustomUsername">
+            <Form.Label>Business Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Wholesale"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+            <Form.Control.Feedback type="invalid">
+              What type of business are you running?
+            </Form.Control.Feedback>
+          </Form.Group>
         </Form.Row>
+
         <Form.Row>
         <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Adress</Form.Label>

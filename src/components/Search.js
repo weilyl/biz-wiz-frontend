@@ -5,8 +5,6 @@ class ViewButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {isToggleOn: true};
-
-    // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -17,17 +15,39 @@ class ViewButton extends React.Component {
   }
 
   render() {
-    return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'List' : 'Map'}
-      </button>
-    );
+    if(this.state){
+      return (
+        <div>
+          <button onClick={this.handleClick}>
+            {this.state.isToggleOn ? 'List' : 'Map'}
+          </button>
+          <div>
+            <ul>
+              <li>one</li>
+              <li>two</li>
+              <li>three</li>
+            </ul>
+          </div>
+        </div>
+      );
+    }else{
+      return (
+        <div>
+          <button onClick={this.handleClick}>
+            {this.state.isToggleOn ? 'List' : 'Map'}
+          </button>
+          <div>
+            <h3>To display map</h3>
+          </div>
+        </div>
+      );
+    }
   }
 }
 
 function SearchBusiness() {
     return (
-      <div>
+      <body>
         <form>
           <label>
             Search for Businesses: 
@@ -41,7 +61,7 @@ function SearchBusiness() {
           <button>Location</button>
           <ViewButton />
         </div>
-      </div>
+      </body>
     );
   }
 
