@@ -11,6 +11,7 @@ import SignIn from "./components/SignIn.js";
 
 //landing page
 function App() {
+  //make a conditional statement to see if user is on the landing page or not
   return (
     <div>
       <Router>

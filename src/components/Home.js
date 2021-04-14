@@ -6,6 +6,7 @@ import SearchBusiness from "./Search.js";
 
 //functions for landing page
 function Home() {
+  //create an if statement to check if on the landing page or not
     return (
       <div>
         <h2>Biz Wiz</h2>
