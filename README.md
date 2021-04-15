@@ -27,4 +27,5 @@ From within the Biz-Wiz-Frontend directory:
 ```sh
 - npm install react-router-dom
 - npm install react-bootstrap bootstrap 
+- npm install axios
 ```
