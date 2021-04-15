@@ -51,7 +51,7 @@ render(){
       <div>
         <Form>
         <Form.Row>
-          <Form.Group as={Col} md="3" controlId="validationCustom01" >
+          <Form.Group as={Col} md="5" controlId="validationCustom01" >
             <Form.Label>First name</Form.Label>
             <Form.Control
               required
@@ -63,7 +63,7 @@ render(){
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustom02">
+          <Form.Group as={Col} md="5" controlId="validationCustom02">
             <Form.Label>Last name</Form.Label>
             <Form.Control
               required
@@ -73,7 +73,21 @@ render(){
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustomUsername">
+        </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+            <Form.Label>Business Type</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Wholesale"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+            <Form.Control.Feedback type="invalid">
+              What type of business are you running?
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="validationCustomUsername">
             <Form.Label>Business Name</Form.Label>
             <InputGroup hasValidation>
               <InputGroup.Prepend>
@@ -90,17 +104,9 @@ render(){
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
-          <Form.Group as={Col} md="3" controlId="validationCustomUsername">
-            <Form.Label>Business Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Wholesale"
-                aria-describedby="inputGroupPrepend"
-                required
-              />
-            <Form.Control.Feedback type="invalid">
-              What type of business are you running?
-            </Form.Control.Feedback>
+          <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+          <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Password" />
           </Form.Group>
         </Form.Row>
         <Form.Row>
