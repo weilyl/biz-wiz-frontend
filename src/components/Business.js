@@ -1,8 +1,8 @@
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import {Navbar, Nav} from 'react-bootstrap';
 import SearchBusiness from "./Search.js";
-import CreatePost from "./Post.js";
-import SeePost from "./Post.js"
+//import Post from "./Post.js";
+import CreatePost from "./Post.js"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function BusinessPage(){
@@ -14,7 +14,7 @@ function BusinessPage(){
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link href="#home"><Link to="/CreatePost">Create Post</Link></Nav.Link>
+                <Nav.Link href="#home"><Link to="/CreatePost">My Posts</Link></Nav.Link>
                 <Nav.Link href="#home"><Link to="/SearchBusinesses">Search for Businesses</Link></Nav.Link>
               </Nav>
             </Navbar.Collapse>
@@ -28,15 +28,7 @@ function BusinessPage(){
             </Route>
           </Switch>
         </Router>
-        <div>
-          <h1>Business Name</h1>
-          <div>
-            <h2>Post Title</h2>
-            <button>View</button>
-            <button>Edit</button>
-            <button>Delete</button>
-          </div>
-        </div>
+        {/* <Post /> */}
       </div>
     );
   }
