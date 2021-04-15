@@ -1,6 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import {Navbar, Nav, Button} from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchBusiness from "./Search.js";
 
