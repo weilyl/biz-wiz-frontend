@@ -1,5 +1,30 @@
 import React from "react";
+import { Button} from 'react-bootstrap'
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import PersonList from "./API.js";
+
+class BusinessList extends React.Component {
+  state = {
+    persons: []
+  }
+
+  componentDidMount() {
+    axios.get(`https://jsonplaceholder.typicode.com/users`)
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+      })
+  }
+
+  render() {
+    return (
+      <ul>
+        { this.state.persons.map(person => <li>{person.name}</li>)}
+      </ul>
+    )
+  }
+}
 
 class ViewButton extends React.Component {
   constructor(props) {
@@ -18,16 +43,10 @@ class ViewButton extends React.Component {
     if(this.state){
       return (
         <div>
-          <button onClick={this.handleClick}>
+          <Button variant="primary" onClick={this.handleClick}>
             {this.state.isToggleOn ? 'List' : 'Map'}
-          </button>
-          <div>
-            <ul>
-              <li>one</li>
-              <li>two</li>
-              <li>three</li>
-            </ul>
-          </div>
+          </Button>
+          <BusinessList />
         </div>
       );
     }else{
@@ -57,8 +76,8 @@ function SearchBusiness() {
         </form>
         <div>
           <h3>Filter By:</h3>
-          <button>Category</button>
-          <button>Location</button>
+          <Button>Category</Button>
+          <Button>Location</Button>
           <ViewButton />
         </div>
       </body>

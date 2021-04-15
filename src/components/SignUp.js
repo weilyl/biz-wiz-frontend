@@ -1,21 +1,65 @@
 import { Button, Form, Col, InputGroup} from 'react-bootstrap'
+import React from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function SignUp() {
-    return (
+export default class SignUp extends React.Component{
+state = {
+  firstName: '',
+  lastName: '',
+  businessName: '',
+  bisunessType: '',
+  address: '',
+  city: '',
+  state: '',
+  zip: ''
+}
+
+// handleClick(event){
+//   console.log("sibmitted")
+// }
+
+handleSubmit = event => {
+  event.preventDefault();
+
+  const user = {
+    firstName: this.state.firstName,
+    lastName: this.state.lastName,
+    businessName: this.state.businessName,
+    bisunessType: this.state.bisunessType,
+    address: this.state.address,
+    city: this.state.city,
+    state: this.state.state,
+    zip: this.state.zip
+  };
+
+  axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+}
+
+// changefirst(event){
+//   this.setState({firstName: event.target.value})
+// }
+
+render(){
+  return (
+    <div>
+      <h2>Sign Up</h2>
       <div>
-        <h2>Sign Up</h2>
-        <div>
-        {/* <Form noValidate validated={validated} onSubmit={handleSubmit}> */}
         <Form>
         <Form.Row>
-          <Form.Group as={Col} md="3" controlId="validationCustom01">
+          <Form.Group as={Col} md="3" controlId="validationCustom01" >
             <Form.Label>First name</Form.Label>
             <Form.Control
               required
               type="text"
               placeholder="First name"
               defaultValue="Foo"
+              // name= "firstName"
+              // onChange={this.changefirst}
             />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
@@ -59,7 +103,6 @@ function SignUp() {
             </Form.Control.Feedback>
           </Form.Group>
         </Form.Row>
-
         <Form.Row>
         <Form.Group as={Col} md="3" controlId="validationCustom03">
             <Form.Label>Adress</Form.Label>
@@ -97,11 +140,10 @@ function SignUp() {
             feedback="You must agree before submitting."
           />
         </Form.Group>
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit" onCLick={this.handleSubmit}>Sign Up</Button>
       </Form>
         </div>
       </div>
     );
   }
-
-  export default SignUp;
+}

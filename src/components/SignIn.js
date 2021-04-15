@@ -2,6 +2,10 @@ import { Button, Form} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BusinessPage from "./Business.js"
 
+function handleClick(event){
+  console.log("Signing in")
+}
+
 function SignIn() {
   let isSignedIn = true;
   if(!isSignedIn){
@@ -23,7 +27,7 @@ function SignIn() {
           {/* <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Keep Me Signed In" />
           </Form.Group> */}
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={handleClick}>
             Sign In
           </Button>
         </Form>
