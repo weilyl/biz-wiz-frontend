@@ -12,7 +12,6 @@ function SignIn() {
   if(!isSignedIn){
     return(
       <div>
-        
         <h2>Sign In</h2>
         <div>
         <Form>

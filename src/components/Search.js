@@ -1,5 +1,5 @@
 import React from "react";
-import { Button} from 'react-bootstrap'
+import { Button, Dropdown} from 'react-bootstrap'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import PersonList from "./API.js";
@@ -76,7 +76,23 @@ function SearchBusiness() {
         </form>
         <div>
           <h3>Filter By:</h3>
-          <Button>Category</Button>
+          {/* <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Categories
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Wholesale</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Supermarket</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Hardware</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown> */}
+          <select className="browser-default custom-select">
+            <option>Categories</option>
+            <option value="1">Wholesale</option>
+            <option value="2">SuperMarket</option>
+            <option value="3">Hardware</option>
+          </select>
           <Button>Location</Button>
           <ViewButton />
         </div>
