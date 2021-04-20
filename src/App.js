@@ -21,9 +21,9 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav class="mr-auto">
-              <a><Link to="/SearchBusinesses"><landingOptions>Home</landingOptions></Link></a>
-              <a><Link to="/register"><landingOptions>Sign up</landingOptions></Link></a>
-              <a><Link to="/login"><landingOptions>Sign In</landingOptions></Link></a>
+              <Link to="/SearchBusinesses"><landingOptions>Home</landingOptions></Link>
+              <Link to="/register"><landingOptions>Sign up</landingOptions></Link>
+              <Link to="/login"><landingOptions>Sign In</landingOptions></Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

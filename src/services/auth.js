@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {apiURL, token} from './config';
 
-const register = (userInfo) => {
+export const register = (userInfo) => {
     axios
         .post(`${apiURL}register`, userInfo)
         .then((res) => {
@@ -14,7 +14,7 @@ const register = (userInfo) => {
     return "Success"
 }
 
-const login = (userLogin) => {
+export const login = (userLogin) => {
     if (!token) {
         axios
             .post(`${apiURL}login`, userLogin)
@@ -29,13 +29,13 @@ const login = (userLogin) => {
     return "Success"
 }
 
-const logout = () => {
+export const logout = () => {
     localStorage.setItem('token', null);
     return "Success"
 }
 
-export default {
-    register,
-    login,
-    logout
-}
+// export default {
+//     register,
+//     login,
+//     logout
+// }

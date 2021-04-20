@@ -1,9 +1,9 @@
-import {Dropdown} from 'react-bootstrap'
 import React from 'react';
-import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+// import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {register} from '../services/auth';
-import {useState, useEffect} from 'react';
+// import {useState, useEffect} from 'react';
 import {useFormFields} from '../lib/customHooks';
 
 
@@ -20,15 +20,12 @@ export default function SignUp () {
     city: '',
     state: '',
     zip: null,
-    logo: ''
+    logo: '',
+    type: '',
+    acct_type: ''
   });
 
 
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setBusinessState(e.target.value);
-  };
   
   const handleRegister = (event) => {
     event.preventDefault();
@@ -38,7 +35,7 @@ export default function SignUp () {
   
 
   return (
-    <form onChange={handleChange}>
+    <form>
         <h3>Register Business</h3>
   
         <div className="form-group">
@@ -158,7 +155,28 @@ export default function SignUp () {
             />
         </div>
   
-        <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleRegister}>Register</button>
+        <button 
+          type="submit" 
+          className="btn btn-dark btn-lg btn-block" 
+          onClick={handleRegister}
+        >Register</button>
+
+      {/* <Form.Group inline>
+          <label>Account Type</label>
+          <Form.Radio 
+            label="Business" 
+            // checked={account === 'Business'} 
+            name="acct_type"
+            value="Business" 
+            onClick={setBusinessState} />
+          <Form.Radio 
+            label="Customer" 
+            // checked={account === 'Customer'} 
+            name="acct_type" 
+            value="Customer"
+            onClick={setBusinessState} />
+      </Form.Group>
+         */}
     </form>
   );
 }
