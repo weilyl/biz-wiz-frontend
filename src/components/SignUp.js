@@ -4,45 +4,36 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {register} from '../services/auth';
 import {useState, useEffect} from 'react';
+import {useFormFields} from '../lib/customHooks';
 
 
 export default function SignUp () {
   
-  const [business, setBusinessState] = useState({
-    firstName: '',
-    lastName: '',
-    businessName: '',
-    businessType: '',
-    address: '',
+  const [business, setBusinessState] = useFormFields({
+    first_name: '',
+    last_name: '',
+    business_name: '',
+    user_name: '',
+    password: '',
+    email: '',
+    street_address: '',
     city: '',
     state: '',
-    zip: ''
+    zip: null,
+    logo: ''
   });
+
+
 
   const handleChange = (e) => {
     console.log(e.target.value);
     setBusinessState(e.target.value);
   };
   
-  const handleSubmit = event => {
+  const handleRegister = (event) => {
     event.preventDefault();
   
-    const user = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      businessName: this.state.businessName,
-      businessType: this.state.bisunessType,
-      address: this.state.address,
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip
-    };
-  
-    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
+    register(business);
   }
   
 
@@ -52,12 +43,23 @@ export default function SignUp () {
   
         <div className="form-group">
             <label>First name</label>
-            <input type="text" placeholder="Foo" />
+            <input 
+              type="text" 
+              placeholder="Foo" 
+              name="first_name"
+              value={business.first_name}
+              onChange={setBusinessState}
+            />
         </div>
   
         <div className="form-group">
             <label>Last name</label>
-            <input type="text" placeholder="Bar" />
+            <input 
+              type="text" 
+              placeholder="Bar" 
+              name="last_name"
+              onChange={setBusinessState}
+            />
         </div>
         
         <div className="form-group">
@@ -84,40 +86,79 @@ export default function SignUp () {
   
         <div className="form-group">
             <label>Business Name</label>
-            <input type="text" placeholder="FooBarElectronics" />
+            <input 
+              type="text" 
+              placeholder="FooBarElectronics" 
+              name="business_name"
+              value={business.business_name}
+              onChange={setBusinessState}/>
         </div>
   
         <div className="form-group">
             <label>Address</label>
-            <input type="text" placeholder="Address" />
+            <input 
+              type="text" 
+              placeholder="Address" 
+              name="street_address"
+              value={business.street_address}
+              onChange={setBusinessState}/>
         </div>
   
         <div className="form-group">
             <label>City</label>
-            <input type="text" placeholder="City" />
+            <input 
+              type="text" 
+              placeholder="City" 
+              name="city"
+              value={business.city}
+            />
         </div>
   
         <div className="form-group">
             <label>State</label>
-            <input type="text" placeholder="State" />
+            <input 
+              type="text" 
+              placeholder="State" 
+              name="state"
+              value={business.state}
+              onChange={setBusinessState}
+            />
         </div>
   
         <div className="form-group">
             <label>Zip Code</label>
-            <input type="text" placeholder="00000" />
+            <input 
+              type="text" 
+              placeholder="00000" 
+              name="zip"
+              value={business.zip}
+              onChange={setBusinessState}
+            />
         </div>
   
         <div className="form-group">
             <label>Email</label>
-            <input type="email" placeholder="Enter email" />
+            <input 
+              type="email" 
+              placeholder="Enter email" 
+              name="email"
+              value={business.email}
+              onChange={setBusinessState}
+            />
         </div>
   
         <div className="form-group">
             <label>Password</label>
-            <input type="password" placeholder="Enter password" />
+            <input 
+              type="password" 
+              placeholder="Enter password" 
+              name="password"
+              value={business.password}
+              onChange={setBusinessState}
+            />
         </div>
   
-        <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleSubmit}>Register</button>
+        <button type="submit" className="btn btn-dark btn-lg btn-block" onClick={handleRegister}>Register</button>
     </form>
   );
 }
