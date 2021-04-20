@@ -1,3 +1,4 @@
+/*
 .App {
   text-align: center;
 }
@@ -35,4 +36,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+*/
+
+landingOptions{
+  color: white;
+  text-align: right;
+  padding-right: 50px;
+}
+optionHeading{
+  color: white;
 }

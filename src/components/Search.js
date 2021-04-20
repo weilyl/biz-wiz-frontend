@@ -2,6 +2,9 @@ import React from "react";
 import { Button, Dropdown} from 'react-bootstrap'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Search.css'
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+
 // import PersonList from "./API.js";
 
 class BusinessList extends React.Component {
@@ -19,9 +22,9 @@ class BusinessList extends React.Component {
 
   render() {
     return (
-      <ul>
-        { this.state.persons.map(person => <li>{person.name}</li>)}
-      </ul>
+      <div className='list'>
+          { this.state.persons.map(person =><div className='business'>{person.company.name}</div>)}
+      </div>
     )
   }
 }
@@ -38,7 +41,6 @@ class ViewButton extends React.Component {
       isToggleOn: !prevState.isToggleOn
     }));
   }
-
   render() {
     if(this.state){
       return (
@@ -46,7 +48,6 @@ class ViewButton extends React.Component {
           <Button variant="primary" onClick={this.handleClick}>
             {this.state.isToggleOn ? 'List' : 'Map'}
           </Button>
-          <BusinessList />
         </div>
       );
     }else{
@@ -64,37 +65,65 @@ class ViewButton extends React.Component {
   }
 }
 
+class SearchForm extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {value: ''};
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleChange(event){
+    this.setState({value: event.target.value})
+  }
+  handleSubmit(event){
+    //console.log(this.state.value)
+    event.preventDefault()
+  }
+  render(){
+    return(
+      <div>
+      <form onSubmit={this.handleSubmit}>  
+        <label>
+        <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <button className='search' type="submit" value="Submit">Search for Business</button>
+      </form>
+      </div>
+    )
+  }
+}
+
 function SearchBusiness() {
     return (
       <body>
-        <form>
-          <label>
-            Search for Businesses: 
-            <input type="text" name="name" />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
+        <div><SearchForm /></div>
+        <div className='page-container'>
+        <div className='filter-container'>
         <div>
-          <h3>Filter By:</h3>
-          {/* <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Categories
-            </Dropdown.Toggle>
+          <filter>Filter By :</filter>
+        </div>
+        <div>
+          <filterby>Category</filterby><br/>
+          <input type='checkbox'></input>Local Markets<br/>
+          <input type='checkbox'></input>Technology<br/>
+          <input type='checkbox'></input>Beauty<br/>
+          <input type='checkbox'></input>Education<br/>
+          <input type='checkbox'></input>Crafting<br/>
+        </div>
+        <div>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Wholesale</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Supermarket</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Hardware</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown> */}
-          <select className="browser-default custom-select">
-            <option>Categories</option>
-            <option value="1">Wholesale</option>
-            <option value="2">SuperMarket</option>
-            <option value="3">Hardware</option>
-          </select>
-          <Button>Location</Button>
-          <ViewButton />
+          <filterby>Location</filterby><br/>
+          <input type='checkbox' name='New York'></input>New York<br/>
+          <input type='checkbox' name='New Jersey'></input>New Jersey<br/>
+          <input type='checkbox' name='Conneticut'></input>Conneticut<br/>
+          <input type='checkbox'></input>Other<br/>
+        </div>
+        <div><ViewButton /></div><br/>
+        <Link to="/SearchBusinesses" className='filter-button'>Filter</Link>
+        </div>
+        <div className='list-container'>
+          <BusinessList />
+        </div>
         </div>
       </body>
     );
