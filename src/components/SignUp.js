@@ -166,25 +166,29 @@ export default function SignUp () {
       class="custom-control custom-radio custom-control-inline">
       <input 
         type="radio" 
-        id="customRadioInline1" 
-        name="customRadioInline1" 
-        class="custom-control-input"/>
+        id="acct-type-business" 
+        name="acct_type" 
+        class="custom-control-input"
+        value="Business"
+        onClick={setBusinessState}/>
       <label 
         class="custom-control-label" 
-        for="customRadioInline1"
-      >Toggle this custom radio</label>
+        for="acct-type-business"
+      >Business</label>
     </div>
     <div 
       class="custom-control custom-radio custom-control-inline">
       <input 
         type="radio" 
-        id="customRadioInline2" 
-        name="customRadioInline1" 
-        class="custom-control-input"/>
+        id="acct-type-customer" 
+        name="acct_type" 
+        class="custom-control-input"
+        value="Customer"
+        onClick={setBusinessState}/>
       <label 
         class="custom-control-label" 
-        for="customRadioInline2"
-      >Or toggle this other custom radio</label>
+        for="acct-type-customer"
+      >Customer</label>
     </div>  
   </div>
 
