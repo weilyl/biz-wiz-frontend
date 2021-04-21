@@ -22,7 +22,7 @@ export default function SignUp () {
     street_address: '',
     city: '',
     state: '',
-    zip: null,
+    zip: '',
     logo: '',
     business_type: '',
     acct_type: ''
@@ -51,7 +51,7 @@ export default function SignUp () {
         onClick={setBusinessState}/>
       <label 
         className="custom-control-label" 
-        for="acct-type-business"
+        htmlFor="acct-type-business"
       >Business</label>
     </div>
     <div 
@@ -65,13 +65,15 @@ export default function SignUp () {
         onClick={setBusinessState}/>
       <label 
         className="custom-control-label" 
-        for="acct-type-customer"
+        htmlFor="acct-type-customer"
       >Customer</label>
     </div>  
   </div>
 
         <div className="form-group">
-            <label className='labels' for="first_name">First name</label>
+            <label 
+              className='labels' 
+              htmlFor="first_name">First name</label>
             <input 
               type="text" 
               placeholder="Foo" 
@@ -82,17 +84,22 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="last_name">Last name</label>
+            <label 
+              className='labels' 
+              htmlFor="last_name">Last name</label>
             <input 
               type="text" 
               placeholder="Bar" 
               name="last_name"
+              value={business.last_name}
               onChange={setBusinessState}
             />
         </div>
         
         <div className="form-group">
-            <label className='labels' for="business_type">Business Type</label>
+            <label 
+              className='labels' 
+              htmlFor="business_type">Business Type</label>
             <select className='dropdown'
               className="browser-default custom-select"
               name="business_type"
@@ -121,7 +128,10 @@ export default function SignUp () {
         </Dropdown> */}
   
         <div className="form-group">
-            <label className='labels' for="business_name">Business Name</label>
+            <label 
+              className='labels' 
+              htmlFor="business_name"
+            >Business Name</label>
             <input 
               type="text" 
               placeholder="FooBarElectronics" 
@@ -131,7 +141,9 @@ export default function SignUp () {
         </div>
 
         <div className="form-group">
-            <label className='labels' for="user_name">User Name</label>
+            <label 
+              className='labels' 
+              htmlFor="user_name">User Name</label>
             <input 
               type="text" 
               placeholder="User Name" 
@@ -142,7 +154,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="street_address">Address</label>
+            <label 
+              className='labels' 
+              htmlFor="street_address">Address</label>
             <input 
               type="text" 
               placeholder="Address" 
@@ -152,7 +166,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="city">City</label>
+            <label 
+              className='labels' 
+              htmlFor="city">City</label>
             <input 
               type="text" 
               placeholder="City" 
@@ -163,7 +179,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="state">State</label>
+            <label 
+              className='labels' 
+              htmlFor="state">State</label>
             <input 
               type="text" 
               placeholder="State" 
@@ -174,7 +192,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="zip">Zip Code</label>
+            <label 
+              className='labels' 
+              htmlFor="zip">Zip Code</label>
             <input 
               type="text" 
               placeholder="00000" 
@@ -185,7 +205,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="email">Email</label>
+            <label 
+              className='labels' 
+              htmlFor="email">Email</label>
             <input 
               type="email" 
               placeholder="Enter email" 
@@ -196,7 +218,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label className='labels' for="password">Password</label>
+            <label 
+              className='labels' 
+              htmlFor="password">Password</label>
             <input 
               type="password" 
               placeholder="Enter password" 

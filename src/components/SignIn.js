@@ -1,33 +1,63 @@
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import BusinessPage from "./Business.js";
-// import axios from 'axios';
-
-function handleClick(event) {
-  console.log("Signing in");
-}
+import {login } from '../services/auth.js';
+import {useFormFields} from '../lib/customHooks';
 
 function SignIn() {
-  let isSignedIn = true;
+
+  const [businessLogin, setBusinessLogin] = useFormFields({
+    user_name: '',
+    password: ''
+  })
+
+  const handleLogin = (event) => {
+    console.log('1')
+    event.preventDefault();  
+    login(businessLogin);
+    console.log("2")
+  }
+
+  let isSignedIn = window.localStorage.getItem('token') in [null, ''] ? true : false;  
+
   if (!isSignedIn) {
+    console.log(window.localStorage.getItem('token'))
+
     return (
       <div>
         <h2>Sign In</h2>
         <div>
           <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Username</Form.Label>
-              <Form.Control placeholder="Enter Username" />
+            <Form.Group>
+              <Form.Label 
+                htmlFor="user_name">Username</Form.Label>
+              <Form.Control 
+                type="text"
+                placeholder="Enter Username" 
+                name="user_name"
+                value={businessLogin.user_name}
+                onChange={setBusinessLogin}
+              />
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group>
+              <Form.Label
+                htmlFor="password"
+              >Password</Form.Label>
+              <Form.Control 
+                type="password" 
+                placeholder="Password" 
+                name="password"
+                value={businessLogin.password}
+                onChange={setBusinessLogin}
+              />
             </Form.Group>
-            {/* <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Keep Me Signed In" />
-          </Form.Group> */}
-            <Button variant="primary" type="submit" onClick={handleClick}>
+           
+            <Button 
+              variant="primary" 
+              type="submit" 
+              onClick={handleLogin}
+            >
               Sign In
             </Button>
           </Form>
