@@ -92,6 +92,16 @@ export default function SignUp () {
               value={business.business_name}
               onChange={setBusinessState}/>
         </div>
+
+        <div className="form-group">
+            <label for="user_name">User Name</label>
+            <input 
+              type="text" 
+              placeholder="User Name" 
+              name="user_name"
+              value={business.user_name}
+              onChange={setBusinessState}/>
+        </div>
   
         <div className="form-group">
             <label for="street_address">Address</label>
