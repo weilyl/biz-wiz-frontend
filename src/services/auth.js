@@ -27,9 +27,9 @@ export const login = (userLogin) => {
             .post(`${apiURL}login`, userLogin)
             .then((res) => {
                 console.log("res: ", res)
-                if (res.token) {
-                    console.log("possible token: ", res.token)
-                window.localStorage.setItem("token", JSON.stringify(res.token));
+                if (res.data.token) {
+                    console.log("possible token: ", res.data.token)
+                window.localStorage.setItem("token", JSON.stringify(res.data.token));
                 }
             })
     }
@@ -37,7 +37,7 @@ export const login = (userLogin) => {
 }
 
 export const logout = () => {
-    window.localStorage.setItem('token', null);
+    window.localStorage.setItem('token', '');
     return "Success"
 }
 
