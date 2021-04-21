@@ -1,29 +1,61 @@
 import React from "react";
-import { Button, Dropdown} from 'react-bootstrap'
+import { Button} from 'react-bootstrap'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Search.css'
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import {BrowserRouter as Link} from "react-router-dom";
 
 // import PersonList from "./API.js";
 
 class BusinessList extends React.Component {
   state = {
-    persons: []
+    businesses: []
+  }
+  
+  //functions for fetching business data during search
+  nameFilter(name){
+    const businesses = ''
+    this.setState({businesses})
+    axios.get(`http://biz-wiz.herokuapp.com//find/?search=:${name}`)
+    .then(res => {
+      const businesses = res.data;
+      this.setState({ businesses });
+    })
+  }
+
+  categoryFilter (type){
+    const businesses = ''
+    this.setState({businesses})
+    axios.get(`http://biz-wiz.herokuapp.com/category/${type}`)
+    .then(res => {
+      const businesses = res.data;
+      this.setState({ businesses });
+    })
+  }
+
+  locationCategoryFilter(type, location){
+    const businesses = ''
+    this.setState({businesses})
+    axios.get(`http://biz-wiz.herokuapp.com/category/${type}/distance/${location}`)
+    .then(res => {
+      const businesses = res.data;
+      this.setState({ businesses });
+    })
   }
 
   componentDidMount() {
+    //Placeholder data => https://jsonplaceholder.typicode.com/users
     axios.get(`https://jsonplaceholder.typicode.com/users`)
       .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
+        const businesses = res.data;
+        this.setState({ businesses });
       })
   }
 
   render() {
     return (
       <div className='list'>
-          { this.state.persons.map(person =><div className='business'>{person.company.name}</div>)}
+          { this.state.businesses.map(business =><div className='business'>{business.name}</div>)}
       </div>
     )
   }
@@ -104,11 +136,12 @@ function SearchBusiness() {
         </div>
         <div>
           <filterby>Category</filterby><br/>
-          <input type='checkbox'></input>Local Markets<br/>
-          <input type='checkbox'></input>Technology<br/>
-          <input type='checkbox'></input>Beauty<br/>
-          <input type='checkbox'></input>Education<br/>
-          <input type='checkbox'></input>Crafting<br/>
+          {/* call functions when check boxes are clicked => onChange={BusinessList.categoryFilter("Education")} */}
+          <input type='checkbox' ></input>Local Markets<br/>
+          <input type='checkbox' ></input>Technology<br/>
+          <input type='checkbox' ></input>Beauty<br/>
+          <input type='checkbox' ></input>Education<br/>
+          <input type='checkbox' ></input>Crafting<br/>
         </div>
         <div>
 
