@@ -1,25 +1,82 @@
-import React from "react";
-import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-import {Navbar, Nav} from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import SearchBusiness from "./Search.js";
-import "./Home.css"
-//functions for landing page
-function Home() {
-  //create an if statement to check if on the landing page or not
-    return (
-      <div>
-        <h2>Biz Wiz</h2>
-        <h3>For Small Business Believers</h3>
-        <div>
-          <Router>
-            <Switch>
-              <Route path="/SearchBusinesses"><SearchBusiness /></Route>
-            </Switch>
-          </Router>
-        </div>
-      </div>
-    );
-  }
+import React, { useEffect, useState } from "react";
+import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
 
-  export default Home;
+const useStyles = makeStyles((theme) => ({
+  logo: {
+    width: "400px",
+    marginLeft: "-39px",
+  },
+  logoContainer: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  searchBar: {
+    "&:hover": {
+      borderColor: "rgba(223,225,229,0)",
+      boxShadow: "0 1px 6px rgb(32 33 36 / 28%)",
+    },
+    "&:focus": {
+      borderColor: "rgba(223,225,229,0)",
+      boxShadow: "0 1px 6px rgb(32 33 36 / 28%)",
+    },
+    backgroundColor: "#00000000",
+    display: "flex",
+    border: " 1px solid #dfe1e5",
+    borderRadius: "24px",
+    height: "44px",
+    margin: "40px auto 20px",
+    width: "482px",
+    outline: "none",
+    textIndent: "30px",
+    textDecoration: "none",
+  },
+  submitButton: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+    },
+    color: "#f6f8f9",
+    background: "#2c63a6",
+    padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    borderRadius: "30px",
+  },
+}));
+
+export default function Home() {
+  const classes = useStyles();
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    setChecked(true);
+  }, []);
+  return (
+    <div className="rootDiv">
+      <Fade in={checked} {...(checked ? { timeout: 3000 } : {})}>
+        <div className={classes.logoContainer}>
+          <img
+            className={classes.logo}
+            src="/assets/BizWiz landing logo.PNG"
+            alt=""
+          />
+        </div>
+      </Fade>
+      <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
+        <form action="">
+          <input className={classes.searchBar} type="text" />
+          <Button
+            type="submit"
+            className={classes.submitButton}
+            variant="contained"
+            size="small"
+          >
+            Search
+          </Button>
+        </form>
+      </Grow>
+    </div>
+  );
+}
