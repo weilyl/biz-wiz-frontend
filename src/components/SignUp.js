@@ -30,7 +30,7 @@ export default function SignUp () {
     event.preventDefault();  
     register(business);
     // window.location.href = ''
-    return <Redirect to="/"/>
+    // return <Redirect to="/"/>
   }
   
 
