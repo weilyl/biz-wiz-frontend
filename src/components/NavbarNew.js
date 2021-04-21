@@ -82,7 +82,6 @@ export default function NavbarNew() {
           </Button>
         </Toolbar>
       </AppBar>
-      <Drawer anchor="left" open={open} onClose={() => setOpen(false)}></Drawer>
     </div>
   );
 }
