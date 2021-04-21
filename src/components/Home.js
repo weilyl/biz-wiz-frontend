@@ -79,7 +79,7 @@ export default function Home() {
           </Button>
         </form>
       </Grow>
-      <Route path="/search">
+      <Route path="/search" >
             <SearchBusiness />
       </Route>
     </div>
