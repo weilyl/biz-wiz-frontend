@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {register} from '../services/auth';
 // import {useState, useEffect} from 'react';
 import {useFormFields} from '../lib/customHooks';
-import {Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router';
 
 
 export default function SignUp () {
@@ -22,17 +22,15 @@ export default function SignUp () {
     state: '',
     zip: null,
     logo: '',
-    business_type: 'Wholesale',
+    business_type: '',
     acct_type: ''
   });
-
-
   
   const handleRegister = (event) => {
     event.preventDefault();  
     register(business);
     // window.location.href = ''
-    return <Redirect to="/"></Redirect>
+    return <Redirect to="/"/>
   }
   
 
