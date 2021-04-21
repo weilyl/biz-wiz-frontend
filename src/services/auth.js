@@ -16,6 +16,7 @@ export const register = (userInfo) => {
             if (res.data.token) {
                 console.log("possible token: ", res.data.token)
                 window.localStorage.setItem("token", JSON.stringify(res.data.token));
+                window.location.assign("/")
             }
         })
     return "Success"
@@ -24,7 +25,13 @@ export const register = (userInfo) => {
 export const login = (userLogin) => {
     if (!token) {
         axios
-            .post(`${apiURL}login`, userLogin)
+            .post(`${apiURL}login`, userLogin, {
+                headers: {
+                    'Access-Control-Allow-Origin': "*",
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             .then((res) => {
                 console.log("res: ", res)
                 if (res.data.token) {
@@ -37,7 +44,7 @@ export const login = (userLogin) => {
 }
 
 export const logout = () => {
-    window.localStorage.setItem('token', '');
+    window.localStorage.removeItem('token');
     return "Success"
 }
 
