@@ -7,51 +7,43 @@ export const register = (userInfo) => {
         .post(`${apiURL}business/register`, userInfo, {
             headers: {
                 'Access-Control-Allow-Origin': "*",
-                'Content-Type': 'application/json'//,
-                //'Authorization': `Bearer ${token}`
+                'Content-Type': 'application/json'
             }
         })
         .then((res) => {
             console.log("res: ", res)
             if (res.data.token) {
                 console.log("possible token: ", res.data.token)
-                window.localStorage.setItem("token", JSON.stringify(res.data.token));
+                window.localStorage.setItem("token", res.data.token);
                 window.location.assign("/");
             }
         })
-    return "Success"
 }
 
 export const login = (userLogin) => {
-    if (!token) {
+    // if (!token || token === '') {
         axios
             .post(`${apiURL}login`, userLogin, {
                 headers: {
                     'Access-Control-Allow-Origin': "*",
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'// ,
+                    // 'Authorization': `Bearer ${token}`
                 }
             })
             .then((res) => {
                 console.log("res: ", res)
                 if (res.data.token) {
                     console.log("possible token: ", res.data.token)
-                    window.localStorage.setItem("token", JSON.stringify(res.data.token));
-                    window.location.assign("/");
+                    window.localStorage.setItem("token", res.data.token);
+                    window.location.assign("/search");
                 }
             })
-    }
-    return "Success"
+    // } else {
+    //     console.log("BOOYA")
+    // }
 }
 
 export const logout = () => {
     window.localStorage.removeItem('token');
     window.location.assign("/")
-    return "Success"
 }
-
-// export default {
-//     register,
-//     login,
-//     logout
-// }
