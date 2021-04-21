@@ -4,19 +4,18 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Search.css'
 import {BrowserRouter as Link} from "react-router-dom";
-
-// import PersonList from "./API.js";
+// import MapContainer from "./Map"
 
 class BusinessList extends React.Component {
   state = {
     businesses: []
   }
   
-  //functions for fetching business data during search
+  //functions for fetching and filtering business data during search
   nameFilter(name){
     const businesses = ''
     this.setState({businesses})
-    axios.get(`http://biz-wiz.herokuapp.com//find/?search=:${name}`)
+    axios.get(`http://biz-wiz.herokuapp.com/business/find/?search=:${name}`)
     .then(res => {
       const businesses = res.data;
       this.setState({ businesses });
@@ -26,7 +25,7 @@ class BusinessList extends React.Component {
   categoryFilter (type){
     const businesses = ''
     this.setState({businesses})
-    axios.get(`http://biz-wiz.herokuapp.com/category/${type}`)
+    axios.get(`http://biz-wiz.herokuapp.com/business/category/${type}`)
     .then(res => {
       const businesses = res.data;
       this.setState({ businesses });
@@ -36,7 +35,7 @@ class BusinessList extends React.Component {
   locationCategoryFilter(type, location){
     const businesses = ''
     this.setState({businesses})
-    axios.get(`http://biz-wiz.herokuapp.com/category/${type}/distance/${location}`)
+    axios.get(`http://biz-wiz.herokuapp.com/business/category/${type}/distance/${location}`)
     .then(res => {
       const businesses = res.data;
       this.setState({ businesses });
@@ -45,7 +44,7 @@ class BusinessList extends React.Component {
 
   componentDidMount() {
     //Placeholder data => https://jsonplaceholder.typicode.com/users
-    axios.get(`https://jsonplaceholder.typicode.com/users`)
+    axios.get(`http://biz-wiz.herokuapp.com/business/all`)
       .then(res => {
         const businesses = res.data;
         this.setState({ businesses });
@@ -55,7 +54,7 @@ class BusinessList extends React.Component {
   render() {
     return (
       <div className='list'>
-          { this.state.businesses.map(business =><div className='business'>{business.name}</div>)}
+          { this.state.businesses.map(business =><div className='business'><p>{business.business_name}</p><p>{business.business_type}</p></div>)}
       </div>
     )
   }
@@ -89,7 +88,7 @@ class ViewButton extends React.Component {
             {this.state.isToggleOn ? 'List' : 'Map'}
           </button>
           <div>
-            <h3>To display map</h3>
+            {/* <MapContainer /> */}
           </div>
         </div>
       );
