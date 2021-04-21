@@ -6,9 +6,11 @@ import {register} from '../services/auth';
 // import {useState, useEffect} from 'react';
 import {useFormFields} from '../lib/customHooks';
 import {Redirect} from 'react-router';
+import "./SignUp.css";
 
 
 export default function SignUp () {
+  
   
   const [business, setBusinessState] = useFormFields({
     first_name: '',
@@ -37,147 +39,7 @@ export default function SignUp () {
   return (
     <form>
         <h3>Register Business</h3>
-  
         <div className="form-group">
-            <label for="first_name">First name</label>
-            <input 
-              type="text" 
-              placeholder="Foo" 
-              name="first_name"
-              value={business.first_name}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <div className="form-group">
-            <label for="last_name">Last name</label>
-            <input 
-              type="text" 
-              placeholder="Bar" 
-              name="last_name"
-              onChange={setBusinessState}
-            />
-        </div>
-        
-        <div className="form-group">
-            <label for="business_type">Business Type</label>
-            <select 
-              className="browser-default custom-select"
-              name="business_type"
-              onChange={setBusinessState}
-            >
-              <option>Categories</option>
-              <option value="Wholesale">Wholesale</option>
-              <option value="SuperMarket">SuperMarket</option>
-              <option value="Hardware">Hardware</option>
-            </select>
-        </div>
-  
-        {/* <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            BusinessType
-          </Dropdown.Toggle>
-  
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Wholesale</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Supermarket</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Hardware</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown> */}
-  
-        <div className="form-group">
-            <label for="business_name">Business Name</label>
-            <input 
-              type="text" 
-              placeholder="FooBarElectronics" 
-              name="business_name"
-              value={business.business_name}
-              onChange={setBusinessState}/>
-        </div>
-
-        <div className="form-group">
-            <label for="user_name">User Name</label>
-            <input 
-              type="text" 
-              placeholder="User Name" 
-              name="user_name"
-              value={business.user_name}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <div className="form-group">
-            <label for="street_address">Address</label>
-            <input 
-              type="text" 
-              placeholder="Address" 
-              name="street_address"
-              value={business.street_address}
-              onChange={setBusinessState}/>
-        </div>
-  
-        <div className="form-group">
-            <label for="city">City</label>
-            <input 
-              type="text" 
-              placeholder="City" 
-              name="city"
-              value={business.city}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <div className="form-group">
-            <label for="state">State</label>
-            <input 
-              type="text" 
-              placeholder="State" 
-              name="state"
-              value={business.state}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <div className="form-group">
-            <label for="zip">Zip Code</label>
-            <input 
-              type="text" 
-              placeholder="00000" 
-              name="zip"
-              value={business.zip}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <div className="form-group">
-            <label for="email">Email</label>
-            <input 
-              type="email" 
-              placeholder="Enter email" 
-              name="email"
-              value={business.email}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <div className="form-group">
-            <label for="password">Password</label>
-            <input 
-              type="password" 
-              placeholder="Enter password" 
-              name="password"
-              value={business.password}
-              onChange={setBusinessState}
-            />
-        </div>
-  
-        <button 
-          type="submit" 
-          className="btn btn-dark btn-lg btn-block" 
-          onClick={handleRegister}
-        >Register</button>
-
-  <div className="form-group">
     <div 
       className="custom-control custom-radio custom-control-inline">
       <input 
@@ -208,6 +70,149 @@ export default function SignUp () {
     </div>  
   </div>
 
+        <div className="form-group">
+            <label className='labels' for="first_name">First name</label>
+            <input 
+              type="text" 
+              placeholder="Foo" 
+              name="first_name"
+              value={business.first_name}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="last_name">Last name</label>
+            <input 
+              type="text" 
+              placeholder="Bar" 
+              name="last_name"
+              onChange={setBusinessState}
+            />
+        </div>
+        
+        <div className="form-group">
+            <label className='labels' for="business_type">Business Type</label>
+            <select className='dropdown'
+              className="browser-default custom-select"
+              name="business_type"
+              onChange={setBusinessState}
+            >
+              <option>Categories</option>
+              <option value="Technology">Technology</option>
+              <option value="Crafts">Crafts</option>
+              <option value="Beauty">Beauty</option>
+              <option value="Educational">Educational</option>
+              <option value="Local Market">Local Market</option>
+              <option value="Decor">Decor</option>
+            </select>
+        </div>
+  
+        {/* <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            BusinessType
+          </Dropdown.Toggle>
+  
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Wholesale</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Supermarket</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Hardware</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown> */}
+  
+        <div className="form-group">
+            <label className='labels' for="business_name">Business Name</label>
+            <input 
+              type="text" 
+              placeholder="FooBarElectronics" 
+              name="business_name"
+              value={business.business_name}
+              onChange={setBusinessState}/>
+        </div>
+
+        <div className="form-group">
+            <label className='labels' for="user_name">User Name</label>
+            <input 
+              type="text" 
+              placeholder="User Name" 
+              name="user_name"
+              value={business.user_name}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="street_address">Address</label>
+            <input 
+              type="text" 
+              placeholder="Address" 
+              name="street_address"
+              value={business.street_address}
+              onChange={setBusinessState}/>
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="city">City</label>
+            <input 
+              type="text" 
+              placeholder="City" 
+              name="city"
+              value={business.city}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="state">State</label>
+            <input 
+              type="text" 
+              placeholder="State" 
+              name="state"
+              value={business.state}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="zip">Zip Code</label>
+            <input 
+              type="text" 
+              placeholder="00000" 
+              name="zip"
+              value={business.zip}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="email">Email</label>
+            <input 
+              type="email" 
+              placeholder="Enter email" 
+              name="email"
+              value={business.email}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <div className="form-group">
+            <label className='labels' for="password">Password</label>
+            <input 
+              type="password" 
+              placeholder="Enter password" 
+              name="password"
+              value={business.password}
+              onChange={setBusinessState}
+            />
+        </div>
+  
+        <button 
+          type="submit" 
+          className="btn btn-dark btn-lg btn-block" 
+          onClick={handleRegister}
+        >Register</button>
+
+  
       {/* <Form.Group inline>
           <label>Account Type</label>
           <Form.Radio 
