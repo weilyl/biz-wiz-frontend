@@ -5,7 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {register} from '../services/auth';
 // import {useState, useEffect} from 'react';
 import {useFormFields} from '../lib/customHooks';
-import "./SignUp.css"
+import {Redirect} from 'react-router';
+import "./SignUp.css";
+
 
 export default function SignUp () {
   
@@ -22,15 +24,15 @@ export default function SignUp () {
     state: '',
     zip: null,
     logo: '',
-    business_type: 'Wholesale',
+    business_type: '',
     acct_type: ''
   });
-
-
   
   const handleRegister = (event) => {
     event.preventDefault();  
     register(business);
+    // window.location.href = ''
+    // return <Redirect to="/"/>
   }
   
 
@@ -93,14 +95,16 @@ export default function SignUp () {
             <label className='labels' for="business_type">Business Type</label>
             <select className='dropdown'
               className="browser-default custom-select"
-              name="business_type">
+              name="business_type"
+              onChange={setBusinessState}
+            >
               <option>Categories</option>
-              <option value="1">Technology</option>
-              <option value="2">Crafts</option>
-              <option value="3">Beauty</option>
-              <option value="3">Educational</option>
-              <option value="3">Local Market</option>
-              <option value="3">Decor</option>
+              <option value="Technology">Technology</option>
+              <option value="Crafts">Crafts</option>
+              <option value="Beauty">Beauty</option>
+              <option value="Educational">Educational</option>
+              <option value="Local Market">Local Market</option>
+              <option value="Decor">Decor</option>
             </select>
         </div>
   

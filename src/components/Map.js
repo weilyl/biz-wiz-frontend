@@ -18,7 +18,8 @@ export class MapContainer extends Component {
                   {latitude: 40.6782, longitude: -73.9442, name: 'Brooklyn'},
                   {latitude: 40.5795, longitude: -74.1502, name: 'Staten Island'},
                   {latitude: 40.7282, longitude: -73.7949, name: 'Queens'},
-                  {latitude: 40.8448, longitude: -73.8648, name: 'Bronx'}]
+                  {latitude: 40.8448, longitude: -73.8648, name: 'Bronx'},
+                  {latitude: 40.7891, longitude: -73.135, name: 'Long Island'}]
     }
   }
 
@@ -28,7 +29,7 @@ export class MapContainer extends Component {
        lat: store.latitude,
        lng: store.longitude
      }}
-     onClick={() => console.log("You clicked me!")} />
+     onClick={() => console.log(store.name)} />
     })
   }
 
@@ -47,5 +48,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'Your Token Here'
+  apiKey: 'AIzaSyAhHZ0DwmZsZ5b2hGtM89Y3Rtaa5xyxMuI'
 })(MapContainer);

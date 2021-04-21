@@ -63,3 +63,7 @@ filterby{
     justify-content: flex-end;
     padding-right: 20px;
 }
+
+#business-info{
+    width: 50%;
+}

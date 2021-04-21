@@ -4,7 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Search.css'
 import {BrowserRouter as Link} from "react-router-dom";
-// import MapContainer from "./Map"
+import MapContainer from "./Map"
 
 class BusinessList extends React.Component {
   state = {
@@ -13,37 +13,37 @@ class BusinessList extends React.Component {
   
   //functions for fetching and filtering business data during search
   nameFilter(name){
-    const businesses = ''
+    let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/find/?search=:${name}`)
     .then(res => {
-      const businesses = res.data;
+      businesses = res.data;
       this.setState({ businesses });
     })
   }
 
   categoryFilter (type){
-    const businesses = ''
+    let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/category/${type}`)
     .then(res => {
-      const businesses = res.data;
+      businesses = res.data;
       this.setState({ businesses });
     })
   }
 
   locationCategoryFilter(type, location){
-    const businesses = ''
+    //clear
+    let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/category/${type}/distance/${location}`)
     .then(res => {
-      const businesses = res.data;
+      businesses = res.data;
       this.setState({ businesses });
     })
   }
 
   componentDidMount() {
-    //Placeholder data => https://jsonplaceholder.typicode.com/users
     axios.get(`http://biz-wiz.herokuapp.com/business/all`)
       .then(res => {
         const businesses = res.data;
@@ -53,8 +53,16 @@ class BusinessList extends React.Component {
 
   render() {
     return (
-      <div className='list'>
-          { this.state.businesses.map(business =><div className='business'><p>{business.business_name}</p><p>{business.business_type}</p></div>)}
+      <div>
+        <div className='list'>
+            { this.state.businesses.map(business =><div className='business'>
+              <div id="business-info">{business.business_name}</div>
+              <div id="business-info">{business.business_type}</div>
+            </div>)}
+        </div>
+        <div>
+              <MapContainer />
+        </div>
       </div>
     )
   }
@@ -87,9 +95,6 @@ class ViewButton extends React.Component {
           <button onClick={this.handleClick}>
             {this.state.isToggleOn ? 'List' : 'Map'}
           </button>
-          <div>
-            {/* <MapContainer /> */}
-          </div>
         </div>
       );
     }
