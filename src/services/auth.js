@@ -16,7 +16,7 @@ export const register = (userInfo) => {
             if (res.data.token) {
                 console.log("possible token: ", res.data.token)
                 window.localStorage.setItem("token", JSON.stringify(res.data.token));
-                window.location.assign("/")
+                window.location.assign("/");
             }
         })
     return "Success"
@@ -36,7 +36,8 @@ export const login = (userLogin) => {
                 console.log("res: ", res)
                 if (res.data.token) {
                     console.log("possible token: ", res.data.token)
-                window.localStorage.setItem("token", JSON.stringify(res.data.token));
+                    window.localStorage.setItem("token", JSON.stringify(res.data.token));
+                    window.location.assign("/");
                 }
             })
     }
@@ -45,6 +46,7 @@ export const login = (userLogin) => {
 
 export const logout = () => {
     window.localStorage.removeItem('token');
+    window.location.assign("/")
     return "Success"
 }
 
