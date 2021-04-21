@@ -13,31 +13,32 @@ class BusinessList extends React.Component {
   
   //functions for fetching and filtering business data during search
   nameFilter(name){
-    const businesses = ''
+    let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/find/?search=:${name}`)
     .then(res => {
-      const businesses = res.data;
+      businesses = res.data;
       this.setState({ businesses });
     })
   }
 
   categoryFilter (type){
-    const businesses = ''
+    let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/category/${type}`)
     .then(res => {
-      const businesses = res.data;
+      businesses = res.data;
       this.setState({ businesses });
     })
   }
 
   locationCategoryFilter(type, location){
-    const businesses = ''
+    //clear
+    let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/category/${type}/distance/${location}`)
     .then(res => {
-      const businesses = res.data;
+      businesses = res.data;
       this.setState({ businesses });
     })
   }
@@ -54,7 +55,10 @@ class BusinessList extends React.Component {
   render() {
     return (
       <div className='list'>
-          { this.state.businesses.map(business =><div className='business'><p>{business.business_name}</p><p>{business.business_type}</p></div>)}
+          { this.state.businesses.map(business =><div className='business'>
+            <div id="business-info">{business.business_name}</div>
+            <div id="business-info">{business.business_type}</div>
+          </div>)}
       </div>
     )
   }
