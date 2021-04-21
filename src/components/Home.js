@@ -75,10 +75,13 @@ export default function Home() {
             variant="contained"
             size="small"
           >
-           Search
+           <Link to="/search">Search</Link>
           </Button>
         </form>
       </Grow>
+      <Route path="/search">
+            <SearchBusiness />
+      </Route>
     </div>
   );
 }
