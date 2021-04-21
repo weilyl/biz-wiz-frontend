@@ -64,11 +64,12 @@ export default function SignUp () {
             <select 
               className="browser-default custom-select"
               name="business_type"
+              onChange={setBusinessState}
             >
               <option>Categories</option>
-              <option value="1">Wholesale</option>
-              <option value="2">SuperMarket</option>
-              <option value="3">Hardware</option>
+              <option value="Wholesale">Wholesale</option>
+              <option value="SuperMarket">SuperMarket</option>
+              <option value="Hardware">Hardware</option>
             </select>
         </div>
   
