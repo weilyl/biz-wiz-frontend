@@ -21,7 +21,7 @@ export default function SignUp () {
     state: '',
     zip: null,
     logo: '',
-    type: '',
+    business_type: 'Wholesale',
     acct_type: ''
   });
 
@@ -59,10 +59,10 @@ export default function SignUp () {
         </div>
         
         <div className="form-group">
-            <label for="type">Business Type</label>
+            <label for="business_type">Business Type</label>
             <select 
               className="browser-default custom-select"
-              name="type"
+              name="business_type"
             >
               <option>Categories</option>
               <option value="1">Wholesale</option>
