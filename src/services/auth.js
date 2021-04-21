@@ -7,14 +7,15 @@ export const register = (userInfo) => {
         .post(`${apiURL}business/register`, userInfo, {
             headers: {
                 'Access-Control-Allow-Origin': "*",
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json'//,
+                //'Authorization': `Bearer ${token}`
             }
         })
         .then((res) => {
             console.log("res: ", res)
-            if (res.token) {
-                console.log("possible token: ", res.token)
-                localStorage.setItem("token", JSON.stringify(res.token));
+            if (res.data.token) {
+                console.log("possible token: ", res.data.token)
+                window.localStorage.setItem("token", JSON.stringify(res.data.token));
             }
         })
     return "Success"
@@ -28,7 +29,7 @@ export const login = (userLogin) => {
                 console.log("res: ", res)
                 if (res.token) {
                     console.log("possible token: ", res.token)
-                localStorage.setItem("token", JSON.stringify(res.token));
+                window.localStorage.setItem("token", JSON.stringify(res.token));
                 }
             })
     }
@@ -36,7 +37,7 @@ export const login = (userLogin) => {
 }
 
 export const logout = () => {
-    localStorage.setItem('token', null);
+    window.localStorage.setItem('token', null);
     return "Success"
 }
 
