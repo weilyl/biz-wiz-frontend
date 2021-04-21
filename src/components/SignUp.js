@@ -100,7 +100,8 @@ export default function SignUp () {
               placeholder="User Name" 
               name="user_name"
               value={business.user_name}
-              onChange={setBusinessState}/>
+              onChange={setBusinessState}
+            />
         </div>
   
         <div className="form-group">
