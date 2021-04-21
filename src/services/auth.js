@@ -3,7 +3,12 @@ import {apiURL, token} from './config';
 
 export const register = (userInfo) => {
     axios
-        .post(`${apiURL}register`, userInfo)
+        .post(`${apiURL}business/register`, userInfo, {
+            headers: {
+                'Access-Control-Allow-Origin': "*",
+                'Content-Type': 'application/json'
+            }
+        })
         .then((res) => {
             console.log("res: ", res)
             if (res.token) {
