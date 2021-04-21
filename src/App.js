@@ -17,13 +17,13 @@ function App() {
     <div>
       <Router>
         <Navbar bg="dark" expand="lg">
-          <Navbar.Brand href="#home"><optionHeading>Biz Wiz</optionHeading></Navbar.Brand>
+          <Navbar.Brand href="/">Biz Wiz</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav class="mr-auto">
-              <a><Link to="/SearchBusinesses"><landingOptions>Home</landingOptions></Link></a>
-              <a><Link to="/register"><landingOptions>Sign up</landingOptions></Link></a>
-              <a><Link to="/login"><landingOptions>Sign In</landingOptions></Link></a>
+            <Nav className="mr-auto">
+              <Link to="/SearchBusinesses">Home</Link>
+              <Link to="/register">Sign up</Link>
+              <Link to="/login">Sign In</Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -39,7 +39,6 @@ function App() {
             <Home />
           </Route>
         </Switch>
-
       </Router>
     </div>
   );
