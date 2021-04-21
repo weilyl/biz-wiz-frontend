@@ -12,22 +12,23 @@ function SignIn() {
   })
 
   const handleLogin = (event) => {
+    console.log('1')
     event.preventDefault();  
     login(businessLogin);
+    console.log("2")
   }
 
-  let isSignedIn = window.localStorage.getItem('token') !== "" ? true : false;
-
-  console.log(isSignedIn)
-  
+  let isSignedIn = window.localStorage.getItem('token') in [null, ''] ? true : false;  
 
   if (!isSignedIn) {
+    console.log(window.localStorage.getItem('token'))
+
     return (
       <div>
         <h2>Sign In</h2>
         <div>
           <Form>
-            <Form.Group controlId="formBasicEmail">
+            <Form.Group>
               <Form.Label 
                 htmlFor="user_name">Username</Form.Label>
               <Form.Control 
@@ -39,7 +40,7 @@ function SignIn() {
               />
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
+            <Form.Group>
               <Form.Label
                 htmlFor="password"
               >Password</Form.Label>

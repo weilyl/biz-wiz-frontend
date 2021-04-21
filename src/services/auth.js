@@ -21,13 +21,13 @@ export const register = (userInfo) => {
 }
 
 export const login = (userLogin) => {
-    if (!token) {
-        return axios
+    // if (!token || token === '') {
+        axios
             .post(`${apiURL}login`, userLogin, {
                 headers: {
                     'Access-Control-Allow-Origin': "*",
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json'// ,
+                    // 'Authorization': `Bearer ${token}`
                 }
             })
             .then((res) => {
@@ -35,10 +35,12 @@ export const login = (userLogin) => {
                 if (res.data.token) {
                     console.log("possible token: ", res.data.token)
                     window.localStorage.setItem("token", res.data.token);
-                    window.location.assign("/");
+                    window.location.assign("/search");
                 }
             })
-    }
+    // } else {
+    //     console.log("BOOYA")
+    // }
 }
 
 export const logout = () => {
