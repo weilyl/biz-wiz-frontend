@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import SearchBusiness from "./Search.js";
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -73,7 +75,7 @@ export default function Home() {
             variant="contained"
             size="small"
           >
-            Search
+           Search
           </Button>
         </form>
       </Grow>

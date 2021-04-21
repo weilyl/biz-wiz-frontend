@@ -18,7 +18,7 @@ function BusinessPage() {
                 <Link to="/CreatePost">My Posts</Link>
               </Nav.Link>
               <Nav.Link href="/">
-                <Link to="search">Search for Businesses</Link>
+                <Link to="/search">Search for Businesses</Link>
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
