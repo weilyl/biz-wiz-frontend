@@ -4,8 +4,7 @@ front end for the biz wiz project
 
 ## Usage
 
-> Some usage instructions for getting the app up and running locally
-From within the Biz-Wiz-Frontend directory:
+To run on local machine, run command from within the Biz-Wiz-Frontend directory:
 
 ```sh
 - npm start
@@ -28,4 +27,6 @@ From within the Biz-Wiz-Frontend directory:
 - npm install react-router-dom
 - npm install react-bootstrap bootstrap 
 - npm install axios
+- npm instal google-maps-react
+- npm install @material-ui/core
 ```
