@@ -20,7 +20,7 @@ function BusinessPage() {
       <h1>Welcome to Your Page!</h1>
       <Router>
       <Nav.Link href="#home">
-        <Button><Link to="/CreatePost">Create Posts</Link></Button>
+        <Button><Link to="/CreatePost">Create A Post</Link></Button>
       </Nav.Link>
       <Nav.Link href="/">
         <Button><Link to="/search">Search for Businesses</Link></Button>
