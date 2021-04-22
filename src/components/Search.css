@@ -3,7 +3,7 @@ form{
     padding-top:10px
 }
 .search{
-    background-color:#1a2333;
+    background-color:#12417b;
     color: white;
 }
 .filterby{
@@ -48,10 +48,11 @@ filterby{
 }
 .business{
     color: white;
-    background-color:#1a2333;
+    background-color:#12417b;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 20px;
+    border-radius: 1vw;
 
 }
 .list:hover .business:hover{

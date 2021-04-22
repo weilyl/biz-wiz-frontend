@@ -10,6 +10,10 @@ import {
   Button,
 } from "@material-ui/core";
 
+const handleSubmit = (event) => {
+  event.preventDefault()
+  console.log(event.state)
+}
 export default class Post extends React.Component {
   state = {
     persons: []
@@ -26,12 +30,11 @@ export default class Post extends React.Component {
   CreatePost() {
     return (
       <div>
-      <Form>
+      <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label>Post Title: </Form.Label>
-            <Form.Control placeholder="Title" />
+            <Form.Control placeholder="Title" type='text' />
           </Form.Group>
-  
           <Form.Group>
             <Form.Label>Text:</Form.Label>
             <Form.Control placeholder="Text" />
@@ -40,8 +43,9 @@ export default class Post extends React.Component {
             <Form.Check type="checkbox" label="Keep Me Signed In" />
           </Form.Group> */}
           <Button 
-          variant="primary" 
+          variant="contained" 
           type="submit"
+          color='inherit'
           >
             Post
           </Button>

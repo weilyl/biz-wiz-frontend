@@ -2,9 +2,8 @@ import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-ro
 import { Navbar, Nav } from "react-bootstrap";
 import SearchBusiness from "./Search.js";
 import './Business.css'
-import CreatePost from './Post.js'
 import Home from './Home.js'
-//import Post from "./Post.js";
+import Post from "./Post.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeIcon from "@material-ui/icons/Home";
 
@@ -52,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     color:"#12417b",
   },
 }));
+
 function BusinessPage() {
   const classes = useStyles();
   return (
@@ -64,7 +64,7 @@ function BusinessPage() {
           type="submit"
           href="/"
           className={classes.postbtn}
-          component={Link} to="/CreatePost">
+          component={Link} to='/CreatePost'>
           Create A Post</Button>
         <Button
           type="submit"
@@ -76,14 +76,13 @@ function BusinessPage() {
             Search for Businesses</Button>
         <Switch>
         <Route path="/CreatePost">
-            <CreatePost />
+            <Post />
           </Route>
           <Route path="/search">
             <Home />
           </Route>
         </Switch>
       </Router>
-      {/* <Post /> */}
     </div>
   );
 }
