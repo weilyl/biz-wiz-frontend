@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-
+import SearchBusiness from './Search.js';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
