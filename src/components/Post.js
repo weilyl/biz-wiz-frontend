@@ -39,7 +39,12 @@ export default class Post extends React.Component {
           {/* <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Keep Me Signed In" />
           </Form.Group> */}
-          <Button variant="primary" type="submit">
+          <Button 
+          variant="primary" 
+          type="submit"
+          color="secondary"
+          enabled
+          >
             Post
           </Button>
         </Form>
