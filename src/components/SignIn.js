@@ -20,7 +20,8 @@ import { useState, useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: "20px",
-    height: "70vh",
+    minHeight: "500px",
+    maxHeight: "70vh",
     width: 380,
     margin: "20px auto",
   },
