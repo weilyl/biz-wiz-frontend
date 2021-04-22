@@ -1,6 +1,14 @@
 import React from 'react';
-import { Button, Form} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 import axios from 'axios';
+import {
+  makeStyles,
+  AppBar,
+  Toolbar,
+  Typography,
+  Drawer,
+  Button,
+} from "@material-ui/core";
 
 export default class Post extends React.Component {
   state = {
@@ -31,7 +39,12 @@ export default class Post extends React.Component {
           {/* <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Keep Me Signed In" />
           </Form.Group> */}
-          <Button variant="primary" type="submit">
+          <Button 
+          variant="primary" 
+          type="submit"
+          color="secondary"
+          enabled
+          >
             Post
           </Button>
         </Form>

@@ -5,9 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {register} from '../services/auth';
 // import {useState, useEffect} from 'react';
 import {useFormFields} from '../lib/customHooks';
+import {Redirect} from 'react-router';
+import "./SignUp.css";
 
 
 export default function SignUp () {
+  
   
   const [business, setBusinessState] = useFormFields({
     first_name: '',
@@ -19,26 +22,58 @@ export default function SignUp () {
     street_address: '',
     city: '',
     state: '',
-    zip: null,
+    zip: '',
     logo: '',
-    business_type: 'Wholesale',
+    business_type: '',
     acct_type: ''
   });
-
-
   
   const handleRegister = (event) => {
     event.preventDefault();  
     register(business);
+    // window.location.href = ''
+    // return <Redirect to="/"/>
   }
   
 
   return (
     <form>
         <h3>Register Business</h3>
-  
         <div className="form-group">
-            <label for="first_name">First name</label>
+    <div 
+      className="custom-control custom-radio custom-control-inline">
+      <input 
+        type="radio" 
+        id="acct-type-business" 
+        name="acct_type" 
+        className="custom-control-input"
+        value="Business"
+        onClick={setBusinessState}/>
+      <label 
+        className="custom-control-label" 
+        htmlFor="acct-type-business"
+      >Business</label>
+    </div>
+    <div 
+      className="custom-control custom-radio custom-control-inline">
+      <input 
+        type="radio" 
+        id="acct-type-customer" 
+        name="acct_type" 
+        className="custom-control-input"
+        value="Customer"
+        onClick={setBusinessState}/>
+      <label 
+        className="custom-control-label" 
+        htmlFor="acct-type-customer"
+      >Customer</label>
+    </div>  
+  </div>
+
+        <div className="form-group">
+            <label 
+              className='labels' 
+              htmlFor="first_name">First name</label>
             <input 
               type="text" 
               placeholder="Foo" 
@@ -49,25 +84,34 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="last_name">Last name</label>
+            <label 
+              className='labels' 
+              htmlFor="last_name">Last name</label>
             <input 
               type="text" 
               placeholder="Bar" 
               name="last_name"
+              value={business.last_name}
               onChange={setBusinessState}
             />
         </div>
         
         <div className="form-group">
-            <label for="business_type">Business Type</label>
-            <select 
+            <label 
+              className='labels' 
+              htmlFor="business_type">Business Type</label>
+            <select className='dropdown'
               className="browser-default custom-select"
               name="business_type"
+              onChange={setBusinessState}
             >
               <option>Categories</option>
-              <option value="1">Wholesale</option>
-              <option value="2">SuperMarket</option>
-              <option value="3">Hardware</option>
+              <option value="Technology">Technology</option>
+              <option value="Crafts">Crafts</option>
+              <option value="Beauty">Beauty</option>
+              <option value="Educational">Educational</option>
+              <option value="Local Market">Local Market</option>
+              <option value="Decor">Decor</option>
             </select>
         </div>
   
@@ -84,7 +128,10 @@ export default function SignUp () {
         </Dropdown> */}
   
         <div className="form-group">
-            <label for="business_name">Business Name</label>
+            <label 
+              className='labels' 
+              htmlFor="business_name"
+            >Business Name</label>
             <input 
               type="text" 
               placeholder="FooBarElectronics" 
@@ -94,7 +141,9 @@ export default function SignUp () {
         </div>
 
         <div className="form-group">
-            <label for="user_name">User Name</label>
+            <label 
+              className='labels' 
+              htmlFor="user_name">User Name</label>
             <input 
               type="text" 
               placeholder="User Name" 
@@ -105,7 +154,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="street_address">Address</label>
+            <label 
+              className='labels' 
+              htmlFor="street_address">Address</label>
             <input 
               type="text" 
               placeholder="Address" 
@@ -115,7 +166,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="city">City</label>
+            <label 
+              className='labels' 
+              htmlFor="city">City</label>
             <input 
               type="text" 
               placeholder="City" 
@@ -126,7 +179,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="state">State</label>
+            <label 
+              className='labels' 
+              htmlFor="state">State</label>
             <input 
               type="text" 
               placeholder="State" 
@@ -137,7 +192,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="zip">Zip Code</label>
+            <label 
+              className='labels' 
+              htmlFor="zip">Zip Code</label>
             <input 
               type="text" 
               placeholder="00000" 
@@ -148,7 +205,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="email">Email</label>
+            <label 
+              className='labels' 
+              htmlFor="email">Email</label>
             <input 
               type="email" 
               placeholder="Enter email" 
@@ -159,7 +218,9 @@ export default function SignUp () {
         </div>
   
         <div className="form-group">
-            <label for="password">Password</label>
+            <label 
+              className='labels' 
+              htmlFor="password">Password</label>
             <input 
               type="password" 
               placeholder="Enter password" 
@@ -175,37 +236,7 @@ export default function SignUp () {
           onClick={handleRegister}
         >Register</button>
 
-  <div className="form-group">
-    <div 
-      className="custom-control custom-radio custom-control-inline">
-      <input 
-        type="radio" 
-        id="acct-type-business" 
-        name="acct_type" 
-        className="custom-control-input"
-        value="Business"
-        onClick={setBusinessState}/>
-      <label 
-        className="custom-control-label" 
-        for="acct-type-business"
-      >Business</label>
-    </div>
-    <div 
-      className="custom-control custom-radio custom-control-inline">
-      <input 
-        type="radio" 
-        id="acct-type-customer" 
-        name="acct_type" 
-        className="custom-control-input"
-        value="Customer"
-        onClick={setBusinessState}/>
-      <label 
-        className="custom-control-label" 
-        for="acct-type-customer"
-      >Customer</label>
-    </div>  
-  </div>
-
+  
       {/* <Form.Group inline>
           <label>Account Type</label>
           <Form.Radio 
