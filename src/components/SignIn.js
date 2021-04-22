@@ -20,7 +20,8 @@ import { useState, useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: "20px",
-    height: "70vh",
+    minHeight: "500px",
+    maxHeight: "70vh",
     width: 380,
     margin: "20px auto",
   },
@@ -53,18 +54,20 @@ const useStyles = makeStyles((theme) => ({
     alignContent: "center",
     marginLeft: 70,
   },
+  signInIcons: {
+    paddingBottom: "14px",
+  },
 }));
 function SignIn() {
   const [businessLogin, setBusinessLogin] = useFormFields({
-    user_name: '',
-    password: ''
-  })
+    user_name: "",
+    password: "",
+  });
 
   const handleLogin = (event) => {
-    console.log('1')
+    console.log("1");
     event.preventDefault();
-    try{
-
+    try{  
       login(businessLogin);
     } catch (err) {
       console.log(err.message)
@@ -82,76 +85,81 @@ function SignIn() {
     console.log(window.localStorage.getItem('token'))
     return (
       <div>
-      <Grid>
-        <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
-          <Paper elevation={10} className={classes.paper}>
-            <div className={classes.inputField}>
-              <Grid
-                container
-                spacing={1}
-                direction="row"
-                alignItems="center"
-                alignContent="center"
-                wrap="nowrap"
-              >
-                <img
-                  className={classes.logo}
-                  src="/assets/BizWiz landing logo.PNG"
-                  alt=""
+        <Grid>
+          <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
+            <Paper elevation={10} className={classes.paper}>
+              <div className={classes.inputField}>
+                <Grid
+                  container
+                  spacing={1}
+                  direction="row"
+                  alignItems="center"
+                  alignContent="center"
+                  wrap="nowrap"
+                >
+                  <img
+                    className={classes.logo}
+                    src="/assets/BizWiz landing logo.PNG"
+                    alt=""
+                  />
+                </Grid>
+                <TextField
+                  className={classes.inputUsername}
+                  margin="normal"
+                  label="Username"
+                  placeholder="Enter Username"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment
+                        className={classes.signInIcons}
+                        position="start"
+                      >
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-              </Grid>
-              <TextField
-                className={classes.inputUsername}
-                margin="normal"
-                label="Username"
-                placeholder="Enter Username"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <AccountCircle />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                className={classes.inputPassword}
-                margin="normal"
-                label="Password"
-                type="password"
-                placeholder="Enter Password"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <LockRounded />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <Button
-                className={classes.signIn}
-                type="submit"
-                variant="contained"
-                onClick={handleLogin}
-              >
-                Sign In
-              </Button>
-              <Typography variant="subtitle2" className={classes.signUp}>
-                Don't have an account? <Link href="/register">Sign Up</Link>
-              </Typography>
-            </div>
-          </Paper>
-        </Collapse>
-      </Grid>
-    </div>
-  );
-  }
-  else {
+                <TextField
+                  className={classes.inputPassword}
+                  margin="normal"
+                  label="Password"
+                  type="password"
+                  placeholder="Enter Password"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment
+                        className={classes.signInIcons}
+                        position="start"
+                      >
+                        <LockRounded />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <Button
+                  className={classes.signIn}
+                  type="submit"
+                  variant="contained"
+                  onClick={handleLogin}
+                >
+                  Sign In
+                </Button>
+                <Typography variant="subtitle2" className={classes.signUp}>
+                  Don't have an account? <Link href="/register">Sign Up</Link>
+                </Typography>
+              </div>
+            </Paper>
+          </Collapse>
+        </Grid>
+      </div>
+    );
+  } else {
     return (
       <div>
         <BusinessPage />
       </div>
     );
   }
-};
+}
 
 export default SignIn;

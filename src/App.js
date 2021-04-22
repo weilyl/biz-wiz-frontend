@@ -7,7 +7,7 @@ import SignUp from "./components/SignUp.js";
 import SignIn from "./components/SignIn.js";
 // import PersonList from "./components/API.js";
 // import * from 'react-bootstrap'
-import Post from './components/Post.js'
+import Post from "./components/Post.js";
 import "./App.css";
 import SearchBusiness from "./components/Search.js";
 import BusinessPage from "./components/Business.js";
@@ -21,9 +21,12 @@ function App() {
       <Router>
         <NavbarNew />
         <Switch>
+          <Route path="/search">
+            <SearchBusiness />
+          </Route>
           <Route path="/create-post">
             <Post />
-            </Route>
+          </Route>
           <Route path="/register">
             <SignUp />
           </Route>
@@ -32,9 +35,6 @@ function App() {
           </Route>
           <Route path="/">
             <Home />
-          </Route>
-          <Route path="/search">
-            <SearchBusiness />
           </Route>
         </Switch>
       </Router>
