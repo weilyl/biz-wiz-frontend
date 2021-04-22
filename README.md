@@ -28,4 +28,5 @@ From within the Biz-Wiz-Frontend directory:
 - npm install react-bootstrap bootstrap 
 - npm install axios
 - npm instal google-maps-react
+- npm install @material-ui/core
 ```
