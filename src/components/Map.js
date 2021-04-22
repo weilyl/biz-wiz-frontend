@@ -1,5 +1,7 @@
-// import React, {Component} from 'react';
-// import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
+
+ import React, {Component} from 'react';
+import { Map, GoogleApiWrapper, Marker} from 'google-maps-react';
+
 
 // const mapStyles = {
 //   map: {
@@ -47,6 +49,6 @@
 //   }
 // }
 
-// export default GoogleApiWrapper({
-//   apiKey: 'AIzaSyAhHZ0DwmZsZ5b2hGtM89Y3Rtaa5xyxMuI'
-// })(MapContainer);
+export default GoogleApiWrapper({
+  apiKey: 'Your Token Here'
+})(MapContainer);
