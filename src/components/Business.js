@@ -15,6 +15,7 @@ import {
   Drawer,
   Button,
 } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 function BusinessPage() {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.rootDiv}>
       <h1>Welcome to Your Page!</h1>
       <Router>
       <Nav.Link href="#home">

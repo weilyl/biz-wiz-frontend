@@ -6,4 +6,5 @@ h1{
 }
 .links:hover{
     color: white;
+    text-decoration: none;
 }
