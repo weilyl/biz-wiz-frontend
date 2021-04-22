@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import SearchBusiness from "./Search.js";
-import BusinessPage from "./Business.js";
+import SearchIcon from "@material-ui/icons/Search";
+
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -30,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "40px auto 20px",
     width: "482px",
     outline: "none",
-    textIndent: "30px",
+    textIndent: "40px",
     textDecoration: "none",
   },
   submitButton: {
@@ -47,6 +46,14 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     borderWidth: "0",
     borderRadius: "30px",
+  },
+  inputWithSearchIcon: {
+    position: "relative",
+  },
+  searchIcon: {
+    position: "absolute",
+    left: "540px",
+    top: "11px",
   },
 }));
 
@@ -69,7 +76,10 @@ export default function Home() {
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
         <form action="">
-          <input className={classes.searchBar} type="text" />
+          <div className={classes.inputWithSearchIcon}>
+            <SearchIcon className={classes.searchIcon} />
+            <input className={classes.searchBar} type="text" />
+          </div>
           <Button
             type="submit"
             className={classes.submitButton}
