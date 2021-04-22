@@ -1,6 +1,14 @@
 import React from 'react';
-import { Button, Form} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 import axios from 'axios';
+import {
+  makeStyles,
+  AppBar,
+  Toolbar,
+  Typography,
+  Drawer,
+  Button,
+} from "@material-ui/core";
 
 export default class Post extends React.Component {
   state = {
