@@ -20,10 +20,25 @@ function BusinessPage() {
       <h1>Welcome to Your Page!</h1>
       <Router>
       <Nav.Link href="#home">
-        <Button><Link to="/CreatePost">Create A Post</Link></Button>
+        <Button
+    style={{
+        borderRadius: 35,
+        backgroundColor: "#12417b",
+        padding: "10px 20px",
+        fontSize: "15px"
+    }}
+    variant="contained"
+    >
+      <Link to="/CreatePost">Create A Post</Link></Button>
       </Nav.Link>
       <Nav.Link href="/">
-        <Button><Link to="/search">Search for Businesses</Link></Button>
+        <Button
+            style={{
+              borderRadius: 35,
+              backgroundColor: "#12417b",
+              padding: "10px 20px",
+              fontSize: "15px"
+          }}><Link to="/search">Search for Businesses</Link></Button>
       </Nav.Link>
         {/* <Navbar bg="light" expand="lg">
           <Navbar.Brand href="#home">Biz Wiz</Navbar.Brand>
