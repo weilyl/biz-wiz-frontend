@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
+import SearchBusiness from './Search.js';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -27,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "40px auto 20px",
     width: "482px",
     outline: "none",
-    textIndent: "30px",
+    textIndent: "40px",
     textDecoration: "none",
   },
   submitButton: {
@@ -35,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
       borderColor: "#adcaec",
       boxShadow: "0 1px 6px #adcaec",
       backgroundColor: "#12417b",
+      color:"white",
     },
     color: "#f6f8f9",
     background: "#2c63a6",
@@ -44,6 +48,14 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     borderWidth: "0",
     borderRadius: "30px",
+  },
+  inputWithSearchIcon: {
+    position: "relative",
+  },
+  searchIcon: {
+    position: "absolute",
+    left: "540px",
+    top: "11px",
   },
 }));
 
@@ -66,17 +78,24 @@ export default function Home() {
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
         <form action="">
-          <input className={classes.searchBar} type="text" />
+          <div className={classes.inputWithSearchIcon}>
+            <SearchIcon className={classes.searchIcon} />
+            <input className={classes.searchBar} type="text" />
+          </div>
           <Button
             type="submit"
             className={classes.submitButton}
             variant="contained"
             size="small"
+            href='/search'
           >
-            Search
+          Search
           </Button>
         </form>
       </Grow>
+      <Route path="/search" >
+            <SearchBusiness />
+      </Route>
     </div>
   );
 }

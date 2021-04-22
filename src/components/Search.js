@@ -1,11 +1,30 @@
 import React from "react";
-import { Button} from 'react-bootstrap'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Search.css'
 import {BrowserRouter as Link} from "react-router-dom";
 import MapContainer from "./Map"
+import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
 
+
+const useStyles = makeStyles((theme) => ({
+  filterbutton: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+      color:"white",
+    },
+    color: "#f6f8f9",
+    background: "#2c63a6",
+    padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    borderRadius: "30px",
+  },
+}));
 class BusinessList extends React.Component {
   state = {
     businesses: []
@@ -101,38 +120,39 @@ class ViewButton extends React.Component {
   }
 }
 
-class SearchForm extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {value: ''};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-  handleChange(event){
-    this.setState({value: event.target.value})
-  }
-  handleSubmit(event){
-    //console.log(this.state.value)
-    event.preventDefault()
-  }
-  render(){
-    return(
-      <div>
-      <form onSubmit={this.handleSubmit}>  
-        <label>
-        <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <button className='search' type="submit" value="Submit">Search for Business</button>
-      </form>
-      </div>
-    )
-  }
-}
+// class SearchForm extends React.Component{
+//   constructor(props){
+//     super(props);
+//     this.state = {value: ''};
+//     this.handleChange = this.handleChange.bind(this);
+//     this.handleSubmit = this.handleSubmit.bind(this)
+//   }
+//   handleChange(event){
+//     this.setState({value: event.target.value})
+//   }
+//   handleSubmit(event){
+//     //console.log(this.state.value)
+//     event.preventDefault()
+//   }
+//   render(){
+//     return(
+//       <div>
+//       <form onSubmit={this.handleSubmit}>  
+//         <label>
+//         <input type="text" value={this.state.value} onChange={this.handleChange} />
+//         </label>
+//         <button className='search' type="submit" value="Submit">Search for Business</button>
+//       </form>
+//       </div>
+//     )
+//   }
+// }
 
 function SearchBusiness() {
+  const classes = useStyles();
     return (
       <body>
-        <div><SearchForm /></div>
+        {/* <div><SearchForm /></div> */}
         <div className='page-container'>
         <div className='filter-container'>
         <div>
@@ -156,7 +176,12 @@ function SearchBusiness() {
           <input type='checkbox'></input>Other<br/>
         </div>
         <div><ViewButton /></div><br/>
-        <Link to="/SearchBusinesses" className='filter-button'>Filter</Link>
+        <Button
+        type='submit'
+        variant='contained'
+        size='small'
+        className={classes.filterbutton}
+        >Filter</Button>
         </div>
         <div className='list-container'>
           <BusinessList />
