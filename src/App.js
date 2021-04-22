@@ -32,7 +32,7 @@ function App() {
             <Home />
           </Route>
           <Route path="/search">
-            <BusinessPage />
+            <SearchBusiness />
           </Route>
         </Switch>
       </Router>
