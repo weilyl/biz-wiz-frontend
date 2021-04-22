@@ -67,19 +67,22 @@ function SignIn() {
   const handleLogin = (event) => {
     console.log("1");
     event.preventDefault();
-    login(businessLogin);
-    console.log("2");
-  };
+    try{  
+      login(businessLogin);
+    } catch (err) {
+      console.log(err.message)
+    }
+    console.log("2")
+  }
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setChecked(true);
   }, []);
-  let isSignedIn =
-    window.localStorage.getItem("token") in [null, ""] ? true : false;
-  isSignedIn = false; //window.localStorage.getItem('token') in [null, ''] ? true : false;
+
+  let isSignedIn = window.localStorage.getItem('token') in [null, ''] //? false : true;
   if (isSignedIn === false) {
-    console.log(window.localStorage.getItem("token"));
+    console.log(window.localStorage.getItem('token'))
     return (
       <div>
         <Grid>
@@ -137,6 +140,7 @@ function SignIn() {
                   className={classes.signIn}
                   type="submit"
                   variant="contained"
+                  onClick={handleLogin}
                 >
                   Sign In
                 </Button>
