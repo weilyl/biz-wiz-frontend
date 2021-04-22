@@ -1,6 +1,9 @@
 h1{
     color:rgb(54, 54, 180);
 }
-Button{
-    border-radius: 35px;
+.links{
+    color:rgb(54, 54, 180);
+}
+.links:hover{
+    color: white;
 }

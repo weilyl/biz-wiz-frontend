@@ -5,6 +5,8 @@ import './Business.css'
 //import Post from "./Post.js";
 import CreatePost from "./Post.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import HomeIcon from "@material-ui/icons/Home";
+
 import {
   makeStyles,
   AppBar,
@@ -13,32 +15,51 @@ import {
   Drawer,
   Button,
 } from "@material-ui/core";
-
+const useStyles = makeStyles((theme) => ({
+  title: {
+    flexGrow: 1,
+  },
+  rootDiv: {
+    minHeight: "100px",
+  },
+  searchbtn: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+      color: "white",
+    },
+  },
+  postbtn: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+      color: "white",
+    },
+  },
+}));
 function BusinessPage() {
+  const classes = useStyles();
   return (
     <div>
       <h1>Welcome to Your Page!</h1>
       <Router>
       <Nav.Link href="#home">
         <Button
-    style={{
-        borderRadius: 35,
-        backgroundColor: "#12417b",
-        padding: "10px 20px",
-        fontSize: "15px"
-    }}
-    variant="contained"
-    >
-      <Link to="/CreatePost">Create A Post</Link></Button>
+          ariant="text"
+          color="inherit"
+          href="/"
+          className={classes.postbtn}>
+      <Link className='links' to="/CreatePost">Create A Post</Link></Button>
       </Nav.Link>
       <Nav.Link href="/">
         <Button
-            style={{
-              borderRadius: 35,
-              backgroundColor: "#12417b",
-              padding: "10px 20px",
-              fontSize: "15px"
-          }}><Link to="/search">Search for Businesses</Link></Button>
+          ariant="text"
+          color="inherit"
+          href="/"
+          className={classes.searchbtn}>
+            <Link to="/search" className='links'>Search for Businesses</Link></Button>
       </Nav.Link>
         {/* <Navbar bg="light" expand="lg">
           <Navbar.Brand href="#home">Biz Wiz</Navbar.Brand>
