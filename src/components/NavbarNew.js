@@ -4,7 +4,6 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Drawer,
   Button,
 } from "@material-ui/core";
 
@@ -15,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   rootDiv: {
-    minHeight: "100px",
+    minHeight: "50px",
   },
   homeBtn: {
     "&:hover": {
