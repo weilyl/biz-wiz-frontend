@@ -1,11 +1,30 @@
 import React from "react";
-import { Button} from 'react-bootstrap'
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Search.css'
 import {BrowserRouter as Link} from "react-router-dom";
 import MapContainer from "./Map"
+import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
 
+
+const useStyles = makeStyles((theme) => ({
+  filterbutton: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+      color:"white",
+    },
+    color: "#f6f8f9",
+    background: "#2c63a6",
+    padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    borderRadius: "30px",
+  },
+}));
 class BusinessList extends React.Component {
   state = {
     businesses: []
@@ -130,6 +149,7 @@ class ViewButton extends React.Component {
 // }
 
 function SearchBusiness() {
+  const classes = useStyles();
     return (
       <body>
         {/* <div><SearchForm /></div> */}
@@ -156,7 +176,12 @@ function SearchBusiness() {
           <input type='checkbox'></input>Other<br/>
         </div>
         <div><ViewButton /></div><br/>
-        <Link to="/SearchBusinesses" className='filter-button'>Filter</Link>
+        <Button
+        type='submit'
+        variant='contained'
+        size='small'
+        className={classes.filterbutton}
+        >Filter</Button>
         </div>
         <div className='list-container'>
           <BusinessList />

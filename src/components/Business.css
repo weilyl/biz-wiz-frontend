@@ -1,6 +1,7 @@
 h1{
     color:rgb(54, 54, 180);
     text-align: center;
+    padding-bottom: 3vw;
 }
 .links{
     color:rgb(54, 54, 180);
@@ -8,4 +9,19 @@ h1{
 .links:hover{
     color: white;
     text-decoration: none;
+}
+divbtn{
+    padding-right: 10px;
+    padding-left: 10px;
+    position: relative;
+    left: 60vw;
+
+}
+divbtn2{
+    padding-right: 10px;
+    padding-left: 10px;
+    right:0px;
+    width:430px;
+    padding:10px;
+    position: relative;
 }

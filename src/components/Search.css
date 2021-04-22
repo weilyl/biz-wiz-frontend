@@ -56,8 +56,8 @@ filterby{
 
 }
 .list:hover .business:hover{
-    background-color:white;
-    color:#1a2333;
+    background-color:#0f3666;
+    color:white;
 }
 .profile-button{
     display: flex;

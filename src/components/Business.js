@@ -1,21 +1,21 @@
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
-import SearchBusiness from "./Search.js";
+//import { Navbar, Nav } from "react-bootstrap";
+//import SearchBusiness from "./Search.js";
 import './Business.css'
 import Home from './Home.js'
 import Post from "./Post.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import HomeIcon from "@material-ui/icons/Home";
+import React, { useEffect, useState } from "react";
 
 import {
   makeStyles,
+  Fade,
   AppBar,
   Toolbar,
   Typography,
   Drawer,
   Button,
 } from "@material-ui/core";
-import { FormatAlignJustify } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     height: "auto",
     borderWidth: "0",
     color:"#12417b",
+    paddingRight:'19px',
   },
   postbtn: {
     "&:hover": {
@@ -54,10 +55,15 @@ const useStyles = makeStyles((theme) => ({
 
 function BusinessPage() {
   const classes = useStyles();
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    setChecked(true);
+  }, []);
   return (
+    <Fade in={checked} {...(checked ? { timeout: 3000 } : {})}>
     <div className={classes.rootDiv}>
       <h1>Welcome to Your Page!</h1>
-      <Router>
+      <Router><divbtn2><divbtn>
         <Button
           variant="contained"
           color="inherit"
@@ -65,15 +71,15 @@ function BusinessPage() {
           href="/"
           className={classes.postbtn}
           component={Link} to='/CreatePost'>
-          Create A Post</Button>
-        <Button
+          Create A Post</Button></divbtn>
+        <divbtn><Button
           type="submit"
           variant="contained"
           color="inherit"
           href="/"
           className={classes.searchbtn}
           onClick={()=><Redirect to={'/'} />}>
-            Search for Businesses</Button>
+            Search for Businesses</Button></divbtn></divbtn2>
         <Switch>
         <Route path="/CreatePost">
             <Post />
@@ -84,6 +90,7 @@ function BusinessPage() {
         </Switch>
       </Router>
     </div>
+    </Fade>
   );
 }
 
