@@ -1,9 +1,10 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import SearchBusiness from "./Search.js";
 import './Business.css'
+import CreatePost from './Post.js'
+import Home from './Home.js'
 //import Post from "./Post.js";
-import CreatePost from "./Post.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeIcon from "@material-ui/icons/Home";
 
@@ -15,6 +16,7 @@ import {
   Drawer,
   Button,
 } from "@material-ui/core";
+import { FormatAlignJustify } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -25,19 +27,29 @@ const useStyles = makeStyles((theme) => ({
   },
   searchbtn: {
     "&:hover": {
-      borderColor: "#adcaec",
+      borderColor: "white",
       boxShadow: "0 1px 6px #adcaec",
-      backgroundColor: "#12417b",
-      color: "white",
+      color:  "#12417b",
     },
+    padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    color:"#12417b",
   },
   postbtn: {
     "&:hover": {
-      borderColor: "#adcaec",
+      borderColor: "white",
       boxShadow: "0 1px 6px #adcaec",
-      backgroundColor: "#12417b",
-      color: "white",
+      color:  "#12417b",
     },
+    padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    color:"#12417b",
   },
 }));
 function BusinessPage() {
@@ -46,42 +58,28 @@ function BusinessPage() {
     <div className={classes.rootDiv}>
       <h1>Welcome to Your Page!</h1>
       <Router>
-      <Nav.Link href="#home">
         <Button
-          ariant="text"
+          variant="contained"
+          color="inherit"
+          type="submit"
+          href="/"
+          className={classes.postbtn}
+          component={Link} to="/CreatePost">
+          Create A Post</Button>
+        <Button
+          type="submit"
+          variant="contained"
           color="inherit"
           href="/"
-          className={classes.postbtn}>
-      <Link className='links' to="/CreatePost">Create A Post</Link></Button>
-      </Nav.Link>
-      <Nav.Link href="/">
-        <Button
-          ariant="text"
-          color="inherit"
-          href="/"
-          className={classes.searchbtn}>
-            <Link to="/search" className='links'>Search for Businesses</Link></Button>
-      </Nav.Link>
-        {/* <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">Biz Wiz</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-              <Nav.Link href="#home">
-                <Link to="/CreatePost">Create Posts</Link>
-              </Nav.Link>
-              <Nav.Link href="/">
-                <Link to="/search">Search for Businesses</Link>
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
+          className={classes.searchbtn}
+          onClick={()=><Redirect to={'/'} />}>
+            Search for Businesses</Button>
         <Switch>
-          <Route path="/CreatePost">
+        <Route path="/CreatePost">
             <CreatePost />
           </Route>
           <Route path="/search">
-            <SearchBusiness />
+            <Home />
           </Route>
         </Switch>
       </Router>

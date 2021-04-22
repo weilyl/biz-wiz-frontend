@@ -42,8 +42,6 @@ export default class Post extends React.Component {
           <Button 
           variant="primary" 
           type="submit"
-          color="secondary"
-          enabled
           >
             Post
           </Button>

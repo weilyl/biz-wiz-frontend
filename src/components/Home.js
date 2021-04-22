@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
       borderColor: "#adcaec",
       boxShadow: "0 1px 6px #adcaec",
       backgroundColor: "#12417b",
+      color:"white",
     },
     color: "#f6f8f9",
     background: "#2c63a6",
@@ -75,11 +76,15 @@ export default function Home() {
             className={classes.submitButton}
             variant="contained"
             size="small"
+            href='/search'
           >
           Search
           </Button>
         </form>
       </Grow>
+      <Route path="/search" >
+            <SearchBusiness />
+      </Route>
     </div>
   );
 }
