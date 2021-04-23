@@ -18,7 +18,7 @@ import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import ProfilePage from "./ProfilePage.js";
 import axios from "axios";
-import { apiURL } from "../services/config.js";
+import { apiURL} from "../services/config.js";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -70,8 +70,14 @@ function SignIn() {
 
   const handleLogin = (event) => {
     event.preventDefault();
+    console.log("handleLogin default prevented");
+    login(businessLogin);
+    console.log("2");
+    /*
+    event.preventDefault();
     console.log("1");
     try {
+      console.log("inside try")
       return axios
         .post(`${apiURL}business/login`, businessLogin, {
           headers: {
@@ -80,12 +86,13 @@ function SignIn() {
           },
         })
         .then((res) => {
-          console.log("res: ", res);
+          // console.log(res["business_id"])
+          // console.log("res: ", res);
           if (res.data.token) {
             // setLoggedInBusinessID(res.data["business_id"]);
-            console.log(res.data["business_id"]);
-            window.localStorage.setItem("business_id", res.data["business_id"]);
-            console.log(window.localStorage.getItem("business_id"));
+            // console.log(res.data["business_id"]);
+            // window.localStorage.setItem("business_id", res.data["business_id"]);
+            // console.log(window.localStorage.getItem("business_id"));
             console.log("possible token: ", res.data.token);
             window.localStorage.setItem("token", res.data.token);
             window.location.assign("/profile/home");
@@ -95,7 +102,9 @@ function SignIn() {
       console.log(err.message);
     }
     console.log("2");
+    */
   };
+
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
@@ -125,16 +134,20 @@ function SignIn() {
                     alt=""
                   />
                 </Grid>
+                <form onSubmit={handleLogin}>
                 <TextField
                   className={classes.inputUsername}
                   margin="normal"
                   label="Username"
                   placeholder="Enter Username"
+                  onChange={setBusinessLogin}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment
                         className={classes.signInIcons}
                         position="start"
+                        name="Username"
+                        value={businessLogin.user_name}
                       >
                         <AccountCircle />
                       </InputAdornment>
@@ -147,11 +160,14 @@ function SignIn() {
                   label="Password"
                   type="password"
                   placeholder="Enter Password"
+                  onChange={setBusinessLogin}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment
                         className={classes.signInIcons}
                         position="start"
+                        name="Password"
+                        value={businessLogin.password}
                       >
                         <LockRounded />
                       </InputAdornment>
@@ -162,10 +178,10 @@ function SignIn() {
                   className={classes.signIn}
                   type="submit"
                   variant="contained"
-                  onClick={handleLogin}
                 >
                   Sign In
                 </Button>
+                </form>
                 <Typography variant="subtitle2" className={classes.signUp}>
                   Don't have an account? <Link href="/register">Sign Up</Link>
                 </Typography>
