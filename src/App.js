@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home.js";
 import SignUp from "./components/SignUp.js";
@@ -10,8 +9,8 @@ import SignIn from "./components/SignIn.js";
 import Post from "./components/Post.js";
 import "./App.css";
 import SearchBusiness from "./components/Search.js";
-import BusinessPage from "./components/Business.js";
 import NavbarNew from "./components/NavbarNew.js";
+import ProfilePage from "./components/ProfilePage.js";
 
 //landing page
 function App() {
@@ -26,6 +25,9 @@ function App() {
           </Route>
           <Route path="/create-post">
             <Post />
+          </Route>
+          <Route path="/profile/home">
+            <ProfilePage />
           </Route>
           <Route path="/register">
             <SignUp />

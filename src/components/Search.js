@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Search.css'
@@ -32,6 +32,7 @@ class BusinessList extends React.Component {
   
   //functions for fetching and filtering business data during search
   nameFilter(name){
+    console.log(name)
     let businesses = ''
     this.setState({businesses})
     axios.get(`http://biz-wiz.herokuapp.com/business/find/?search=:${name}`)
@@ -150,9 +151,32 @@ class ViewButton extends React.Component {
 
 function SearchBusiness() {
   const classes = useStyles();
+  const [checked, setChecked] = useState(false);
+    useEffect(() => {
+      setChecked(true);
+    }, []);
     return (
+      
       <body>
         {/* <div><SearchForm /></div> */}
+
+        {/* have the search bar appear -I.T.*/}
+        <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
+          <form action="">
+            <input className={classes.searchBar} type="text" id='searchField'/>
+            <Button
+              type="submit"
+              className={classes.submitButton}
+              variant="contained"
+              size="small"
+              onClick = {console.log('Search Clicked')}
+              // onClick={BusinessList.nameFilter(document.getElementById('searchField').value)}
+            >
+              Search
+            </Button>
+          </form>
+        </Grow>
+
         <div className='page-container'>
         <div className='filter-container'>
         <div>
