@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   rootDiv: {
     minHeight: "50px",
+    display: "flex",
   },
   homeBtn: {
     "&:hover": {
