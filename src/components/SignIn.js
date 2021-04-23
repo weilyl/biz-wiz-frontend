@@ -16,6 +16,9 @@ import {
 } from "@material-ui/core";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
+import ProfilePage from "./ProfilePage.js";
+import axios from "axios";
+import { apiURL } from "../services/config.js";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,12 +66,31 @@ function SignIn() {
     user_name: "",
     password: "",
   });
+  // const [loggedInBusinessId, setLoggedInBusinessID] = useState();
 
   const handleLogin = (event) => {
-    console.log("1");
     event.preventDefault();
+    console.log("1");
     try {
-      login(businessLogin);
+      return axios
+        .post(`${apiURL}business/login`, businessLogin, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          console.log("res: ", res);
+          if (res.data.token) {
+            // setLoggedInBusinessID(res.data["business_id"]);
+            console.log(res.data["business_id"]);
+            window.localStorage.setItem("business_id", res.data["business_id"]);
+            console.log(window.localStorage.getItem("business_id"));
+            console.log("possible token: ", res.data.token);
+            window.localStorage.setItem("token", res.data.token);
+            window.location.assign("/profile/home");
+          }
+        });
     } catch (err) {
       console.log(err.message);
     }
@@ -156,7 +178,7 @@ function SignIn() {
   } else {
     return (
       <div>
-        <BusinessPage />
+        <ProfilePage />
       </div>
     );
   }
