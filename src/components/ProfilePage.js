@@ -23,7 +23,6 @@ export default function ProfilePage() {
           },
         })
         .then((res) => {
-
           if (res.data) {
             setPosts(res.data);
             return res.data;
@@ -36,11 +35,19 @@ export default function ProfilePage() {
 
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
+  const [isPostChanged, setIsPostChanged] = useState(false);
 
   useEffect(() => {
     handleLoad();
+
     console.log(posts);
-  }, posts);
+    console.log("initial", isPostChanged)
+
+    if (isPostChanged) {
+      setIsPostChanged(!isPostChanged);
+      console.log("changed", isPostChanged)
+    }
+  }, [isPostChanged]);
 
   return (
     <div>
@@ -59,7 +66,7 @@ export default function ProfilePage() {
               spacing={3}
               className={classes.cards}
             >
-              <PostCard post={ele} />
+              <PostCard post={ele} setIsPostChanged={setIsPostChanged} isPostChanged={isPostChanged}/>
             </Grid>
           ))}
         </Grid>
