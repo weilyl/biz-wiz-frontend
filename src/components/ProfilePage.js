@@ -42,12 +42,6 @@ export default function ProfilePage() {
     console.log(posts);
   }, posts);
 
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    handleLoad();
-  }, [posts]);
-
   return (
     <div>
       <Container maxWidth="md" className={classes.container}>
