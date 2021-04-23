@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProfilePage() {
-  // const id = 18; //window.localStorage.getItem("business_id");
   const handleLoad = () => {
     try {
       return axios
@@ -24,9 +23,8 @@ export default function ProfilePage() {
           },
         })
         .then((res) => {
-          console.log("res: ", res);
+
           if (res.data) {
-            console.log(res.data);
             setPosts(res.data);
             return res.data;
           }
@@ -43,6 +41,12 @@ export default function ProfilePage() {
     handleLoad();
     console.log(posts);
   }, posts);
+
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    handleLoad();
+  }, [posts]);
 
   return (
     <div>

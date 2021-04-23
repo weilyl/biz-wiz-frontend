@@ -4,12 +4,17 @@ import {
   CardHeader,
   Collapse,
   IconButton,
+  List,
+  ListItem,
   makeStyles,
   Typography,
 } from "@material-ui/core";
 import { DeleteOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { apiURL, token } from "../services/config";
+import axios from "axios";
+import handleLoad from "./ProfilePage";
 
 import clsx from "clsx";
 
@@ -24,11 +29,62 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
+  // postCard: {
+  //   maxWidth: "300px",
+  // },
 }));
 
 export default function PostCard({ post }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [comments, setComments] = useState([]);
+  useEffect(() => {
+    handleLoadComments();
+  }, []);
+
+  const handleDelete = (e) => {
+    console.log("post id", post.id);
+    console.log("event id", e.target);
+    try {
+      console.log(post.id);
+      return axios
+        .delete(`${apiURL}business/posts/post/${post.id}/remove`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (res.data) {
+          }
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleLoadComments = () => {
+    try {
+      return axios
+        .get(`${apiURL}business/posts/post/${post.id}/comments/all`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          if (res.data) {
+            setComments(res.data);
+            return res.data;
+          }
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -39,7 +95,7 @@ export default function PostCard({ post }) {
       <Card className={classes.postCard} elevation={10}>
         <CardHeader
           action={
-            <IconButton>
+            <IconButton onClick={handleDelete}>
               <DeleteOutlined />
             </IconButton>
           }
@@ -61,7 +117,13 @@ export default function PostCard({ post }) {
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>COMMENTS GO HERE</Typography>
+            <List>
+              {comments.map((comment) => (
+                <ListItem key={comment.id}>
+                  <Typography paragraph>{comment.content}</Typography>
+                </ListItem>
+              ))}
+            </List>
           </CardContent>
         </Collapse>
       </Card>
