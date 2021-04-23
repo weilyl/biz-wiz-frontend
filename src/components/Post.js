@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Post.css";
 import {
   Button,
@@ -9,6 +9,9 @@ import {
   Grid,
 } from "@material-ui/core";
 import DrawerForProfile from "./DrawerForProfile";
+import axios from "axios";
+import { apiURL } from "../services/config";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   postBtn: {
@@ -39,6 +42,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Post() {
   const classes = useStyles();
+  const history = useHistory();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [titleError, setTitleError] = useState(false);
+  const [contentError, setContentError] = useState(false);
+  const handleCreatePost = (e) => {
+    e.preventDefault();
+    setTitleError(false);
+    setContentError(false);
+    if (title === "") {
+      setTitleError(true);
+    }
+
+    if (content === "") {
+      setContentError(true);
+    }
+
+    if (content && title) {
+      try {
+        return axios
+          .post(`${apiURL}business/create-post`, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              body: JSON.stringify({ title, content }),
+            },
+          })
+          .then(() => history.push("/profile/home"));
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  };
   return (
     <div>
       <Container className={classes.container}>
@@ -61,12 +98,15 @@ export default function Post() {
             >
               Create A Post
             </Typography>
-            <form autoComplete="off">
+            <form autoComplete="off" noValidate onSubmit={handleCreatePost}>
               <TextField
                 variant="outlined"
                 label="Title"
                 fullWidth
                 className={classes.titleField}
+                require
+                onChange={(e) => setTitle(e.target.value)}
+                error={titleError}
               />
               <TextField
                 id="outlined-multiline-static"
@@ -76,6 +116,9 @@ export default function Post() {
                 variant="outlined"
                 fullWidth
                 className={classes.contentField}
+                required
+                onChange={(e) => setContent(e.target.value)}
+                error={contentError}
               />
               <Button
                 className={classes.postBtn}
