@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -7,6 +8,7 @@ import {
   List,
   ListItem,
   makeStyles,
+  TextField,
   Typography,
 } from "@material-ui/core";
 import { DeleteOutlined } from "@material-ui/icons";
@@ -15,7 +17,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { apiURL, token } from "../services/config";
 import axios from "axios";
 import clsx from "clsx";
-import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -28,20 +29,88 @@ const useStyles = makeStyles((theme) => ({
   expandOpen: {
     transform: "rotate(180deg)",
   },
-  // postCard: {
-  //   maxWidth: "300px",
-  // },
+  commentBtn: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+    },
+    color: "#f6f8f9",
+    background: "#2c63a6",
+    // padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    borderRadius: "20px",
+    top: 5,
+  },
+  commentField: {
+    display: "block",
+  },
+
+  postCard: {
+    maxWidth: "100vh",
+  },
 }));
 
 export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const classes = useStyles();
-  const history = useHistory();
   const [expanded, setExpanded] = React.useState(false);
   const [comments, setComments] = useState([]);
+  const [postComment, setPostComment] = useState("");
+
 
   useEffect(() => {
     handleLoadComments();
   }, []);
+
+  const handlePostComment = (e) => {
+    e.preventDefault();
+    console.log(isPostChanged);
+    try {
+      console.log("try");
+      return axios
+        .post(
+          `${apiURL}business/posts/post/${post.id}/comment/create`,
+          {
+            content: postComment.toString(),
+          },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+            },
+          }
+        )
+        .then(() => {
+          console.log(isPostChanged);
+          setIsPostChanged(!isPostChanged);
+          console.log(isPostChanged);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const handleCommentDelete = (id) => {
+    console.log(id);
+    try {
+      return axios
+        .delete(`${apiURL}business/posts/post/${post.id}/comment/${id}`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        })
+        .then(() => {
+          setIsPostChanged(!isPostChanged);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const handleDelete = (e) => {
     console.log("post id", post.id);
@@ -124,9 +193,30 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
               {comments.map((comment) => (
                 <ListItem key={comment.id}>
                   <Typography paragraph>{comment.content}</Typography>
+                  <IconButton onClick={() => handleCommentDelete(comment.id)}>
+                    <DeleteOutlined />
+                  </IconButton>
                 </ListItem>
               ))}
             </List>
+            <form action="" onSubmit={handlePostComment}>
+              <TextField
+                id="outlined-multiline-flexible"
+                multiline
+                onChange={(e) => setPostComment(e.target.value)}
+                defaultValue={postComment}
+                variant="outlined"
+                className={classes.commentField}
+                size="small"
+              />
+              <Button
+                className={classes.commentBtn}
+                type="submit"
+                variant="contained"
+              >
+                Post
+              </Button>
+            </form>
           </CardContent>
         </Collapse>
       </Card>
