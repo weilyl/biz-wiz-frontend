@@ -14,6 +14,7 @@ import SearchBusiness from "./components/Search.js";
 import NavbarNew from "./components/NavbarNew.js";
 import ProfilePage from "./components/ProfilePage.js";
 import NavbarLoggedIn from "./components/NavbarLoggedIn";
+import SearchContent from "./components/SearchContent";
 
 // let isLoggedIn = !window.localStorage.getItem('token') in [null, ''];
 
@@ -28,6 +29,14 @@ function App() {
         <NavbarLoggedIn setLoggedIn={setLoggedIn}/>: 
         <NavbarNew /> 
     )
+  }
+
+  function SearchPosts() {
+    if (loggedIn) {
+      return <SearchContent />
+    } else {
+      return <Home />
+    }
   }
 
   useEffect(()=> {
@@ -54,6 +63,9 @@ function App() {
           </Route>
           <Route path="/login">
             <SignIn setLoggedIn={setLoggedIn}/> 
+          </Route>
+          <Route exact path="/search/posts">
+            <SearchPosts />
           </Route>
           <Route exact path="/">
             <Home />
