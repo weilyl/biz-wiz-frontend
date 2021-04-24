@@ -7,13 +7,13 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import NavbarLoggedIn from "./NavbarLoggedIn";
 import ListAltOutlinedIcon from "@material-ui/icons/ListAltOutlined";
 import {
   AccountCircleOutlined,
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import NavbarLoggedIn from './NavbarLoggedIn';
 
 const useStyles = makeStyles((theme) => ({}));
 

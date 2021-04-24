@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 
 import HomeIcon from "@material-ui/icons/Home";
+import {useHistory} from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -48,13 +49,10 @@ export default function NavbarNew({setLoggedIn}) {
   if (window.localStorage.getItem('token') in [null, '']) {
     setLoggedIn(false)
   }
+  const history = useHistory();
 
   const handleHome =(e) => {
-    if (window.localStorage.getItem('token') in [null, '']) {
-      setLoggedIn(false)
-    } else {
-      setLoggedIn(true)
-    }
+    history.push('/');
   }
 
   const classes = useStyles();
@@ -70,7 +68,6 @@ export default function NavbarNew({setLoggedIn}) {
             ariant="text"
             color="inherit"
             startIcon={<HomeIcon />}
-            href="/"
             className={classes.homeBtn}
             onClick={handleHome}
           >

@@ -47,27 +47,17 @@ const useStyles = makeStyles((theme) => ({
 export default function NavbarLoggedIn({setLoggedIn}) {
   const classes = useStyles();
   const history = useHistory();
-//   const [loggedIn, setLoggedIn] = useState(true);
-//   useEffect(()=> {
-//     if (!loggedIn) {
-//         isLoggedOut = setTokenExists(false)
-//     }
-//   }, [tokenExists])
 
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
     setLoggedIn(false)
-    // history.push('/')
+    history.push('/')
   }
 
   const handleHome =(e) => {
+      history.push('/')
 
-    if (window.localStorage.getItem('token') in [null, '']) {
-      setLoggedIn(false)
-    } else {
-      setLoggedIn(true)
-    }
   }
 
   return (
@@ -82,7 +72,7 @@ export default function NavbarLoggedIn({setLoggedIn}) {
             variant="text"
             color="inherit"
             startIcon={<HomeIcon />}
-            href="/"
+            // href="/#"
             className={classes.homeBtn}
             onClick={handleHome}
           >
@@ -92,7 +82,8 @@ export default function NavbarLoggedIn({setLoggedIn}) {
           <Button
             variant="text"
             color="inherit"
-            href="/profile/home"
+            // href="/profile/home"
+            onClick={()=> history.push('/profile/home')}
             className={classes.profileBtn}
           >
               Profile
@@ -101,7 +92,7 @@ export default function NavbarLoggedIn({setLoggedIn}) {
           <Button
             variant="text"
             color="inherit"
-            href="/"
+            // href="/#"
             className={classes.logoutBtn}
             onClick={handleLogout}
           >

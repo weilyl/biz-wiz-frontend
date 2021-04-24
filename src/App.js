@@ -22,19 +22,23 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(!window.localStorage.getItem('token') in [null, '']);
 
+  function Nav() {
+    return(
+      loggedIn ? 
+        <NavbarLoggedIn setLoggedIn={setLoggedIn} />: 
+        <NavbarNew /> 
+    )
+  }
+
   useEffect(()=> {
-    // if (!loggedIn) {
-      console.log(loggedIn)
-    // }
+      console.log(`am I logged in? ${loggedIn}`)
   }, [loggedIn])
 
   //make a conditional statement to see if user is on the landing page or not
   return (
     <div>
       <Router>
-        loggedIn ? 
-          <NavbarLoggedIn setLoggedIn={setLoggedIn}/>: 
-          <NavbarNew setLoggedIn={setLoggedIn} /> 
+        <Nav />
         <Switch>
           <Route path="/search">
             <SearchBusiness />
@@ -46,7 +50,7 @@ function App() {
             <ProfilePage />
           </Route>
           <Route path="/register">
-            <SignUp  setLoggedIn={setLoggedIn}/>
+            <SignUp />
           </Route>
           <Route path="/login">
             <SignIn setLoggedIn={setLoggedIn}/> 

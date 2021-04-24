@@ -35,7 +35,7 @@ export const login = (userLogin) => {
       if (res.data.token) {
         console.log("possible token: ", res.data.token);
         window.localStorage.setItem("token", res.data.token);
-        window.location.assign("/profile/home");
+        // window.location.assign("/profile/home");
       }
     });
 };

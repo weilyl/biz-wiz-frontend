@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
-import {Redirect} from 'react-router';
+import {Redirect, useHistory} from 'react-router';
 import ProfilePage from './ProfilePage';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,12 +64,15 @@ function SignIn({setLoggedIn}) {
     password: "",
   });
 
+  const history = useHistory();
+
   const handleLogin = (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
     login(businessLogin);
     console.log("2");
     setLoggedIn(true)
+    history.push('/profile/home');
   };
 
   const classes = useStyles();
