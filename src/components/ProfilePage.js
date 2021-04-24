@@ -40,12 +40,12 @@ export default function ProfilePage() {
   useEffect(() => {
     handleLoad();
 
-    console.log(posts);
-    console.log("initial", isPostChanged)
+    // console.log(posts);
+    // console.log("initial", isPostChanged)
 
     if (isPostChanged) {
       setIsPostChanged(!isPostChanged);
-      console.log("changed", isPostChanged)
+      // console.log("changed", isPostChanged)
     }
   }, [isPostChanged]);
 

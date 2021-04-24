@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiURL, token } from "./config";
+import { apiURL } from "./config";
 
 export const register = (userInfo) => {
   console.log("USER INFO: ", userInfo);

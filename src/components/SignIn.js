@@ -15,6 +15,7 @@ import {
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import {Redirect} from 'react-router';
+import ProfilePage from './ProfilePage';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "14px",
   },
 }));
-function SignIn() {
+function SignIn({setLoggedIn}) {
   const [businessLogin, setBusinessLogin] = useFormFields({
     user_name: "",
     password: "",
@@ -68,6 +69,7 @@ function SignIn() {
     console.log("handleLogin default prevented");
     login(businessLogin);
     console.log("2");
+    setLoggedIn(true)
   };
 
   const classes = useStyles();
@@ -76,7 +78,7 @@ function SignIn() {
     setChecked(true);
   }, []);
 
-  let isSignedOut = window.localStorage.getItem("token") in [null, ""]; 
+  let isSignedOut = true //window.localStorage.getItem("token") in [null, ""]; 
 
   if (isSignedOut) {
     return (
@@ -158,7 +160,8 @@ function SignIn() {
     );
   } else {
     return (
-        <Redirect to="/profile/home" />
+      <ProfilePage />
+        // <Redirect to="/profile/home" />
     );
   }
 }

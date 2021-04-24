@@ -43,7 +43,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavbarNew({isLoggedOut}) {
+export default function NavbarNew({setLoggedIn}) {
+
+  if (window.localStorage.getItem('token') in [null, '']) {
+    setLoggedIn(false)
+  }
+
+  const handleHome =(e) => {
+    if (window.localStorage.getItem('token') in [null, '']) {
+      setLoggedIn(false)
+    } else {
+      setLoggedIn(true)
+    }
+  }
+
   const classes = useStyles();
   return (
     <div className={classes.rootDiv}>
@@ -59,6 +72,7 @@ export default function NavbarNew({isLoggedOut}) {
             startIcon={<HomeIcon />}
             href="/"
             className={classes.homeBtn}
+            onClick={handleHome}
           >
             Home
           </Button>

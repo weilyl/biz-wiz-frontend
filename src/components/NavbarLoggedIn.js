@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   makeStyles,
   AppBar,
@@ -8,6 +8,7 @@ import {
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import {logout} from "../services/auth";
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -43,12 +44,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavbarLoggedIn() {
+export default function NavbarLoggedIn({setLoggedIn}) {
   const classes = useStyles();
+  const history = useHistory();
+//   const [loggedIn, setLoggedIn] = useState(true);
+//   useEffect(()=> {
+//     if (!loggedIn) {
+//         isLoggedOut = setTokenExists(false)
+//     }
+//   }, [tokenExists])
 
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
+    setLoggedIn(false)
+    // history.push('/')
+  }
+
+  const handleHome =(e) => {
+
+    if (window.localStorage.getItem('token') in [null, '']) {
+      setLoggedIn(false)
+    } else {
+      setLoggedIn(true)
+    }
   }
 
   return (
@@ -65,6 +84,7 @@ export default function NavbarLoggedIn() {
             startIcon={<HomeIcon />}
             href="/"
             className={classes.homeBtn}
+            onClick={handleHome}
           >
             Home
           </Button>

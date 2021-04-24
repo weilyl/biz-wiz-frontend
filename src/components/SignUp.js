@@ -9,7 +9,7 @@ import {useFormFields} from '../lib/customHooks';
 import "./SignUp.css";
 import {useHistory} from 'react-router';
 
-export default function SignUp () {
+export default function SignUp ({setLoggedIn}) {
   const history = useHistory();
   
   const [business, setBusinessState] = useFormFields({
@@ -31,6 +31,7 @@ export default function SignUp () {
   const handleRegister = (event) => {
     event.preventDefault();  
     register(business);
+    setLoggedIn(true);
     history.push("/profile/home");
   }
 
