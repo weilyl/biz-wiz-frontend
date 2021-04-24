@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {Redirect} from 'react-router';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/Home.js";
 import SignUp from "./components/SignUp.js";
@@ -11,6 +12,7 @@ import "./App.css";
 import SearchBusiness from "./components/Search.js";
 import NavbarNew from "./components/NavbarNew.js";
 import ProfilePage from "./components/ProfilePage.js";
+import NavbarLoggedIn from "./components/NavbarLoggedIn";
 
 let isLoggedOut = window.localStorage.getItem('token') in [null, ''];
 
@@ -20,7 +22,7 @@ function App() {
   return (
     <div>
       <Router>
-        <NavbarNew />
+        isLoggedOut ? <NavbarNew /> : <NavbarLoggedIn />
         <Switch>
           <Route path="/search">
             <SearchBusiness />
@@ -28,20 +30,20 @@ function App() {
           <Route path="/create-post">
             <Post />
           </Route>
+        if (!isLoggedOut) {
           <Route path="/profile/home">
             <ProfilePage />
           </Route>
+        }
           <Route path="/register">
             <SignUp />
           </Route>
           <Route path="/login">
-            if (isLoggedOut) {
-              <SignIn />
-            } else {
-              <ProfilePage />
-            }
+            isLoggedOut ? 
+              <SignIn /> : 
+              <Redirect to="/profile/home" />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
         </Switch>

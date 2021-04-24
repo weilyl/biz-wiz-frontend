@@ -38,12 +38,9 @@ export const login = (userLogin) => {
         window.location.assign("/profile/home");
       }
     });
-  // } else {
-  //     console.log("BOOYA")
-  // }
 };
 
 export const logout = () => {
   window.localStorage.removeItem("token");
-  window.location.assign("/");
+  // window.location.assign("/");
 };

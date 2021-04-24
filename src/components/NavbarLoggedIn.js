@@ -6,8 +6,8 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-
 import HomeIcon from "@material-ui/icons/Home";
+import {logout} from "../services/auth";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
   },
-  loginBtn: {
+  logoutBtn: {
     "&:hover": {
       borderColor: "#adcaec",
       boxShadow: "0 1px 6px #adcaec",
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
   },
-  registerBtn: {
+  profileBtn: {
     "&:hover": {
       borderColor: "#adcaec",
       boxShadow: "0 1px 6px #adcaec",
@@ -43,8 +43,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavbarNew({isLoggedOut}) {
+export default function NavbarLoggedIn() {
   const classes = useStyles();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+  }
+
   return (
     <div className={classes.rootDiv}>
       <AppBar position="fixed" color="primary" className="nav">
@@ -54,7 +60,7 @@ export default function NavbarNew({isLoggedOut}) {
           </Typography>
 
           <Button
-            ariant="text"
+            variant="text"
             color="inherit"
             startIcon={<HomeIcon />}
             href="/"
@@ -64,21 +70,22 @@ export default function NavbarNew({isLoggedOut}) {
           </Button>
 
           <Button
-            href="/login"
             variant="text"
             color="inherit"
-            className={classes.loginBtn}
+            href="/profile/home"
+            className={classes.profileBtn}
           >
-            Login
+              Profile
           </Button>
 
           <Button
-            href="/register"
             variant="text"
             color="inherit"
-            className={classes.registerBtn}
+            href="/"
+            className={classes.logoutBtn}
+            onClick={handleLogout}
           >
-            Register
+              Logout
           </Button>
 
         </Toolbar>
