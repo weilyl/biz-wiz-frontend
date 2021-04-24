@@ -33,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-export default function PostCard({ post, setIsPostChanged, isPostChanged } ) {
+export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const classes = useStyles();
   const history = useHistory();
   const [expanded, setExpanded] = React.useState(false);
   const [comments, setComments] = useState([]);
-  
+
   useEffect(() => {
     handleLoadComments();
   }, []);
@@ -55,13 +55,13 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged } ) {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
             Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          }
+          },
         })
         .then(() => {
           console.log(typeof setIsPostChanged);
           console.log("first: ", isPostChanged);
           setIsPostChanged(!isPostChanged);
-          console.log("second: ", isPostChanged)
+          console.log("second: ", isPostChanged);
         });
     } catch (error) {
       console.log(error.message);
@@ -96,10 +96,9 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged } ) {
   return (
     <div>
       <Card className={classes.postCard} elevation={10}>
-        <CardHeader 
+        <CardHeader
           action={
-            <IconButton 
-              onClick={handleDelete}>
+            <IconButton onClick={handleDelete}>
               <DeleteOutlined />
             </IconButton>
           }

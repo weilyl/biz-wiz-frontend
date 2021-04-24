@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, Grid, Container } from "@material-ui/core";
 import PostCard from "./PostCards";
 import DrawerForProfile from "./DrawerForProfile";
-import { apiURL} from "../services/config";
+import { apiURL } from "../services/config";
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePage({setLoggedIn}) {
+export default function ProfilePage({ setLoggedIn }) {
   const handleLoad = () => {
     try {
       return axios
@@ -48,12 +48,16 @@ export default function ProfilePage({setLoggedIn}) {
     }
   }, [isPostChanged]);
 
+  useEffect(() => {
+    handleLoad();
+  }, [posts]);
+
   return (
     <div>
       <Container maxWidth="md" className={classes.container}>
         <Grid container justify="flex-end">
           <Grid item>
-            <DrawerForProfile setLoggedIn={setLoggedIn}/>
+            <DrawerForProfile setLoggedIn={setLoggedIn} />
           </Grid>
 
           {posts.map((ele) => (
@@ -65,7 +69,11 @@ export default function ProfilePage({setLoggedIn}) {
               spacing={3}
               className={classes.cards}
             >
-              <PostCard post={ele} setIsPostChanged={setIsPostChanged} isPostChanged={isPostChanged}/>
+              <PostCard
+                post={ele}
+                setIsPostChanged={setIsPostChanged}
+                isPostChanged={isPostChanged}
+              />
             </Grid>
           ))}
         </Grid>

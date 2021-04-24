@@ -14,8 +14,8 @@ import {
 } from "@material-ui/core";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
-import {Redirect, useHistory} from 'react-router';
-import ProfilePage from './ProfilePage';
+import { Redirect, useHistory } from "react-router";
+import ProfilePage from "./ProfilePage";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -58,11 +58,12 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "14px",
   },
 }));
-function SignIn({setLoggedIn}) {
+function SignIn({ setLoggedIn }) {
   const [businessLogin, setBusinessLogin] = useFormFields({
     user_name: "",
     password: "",
   });
+  // const [loggedInBusinessId, setLoggedInBusinessID] = useState();
 
   const history = useHistory();
 
@@ -71,8 +72,8 @@ function SignIn({setLoggedIn}) {
     console.log("handleLogin default prevented");
     await login(businessLogin);
     console.log("2");
-    setLoggedIn(true)
-    history.push('/profile/home');
+    setLoggedIn(true);
+    history.push("/profile/home");
   };
 
   const classes = useStyles();
@@ -81,7 +82,7 @@ function SignIn({setLoggedIn}) {
     setChecked(true);
   }, []);
 
-  let isSignedOut = true //window.localStorage.getItem("token") in [null, ""]; 
+  let isSignedOut = true; //window.localStorage.getItem("token") in [null, ""];
 
   if (isSignedOut) {
     return (
@@ -105,52 +106,55 @@ function SignIn({setLoggedIn}) {
                   />
                 </Grid>
                 <form onSubmit={handleLogin}>
-                <TextField
-                  className={classes.inputUsername}
-                  margin="normal"
-                  label="Username"
-                  placeholder="Enter Username"
-                  onChange={setBusinessLogin}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment
-                        className={classes.signInIcons}
-                        position="start"
-                        name="Username"
-                        value={businessLogin.user_name}
-                      >
-                        <AccountCircle />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <TextField
-                  className={classes.inputPassword}
-                  margin="normal"
-                  label="Password"
-                  type="password"
-                  placeholder="Enter Password"
-                  onChange={setBusinessLogin}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment
-                        className={classes.signInIcons}
-                        position="start"
-                        name="Password"
-                        value={businessLogin.password}
-                      >
-                        <LockRounded />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-                <Button
-                  className={classes.signIn}
-                  type="submit"
-                  variant="contained"
-                >
-                  Sign In
-                </Button>
+                  <TextField
+                    className={classes.inputUsername}
+                    margin="normal"
+                    label="Username"
+                    placeholder="Enter Username"
+                    onChange={setBusinessLogin}
+                    fullWidth
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          className={classes.signInIcons}
+                          position="start"
+                          name="Username"
+                          value={businessLogin.user_name}
+                        >
+                          <AccountCircle />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <TextField
+                    className={classes.inputPassword}
+                    margin="normal"
+                    label="Password"
+                    type="password"
+                    placeholder="Enter Password"
+                    fullWidth
+                    onChange={setBusinessLogin}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          className={classes.signInIcons}
+                          position="start"
+                          name="Password"
+                          value={businessLogin.password}
+                        >
+                          <LockRounded />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                  <Button
+                    className={classes.signIn}
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                  >
+                    Sign In
+                  </Button>
                 </form>
                 <Typography variant="subtitle2" className={classes.signUp}>
                   Don't have an account? <Link href="/register">Sign Up</Link>
@@ -162,9 +166,7 @@ function SignIn({setLoggedIn}) {
       </div>
     );
   } else {
-    return (
-      <ProfilePage />
-    );
+    return <ProfilePage />;
   }
 }
 
