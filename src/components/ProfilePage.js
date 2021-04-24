@@ -41,7 +41,7 @@ export default function ProfilePage({ setLoggedIn }) {
     handleLoad();
     // console.log(posts);
     // console.log("initial", isPostChanged)
-
+    console.log("bug2");
     if (isPostChanged) {
       setIsPostChanged(!isPostChanged);
       // console.log("changed", isPostChanged)
@@ -50,7 +50,9 @@ export default function ProfilePage({ setLoggedIn }) {
 
   useEffect(() => {
     handleLoad();
-  }, [posts]);
+
+  }, []);
+
 
   return (
     <div>
