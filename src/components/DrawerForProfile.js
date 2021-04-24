@@ -7,17 +7,17 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import NavbarNew from "./NavbarNew";
 import ListAltOutlinedIcon from "@material-ui/icons/ListAltOutlined";
 import {
   AccountCircleOutlined,
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import NavbarLoggedIn from './NavbarLoggedIn';
 
 const useStyles = makeStyles((theme) => ({}));
 
-export default function DrawerForProfile() {
+export default function DrawerForProfile({setLoggedIn}) {
   const classes = useStyles();
   const history = useHistory();
   const itemList = [
@@ -40,7 +40,7 @@ export default function DrawerForProfile() {
   return (
     <div className={classes.container}>
       <Drawer className={classes.drawer} variant="permanent" anchor="left">
-        <NavbarNew />
+        <NavbarLoggedIn setLoggedIn={setLoggedIn}/>
         <div>
           <Typography variant="h5" color="initial">
             My Business
