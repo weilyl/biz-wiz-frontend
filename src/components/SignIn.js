@@ -79,7 +79,6 @@ function SignIn() {
   let isSignedOut = window.localStorage.getItem("token") in [null, ""]; 
 
   if (isSignedOut) {
-    console.log(window.localStorage.getItem("token"));
     return (
       <div>
         <Grid>

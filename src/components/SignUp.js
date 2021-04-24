@@ -114,18 +114,6 @@ export default function SignUp () {
             </select>
         </div>
   
-        {/* <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            BusinessType
-          </Dropdown.Toggle>
-  
-          <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Wholesale</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Supermarket</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Hardware</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown> */}
-  
         <div className="form-group">
             <label 
               className='labels' 
