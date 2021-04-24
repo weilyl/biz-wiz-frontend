@@ -7,10 +7,10 @@ import {register} from '../services/auth';
 import {useFormFields} from '../lib/customHooks';
 //import {Redirect} from 'react-router';
 import "./SignUp.css";
-
+import {useHistory} from 'react-router';
 
 export default function SignUp () {
-  
+  const history = useHistory();
   
   const [business, setBusinessState] = useFormFields({
     first_name: '',
@@ -31,10 +31,8 @@ export default function SignUp () {
   const handleRegister = (event) => {
     event.preventDefault();  
     register(business);
-    // window.location.href = ''
-    // return <Redirect to="/"/>
+    history.push("/profile/home");
   }
-  
 
   return (
     
@@ -236,24 +234,6 @@ export default function SignUp () {
           className="btn btn-dark btn-lg btn-block" 
           onClick={handleRegister}
         >Register</button>
-
-  
-      {/* <Form.Group inline>
-          <label>Account Type</label>
-          <Form.Radio 
-            label="Business" 
-            // checked={account === 'Business'} 
-            name="acct_type"
-            value="Business" 
-            onClick={setBusinessState} />
-          <Form.Radio 
-            label="Customer" 
-            // checked={account === 'Customer'} 
-            name="acct_type" 
-            value="Customer"
-            onClick={setBusinessState} />
-      </Form.Group>
-         */}
     </form>
   );
 }

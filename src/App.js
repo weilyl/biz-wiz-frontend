@@ -12,6 +12,8 @@ import SearchBusiness from "./components/Search.js";
 import NavbarNew from "./components/NavbarNew.js";
 import ProfilePage from "./components/ProfilePage.js";
 
+let isLoggedOut = window.localStorage.getItem('token') in [null, ''];
+
 //landing page
 function App() {
   //make a conditional statement to see if user is on the landing page or not
@@ -33,7 +35,11 @@ function App() {
             <SignUp />
           </Route>
           <Route path="/login">
-            <SignIn />
+            if (isLoggedOut) {
+              <SignIn />
+            } else {
+              <ProfilePage />
+            }
           </Route>
           <Route path="/">
             <Home />

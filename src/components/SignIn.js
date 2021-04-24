@@ -1,6 +1,4 @@
-// import { Button, Form } from "react-bootstrap";
-// import "bootstrap/dist/css/bootstrap.min.css";
-import BusinessPage from "./Business.js";
+// import BusinessPage from "./Business.js";
 import { login } from "../services/auth.js";
 import { useFormFields } from "../lib/customHooks";
 import {
@@ -16,9 +14,7 @@ import {
 } from "@material-ui/core";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
-import ProfilePage from "./ProfilePage.js";
-import axios from "axios";
-import { apiURL} from "../services/config.js";
+import {Redirect} from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -66,43 +62,12 @@ function SignIn() {
     user_name: "",
     password: "",
   });
-  // const [loggedInBusinessId, setLoggedInBusinessID] = useState();
 
   const handleLogin = (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
     login(businessLogin);
     console.log("2");
-    /*
-    event.preventDefault();
-    console.log("1");
-    try {
-      console.log("inside try")
-      return axios
-        .post(`${apiURL}business/login`, businessLogin, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          // console.log(res["business_id"])
-          // console.log("res: ", res);
-          if (res.data.token) {
-            // setLoggedInBusinessID(res.data["business_id"]);
-            // console.log(res.data["business_id"]);
-            // window.localStorage.setItem("business_id", res.data["business_id"]);
-            // console.log(window.localStorage.getItem("business_id"));
-            console.log("possible token: ", res.data.token);
-            window.localStorage.setItem("token", res.data.token);
-            window.location.assign("/profile/home");
-          }
-        });
-    } catch (err) {
-      console.log(err.message);
-    }
-    console.log("2");
-    */
   };
 
   const classes = useStyles();
@@ -111,8 +76,9 @@ function SignIn() {
     setChecked(true);
   }, []);
 
-  let isSignedIn = window.localStorage.getItem("token") in [null, ""]; //? false : true;
-  if (isSignedIn === false) {
+  let isSignedOut = window.localStorage.getItem("token") in [null, ""]; 
+
+  if (isSignedOut) {
     console.log(window.localStorage.getItem("token"));
     return (
       <div>
@@ -193,9 +159,7 @@ function SignIn() {
     );
   } else {
     return (
-      <div>
-        <ProfilePage />
-      </div>
+        <Redirect to="/profile/home" />
     );
   }
 }
