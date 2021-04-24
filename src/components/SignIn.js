@@ -66,10 +66,10 @@ function SignIn({setLoggedIn}) {
 
   const history = useHistory();
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
-    login(businessLogin);
+    await login(businessLogin);
     console.log("2");
     setLoggedIn(true)
     history.push('/profile/home');
@@ -164,7 +164,6 @@ function SignIn({setLoggedIn}) {
   } else {
     return (
       <ProfilePage />
-        // <Redirect to="/profile/home" />
     );
   }
 }

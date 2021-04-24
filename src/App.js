@@ -22,10 +22,10 @@ function App() {
 
   const [loggedIn, setLoggedIn] = useState(!window.localStorage.getItem('token') in [null, '']);
 
-  function Nav() {
+  function Nav({setLoggedIn}) {
     return(
       loggedIn ? 
-        <NavbarLoggedIn setLoggedIn={setLoggedIn} />: 
+        <NavbarLoggedIn setLoggedIn={setLoggedIn}/>: 
         <NavbarNew /> 
     )
   }
@@ -38,7 +38,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Nav />
+        <Nav setLoggedIn={setLoggedIn}/>
         <Switch>
           <Route path="/search">
             <SearchBusiness />
@@ -47,10 +47,10 @@ function App() {
             <Post />
           </Route>
           <Route path="/profile/home">
-            <ProfilePage />
+            <ProfilePage setLoggedIn={setLoggedIn}/>
           </Route>
           <Route path="/register">
-            <SignUp />
+            <SignUp setLoggedIn={setLoggedIn}/>
           </Route>
           <Route path="/login">
             <SignIn setLoggedIn={setLoggedIn}/> 
