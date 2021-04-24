@@ -1,4 +1,3 @@
-// import BusinessPage from "./Business.js";
 import { login } from "../services/auth.js";
 import { useFormFields } from "../lib/customHooks";
 import {
@@ -59,18 +58,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function SignIn({ setLoggedIn }) {
-  const [businessLogin, setBusinessLogin] = useFormFields({
-    user_name: "",
-    password: "",
-  });
-  // const [loggedInBusinessId, setLoggedInBusinessID] = useState();
+
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
 
   const history = useHistory();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
-    await login(businessLogin);
+    console.log({user_name: userName, password: password})
+    await login({user_name: userName, password: password});
     console.log("2");
     setLoggedIn(true);
     history.push("/profile/home");
@@ -111,15 +110,14 @@ function SignIn({ setLoggedIn }) {
                     margin="normal"
                     label="Username"
                     placeholder="Enter Username"
-                    onChange={setBusinessLogin}
+                    onChange={(e) => setUserName(e.target.value)}
+                    defaultValue={userName}
                     fullWidth
                     InputProps={{
                       startAdornment: (
                         <InputAdornment
                           className={classes.signInIcons}
                           position="start"
-                          name="Username"
-                          value={businessLogin.user_name}
                         >
                           <AccountCircle />
                         </InputAdornment>
@@ -133,14 +131,13 @@ function SignIn({ setLoggedIn }) {
                     type="password"
                     placeholder="Enter Password"
                     fullWidth
-                    onChange={setBusinessLogin}
+                    onChange={(e) => setPassword(e.target.value)}
+                    defaultValue={password}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment
                           className={classes.signInIcons}
                           position="start"
-                          name="Password"
-                          value={businessLogin.password}
                         >
                           <LockRounded />
                         </InputAdornment>
