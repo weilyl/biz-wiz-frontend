@@ -15,7 +15,7 @@ import NavbarNew from "./components/NavbarNew.js";
 import ProfilePage from "./components/ProfilePage.js";
 import NavbarLoggedIn from "./components/NavbarLoggedIn";
 
-let isLoggedIn = !window.localStorage.getItem('token') in [null, ''];
+// let isLoggedIn = !window.localStorage.getItem('token') in [null, ''];
 
 //landing page
 function App() {
