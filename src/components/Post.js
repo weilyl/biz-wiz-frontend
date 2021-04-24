@@ -47,7 +47,7 @@ export default function Post() {
   const [content, setContent] = useState("");
   const [titleError, setTitleError] = useState(false);
   const [contentError, setContentError] = useState(false);
-  
+
   const handleCreatePost = (e) => {
     e.preventDefault();
     setTitleError(false);
@@ -63,13 +63,17 @@ export default function Post() {
     if (content && title) {
       try {
         return axios
-          .post(`${apiURL}business/create-post`, { title: title, content: content }, {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`
-            },
-          })
+          .post(
+            `${apiURL}business/create-post`,
+            { title: title, content: content },
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              },
+            }
+          )
           .then(() => history.push("/profile/home"));
       } catch (error) {
         console.log(error.message);
