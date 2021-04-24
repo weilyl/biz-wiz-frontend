@@ -39,7 +39,6 @@ export default function ProfilePage() {
 
   useEffect(() => {
     handleLoad();
-
     // console.log(posts);
     // console.log("initial", isPostChanged)
 
