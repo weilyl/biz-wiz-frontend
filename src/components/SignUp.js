@@ -31,7 +31,7 @@ export default function SignUp ({setLoggedIn}) {
   const handleRegister = (event) => {
     event.preventDefault();  
     register(business);
-    setLoggedIn(true);
+    // setLoggedIn(true);
     history.push("/profile/home");
   }
 

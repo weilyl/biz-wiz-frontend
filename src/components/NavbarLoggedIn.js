@@ -56,8 +56,7 @@ export default function NavbarLoggedIn({setLoggedIn}) {
   }
 
   const handleHome =(e) => {
-      history.push('/')
-
+    history.push('/')
   }
 
   return (
@@ -72,7 +71,6 @@ export default function NavbarLoggedIn({setLoggedIn}) {
             variant="text"
             color="inherit"
             startIcon={<HomeIcon />}
-            // href="/#"
             className={classes.homeBtn}
             onClick={handleHome}
           >
@@ -82,7 +80,6 @@ export default function NavbarLoggedIn({setLoggedIn}) {
           <Button
             variant="text"
             color="inherit"
-            // href="/profile/home"
             onClick={()=> history.push('/profile/home')}
             className={classes.profileBtn}
           >
@@ -92,7 +89,6 @@ export default function NavbarLoggedIn({setLoggedIn}) {
           <Button
             variant="text"
             color="inherit"
-            // href="/#"
             className={classes.logoutBtn}
             onClick={handleLogout}
           >
