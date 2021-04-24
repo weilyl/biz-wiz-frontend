@@ -35,7 +35,7 @@ function App() {
     if (loggedIn) {
       return <SearchContent />
     } else {
-      return <Home />
+      return <Redirect to="/" />
     }
   }
 
@@ -49,7 +49,7 @@ function App() {
       <Router>
         <Nav setLoggedIn={setLoggedIn}/>
         <Switch>
-          <Route path="/search">
+          <Route exact path="/search">
             <SearchBusiness />
           </Route>
           <Route path="/create-post">
