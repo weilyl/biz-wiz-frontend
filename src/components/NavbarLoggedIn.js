@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   makeStyles,
   AppBar,
@@ -6,9 +6,9 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-
 import HomeIcon from "@material-ui/icons/Home";
-import {useHistory} from 'react-router';
+import {logout} from "../services/auth";
+import {useHistory} from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
   },
-  loginBtn: {
+  logoutBtn: {
     "&:hover": {
       borderColor: "#adcaec",
       boxShadow: "0 1px 6px #adcaec",
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
       color: "white",
     },
   },
-  registerBtn: {
+  profileBtn: {
     "&:hover": {
       borderColor: "#adcaec",
       boxShadow: "0 1px 6px #adcaec",
@@ -44,18 +44,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavbarNew({setLoggedIn}) {
-
-  if (window.localStorage.getItem('token') in [null, '']) {
-    setLoggedIn(false)
-  }
+export default function NavbarLoggedIn({setLoggedIn}) {
+  const classes = useStyles();
   const history = useHistory();
 
-  const handleHome =(e) => {
-    history.push('/');
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    setLoggedIn(false)
+    history.push('/')
   }
 
-  const classes = useStyles();
+  const handleHome =(e) => {
+      history.push('/')
+
+  }
+
   return (
     <div className={classes.rootDiv}>
       <AppBar position="fixed" color="primary" className="nav">
@@ -65,9 +69,10 @@ export default function NavbarNew({setLoggedIn}) {
           </Typography>
 
           <Button
-            ariant="text"
+            variant="text"
             color="inherit"
             startIcon={<HomeIcon />}
+            // href="/#"
             className={classes.homeBtn}
             onClick={handleHome}
           >
@@ -75,21 +80,23 @@ export default function NavbarNew({setLoggedIn}) {
           </Button>
 
           <Button
-            href="/login"
             variant="text"
             color="inherit"
-            className={classes.loginBtn}
+            // href="/profile/home"
+            onClick={()=> history.push('/profile/home')}
+            className={classes.profileBtn}
           >
-            Login
+              Profile
           </Button>
 
           <Button
-            href="/register"
             variant="text"
             color="inherit"
-            className={classes.registerBtn}
+            // href="/#"
+            className={classes.logoutBtn}
+            onClick={handleLogout}
           >
-            Register
+              Logout
           </Button>
 
         </Toolbar>

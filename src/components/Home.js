@@ -59,6 +59,8 @@ export default function Home() {
   useEffect(() => {
     setChecked(true);
   }, []);
+
+
   return (
     <div className="rootDiv">
       <Fade in={checked} {...(checked ? { timeout: 3000 } : {})}>

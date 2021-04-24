@@ -14,8 +14,6 @@ import React, { useState, useEffect } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { apiURL, token } from "../services/config";
 import axios from "axios";
-import handleLoad from "./ProfilePage";
-
 import clsx from "clsx";
 import { useHistory } from "react-router";
 
@@ -63,7 +61,6 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged } ) {
           console.log(typeof setIsPostChanged);
           console.log("first: ", isPostChanged);
           setIsPostChanged(!isPostChanged);
-          // history.push("/profile/home");
           console.log("second: ", isPostChanged)
         });
     } catch (error) {

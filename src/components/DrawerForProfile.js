@@ -7,13 +7,13 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import NavbarNew from "./NavbarNew";
 import ListAltOutlinedIcon from "@material-ui/icons/ListAltOutlined";
 import {
   AccountCircleOutlined,
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import NavbarLoggedIn from './NavbarLoggedIn';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -40,7 +40,7 @@ export default function DrawerForProfile() {
   return (
     <div className={classes.container}>
       <Drawer className={classes.drawer} variant="permanent" anchor="left">
-        <NavbarNew />
+        <NavbarLoggedIn />
         <div>
           <Typography variant="h5" color="initial">
             My Business
