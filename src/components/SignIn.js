@@ -1,5 +1,5 @@
 import { login } from "../services/auth.js";
-import { useFormFields } from "../lib/customHooks";
+// import { useFormFields } from "../lib/customHooks";
 import {
   Grid,
   Paper,
@@ -58,18 +58,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function SignIn({ setLoggedIn }) {
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
 
   const history = useHistory();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
-    console.log({user_name: userName, password: password})
-    await login({user_name: userName, password: password});
+    console.log({ user_name: userName, password: password });
+    await login({ user_name: userName, password: password });
     console.log("2");
     setLoggedIn(true);
     history.push("/profile/home");
@@ -131,7 +129,7 @@ function SignIn({ setLoggedIn }) {
                     type="password"
                     placeholder="Enter Password"
                     fullWidth
-                    onChange={(e) => {setPassword(e.target.value)}}
+                    onChange={(e) => setPassword(e.target.value)}
                     defaultValue={password}
                     InputProps={{
                       startAdornment: (

@@ -59,11 +59,15 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const [expanded, setExpanded] = React.useState(false);
   const [comments, setComments] = useState([]);
   const [postComment, setPostComment] = useState("");
-
+  const [businessInfo, setBusinessinfo] = useState([]);
 
   useEffect(() => {
     handleLoadComments();
-  }, []);
+    console.log("business id", post.business_id);
+    if (isPostChanged) {
+      setIsPostChanged(!isPostChanged);
+    }
+  }, [isPostChanged]);
 
   const handlePostComment = (e) => {
     e.preventDefault();
@@ -74,7 +78,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
         .post(
           `${apiURL}business/posts/post/${post.id}/comment/create`,
           {
-            content: postComment.toString(),
+            content: postComment,
           },
           {
             headers: {
@@ -104,7 +108,8 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
             Authorization: `Bearer ${window.localStorage.getItem("token")}`,
           },
         })
-        .then(() => {
+        .then((res) => {
+          console.log(res.data);
           setIsPostChanged(!isPostChanged);
         });
     } catch (error) {
@@ -162,10 +167,34 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
     setExpanded(!expanded);
   };
 
+  const profile = () => {
+    try {
+      return axios
+        .get(`${apiURL}business/home/profile`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setBusinessinfo(res.data);
+          return res.data;
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    profile();
+  }, []);
+
   return (
     <div>
       <Card className={classes.postCard} elevation={10}>
         <CardHeader
+          subheader={"By " + businessInfo.business_name}
           action={
             <IconButton onClick={handleDelete}>
               <DeleteOutlined />
@@ -203,11 +232,13 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
               <TextField
                 id="outlined-multiline-flexible"
                 multiline
+                rows={2}
                 onChange={(e) => setPostComment(e.target.value)}
                 defaultValue={postComment}
                 variant="outlined"
                 className={classes.commentField}
                 size="small"
+                fullWidth
               />
               <Button
                 className={classes.commentBtn}

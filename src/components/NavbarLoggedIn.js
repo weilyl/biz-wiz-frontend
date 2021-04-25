@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   makeStyles,
   AppBar,
@@ -7,8 +7,8 @@ import {
   Button,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import {logout} from "../services/auth";
-import {useHistory} from "react-router";
+import { logout } from "../services/auth";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -44,20 +44,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavbarLoggedIn({setLoggedIn}) {
+export default function NavbarLoggedIn({ setLoggedIn }) {
   const classes = useStyles();
   const history = useHistory();
 
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
-    setLoggedIn(false)
-    history.push('/')
-  }
+    setLoggedIn(false);
+    history.push("/");
+  };
 
-  const handleHome =(e) => {
-    history.push('/')
-  }
+  const handleHome = (e) => {
+    history.push("/");
+  };
 
   return (
     <div className={classes.rootDiv}>
@@ -80,10 +80,10 @@ export default function NavbarLoggedIn({setLoggedIn}) {
           <Button
             variant="text"
             color="inherit"
-            onClick={()=> history.push('/profile/home')}
+            onClick={() => history.push("/profile/home")}
             className={classes.profileBtn}
           >
-              Profile
+            Profile
           </Button>
 
           <Button
@@ -92,9 +92,8 @@ export default function NavbarLoggedIn({setLoggedIn}) {
             className={classes.logoutBtn}
             onClick={handleLogout}
           >
-              Logout
+            Logout
           </Button>
-
         </Toolbar>
       </AppBar>
     </div>
