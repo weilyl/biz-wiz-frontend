@@ -16,16 +16,23 @@ import ProfilePage from "./components/ProfilePage.js";
 import NavbarLoggedIn from "./components/NavbarLoggedIn";
 import SearchContent from "./components/SearchContent";
 import Account from "./components/Account.js";
+import { logout } from "./services/auth";
 
-// let isLoggedIn = !window.localStorage.getItem('token') in [null, ''];
+let isLoggedIn = ![undefined, null, ''].includes(window.localStorage.getItem('token'));
 
 //landing page
 function App() {
-  const [loggedIn, setLoggedIn] = useState(
-    !window.localStorage.getItem("token") in [null, ""]
-  );
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  function Nav({ setLoggedIn }) {
+  useEffect(() => {
+    logout()
+  }, [])
+
+  useEffect(()=> {
+    console.log(`am I logged in? ${loggedIn}`);
+}, [loggedIn])
+
+  function Nav({setLoggedIn}) {
     return loggedIn ? (
       <NavbarLoggedIn setLoggedIn={setLoggedIn} />
     ) : (
@@ -41,18 +48,6 @@ function App() {
     }
   }
 
-  function SearchPosts() {
-    if (loggedIn) {
-      return <SearchContent />
-    } else {
-      return <Redirect to="/" />
-    }
-  }
-
-  useEffect(()=> {
-      console.log(`am I logged in? ${loggedIn}`);
-  }, [loggedIn])
-
   //make a conditional statement to see if user is on the landing page or not
   return (
     <div>
@@ -62,10 +57,10 @@ function App() {
           <Route path="/create-post">
             <Post />
           </Route>
-          <Route path="/account">
+          <Route exact path="/account">
             <Account setLoggedIn={setLoggedIn} />
           </Route>
-          <Route path="/profile/home">
+          <Route exact path="/profile/home">
             <ProfilePage setLoggedIn={setLoggedIn} />
           </Route>
           <Route path="/register">
@@ -74,9 +69,9 @@ function App() {
           <Route path="/login">
             <SignIn setLoggedIn={setLoggedIn} />
           </Route>
-          <Route exact path="/search/posts">
+          {/* <Route path="/search-posts">
             <SearchPosts />
-          </Route>
+          </Route> */}
           <Route exact path="/search">
             <SearchBusiness />
           </Route>

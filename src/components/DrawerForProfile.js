@@ -40,6 +40,7 @@ export default function DrawerForProfile({ setLoggedIn }) {
       onClick: () => history.push("/account"),
     },
   ];
+
   const profile = () => {
     try {
       return axios
@@ -51,7 +52,6 @@ export default function DrawerForProfile({ setLoggedIn }) {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setBusinessinfo(res.data);
           return res.data;
         });

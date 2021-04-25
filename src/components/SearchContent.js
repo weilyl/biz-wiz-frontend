@@ -11,9 +11,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 import { apiURL } from '../services/config';
 import { useHistory } from 'react-router';
-import { PostCards } from './components/PostCards';
+import PostCard from "./PostCards";
 
 const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+  },
   logo: {
     width: "400px",
     marginLeft: "-39px",
@@ -126,6 +129,24 @@ export default function SearchContent() {
           </Button>
         </form>
       </Grow>
+      <Container maxWidth="md" className={classes.container}>
+        <Grid container justify="flex-end">
+            {searchResults.map((ele) => (
+                <Grid
+                item
+                key={ele.id}
+                xs={8}
+                md={10}
+                spacing={3}
+                className={classes.cards}
+                >
+                <PostCard
+                    post={ele}
+                />
+                </Grid>
+            ))}
+        </Grid>
+      </Container>
     </div>
   );
 }
