@@ -4,6 +4,7 @@ import PostCard from "./PostCards";
 import DrawerForProfile from "./DrawerForProfile";
 import { apiURL } from "../services/config";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePage({ setLoggedIn }) {
+export default function ProfilePage( { setLoggedIn }) {
   const handleLoad = () => {
     try {
       return axios
@@ -51,9 +52,15 @@ export default function ProfilePage({ setLoggedIn }) {
     handleLoad();
   }, []);
 
+  let isSignedOut = [null, '', undefined].includes(window.localStorage.getItem("token"))
+
+  if (isSignedOut) {
+    return <Redirect to="/" />
+  }
+
   return (
     <div>
-      <Container maxWidth="md" className={classes.container}>
+      <Container maxWidth="md" className={classes.container} >
         <Grid container justify="flex-end">
           <Grid item>
             <DrawerForProfile setLoggedIn={setLoggedIn} />
@@ -62,6 +69,7 @@ export default function ProfilePage({ setLoggedIn }) {
           {posts.map((ele) => (
             <Grid
               item
+              container
               key={ele.id}
               xs={8}
               md={10}

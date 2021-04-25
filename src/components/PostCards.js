@@ -14,7 +14,7 @@ import {
 import { DeleteOutlined } from "@material-ui/icons";
 import React, { useState, useEffect } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { apiURL, token } from "../services/config";
+import { apiURL } from "../services/config";
 import axios from "axios";
 import clsx from "clsx";
 

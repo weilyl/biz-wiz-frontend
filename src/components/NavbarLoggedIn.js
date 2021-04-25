@@ -9,6 +9,7 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import { logout } from "../services/auth";
 import { useHistory } from "react-router";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -56,6 +57,7 @@ export default function NavbarLoggedIn({ setLoggedIn }) {
   };
 
   const handleHome = (e) => {
+    e.preventDefault();
     history.push("/");
   };
 
@@ -94,6 +96,16 @@ export default function NavbarLoggedIn({ setLoggedIn }) {
           >
             Logout
           </Button>
+
+          <Button
+            variant="text"
+            color="inherit"
+            className={classes.logoutBtn}
+            onClick={() => history.push("/search-posts")}
+          >
+            {<SearchIcon /> }
+          </Button>
+
         </Toolbar>
       </AppBar>
     </div>

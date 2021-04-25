@@ -1,5 +1,5 @@
 import { login } from "../services/auth.js";
-import { useFormFields } from "../lib/customHooks";
+// import { useFormFields } from "../lib/customHooks";
 import {
   Grid,
   Paper,
@@ -66,7 +66,7 @@ function SignIn({ setLoggedIn }) {
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
-    console.log({ user_name: userName, password: password });
+    // console.log({ user_name: userName});
     await login({ user_name: userName, password: password });
     console.log("2");
     setLoggedIn(true);
@@ -79,7 +79,7 @@ function SignIn({ setLoggedIn }) {
     setChecked(true);
   }, []);
 
-  let isSignedOut = true; //window.localStorage.getItem("token") in [null, ""];
+  let isSignedOut = [null, '', undefined].includes(window.localStorage.getItem("token")) // in [null, ""];
 
   if (isSignedOut) {
     return (
