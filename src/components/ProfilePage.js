@@ -69,11 +69,9 @@ export default function ProfilePage( { setLoggedIn }) {
           {posts.map((ele) => (
             <Grid
               item
-              container
               key={ele.id}
               xs={8}
               md={10}
-              spacing={3}
               className={classes.cards}
             >
               <PostCard
