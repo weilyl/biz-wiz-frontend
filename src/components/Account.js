@@ -10,7 +10,17 @@ import DrawerForProfile from "./DrawerForProfile";
 import { apiURL } from "../services/config";
 import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({}));
+
+const useStyles = makeStyles((theme) => ({
+  accountPaper: {
+    padding: "20px",
+    minHeight: "500px",
+    maxHeight: "100vh",
+    width: " 100vh",
+    margin: "20px auto",
+  },
+}));
+
 
 export default function Account({ setLoggedIn }) {
   const classes = useStyles();
@@ -53,11 +63,46 @@ export default function Account({ setLoggedIn }) {
           <DrawerForProfile setLoggedIn={setLoggedIn} />
         </Grid>
         <Grid container spacing={1}>
-          <Paper>
-            <Typography variant="subtitle2" color="initial"></Typography>
+
+          <Paper className={classes.accountPaper}>
+            <Typography variant="h6" color="initial">
+              First Name: {businessInfo.first_name}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Last Name: {businessInfo.last_name}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Business Name: {businessInfo.business_name}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Username: {businessInfo.user_name}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Email: {businessInfo.email}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Address: {businessInfo.street_address}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              City: {businessInfo.city}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              State: {businessInfo.state}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Zip: {businessInfo.zip}
+            </Typography>
+            <Typography variant="h6" color="initial">
+              Business Type: {businessInfo.business_type}
+            </Typography>
+
           </Paper>
         </Grid>
       </Container>
     </div>
   );
 }
+
+
+
+
