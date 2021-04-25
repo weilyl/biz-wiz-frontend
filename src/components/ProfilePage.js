@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePage( { setLoggedIn }) {
+export default function ProfilePage({ setLoggedIn }) {
   const handleLoad = () => {
     try {
       return axios
@@ -52,30 +52,24 @@ export default function ProfilePage( { setLoggedIn }) {
     handleLoad();
   }, []);
 
-  let isSignedOut = [null, '', undefined].includes(window.localStorage.getItem("token"))
+  let isSignedOut = [null, "", undefined].includes(
+    window.localStorage.getItem("token")
+  );
 
   if (isSignedOut) {
-    return <Redirect to="/" />
+    return <Redirect to="/" />;
   }
 
   return (
     <div>
-      <Container maxWidth="md" className={classes.container} >
+      <Container maxWidth="md" className={classes.container}>
         <Grid container justify="flex-end">
           <Grid item>
             <DrawerForProfile setLoggedIn={setLoggedIn} />
           </Grid>
 
           {posts.map((ele) => (
-            <Grid
-              item
-              container
-              key={ele.id}
-              xs={8}
-              md={10}
-              spacing={3}
-              className={classes.cards}
-            >
+            <Grid item key={ele.id} xs={8} md={10} className={classes.cards}>
               <PostCard
                 post={ele}
                 setIsPostChanged={setIsPostChanged}
