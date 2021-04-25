@@ -52,10 +52,12 @@ export default function ProfilePage( { setLoggedIn }) {
     handleLoad();
   }, []);
 
-  let isSignedOut = [null, '', undefined].includes(window.localStorage.getItem("token"))
+  let isSignedOut = [null, "", undefined].includes(
+    window.localStorage.getItem("token")
+  );
 
   if (isSignedOut) {
-    return <Redirect to="/" />
+    return <Redirect to="/" />;
   }
 
   return (

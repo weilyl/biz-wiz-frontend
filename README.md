@@ -15,6 +15,7 @@ To run on local machine, run command from within the Biz-Wiz-Frontend directory:
 - React
 - React Bootstrap
 - React Router Dom
+- Material-UI
 - Node 0.10.x
 
 ## Development
@@ -27,6 +28,6 @@ From within the Biz-Wiz-Frontend directory:
 - npm install react-router-dom
 - npm install react-bootstrap bootstrap 
 - npm install axios
-- npm instal google-maps-react
+- npm install google-maps-react
 - npm install @material-ui/core
 ```

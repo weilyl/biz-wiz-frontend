@@ -59,7 +59,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const [expanded, setExpanded] = React.useState(false);
   const [comments, setComments] = useState([]);
   const [postComment, setPostComment] = useState("");
-  const [businessInfo, setBusinessinfo] = useState([]);
+  const [businessInfo, setBusinessinfo] = useState({});
 
   useEffect(() => {
     handleLoadComments();
@@ -170,15 +170,18 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const profile = () => {
     try {
       return axios
-        .get(`${apiURL}business/home/profile`, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          },
-        })
+        .post(
+          `${apiURL}business/business-info/${post.business_id}`,
+          { business_id: post.business_id },
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
-          console.log(res.data);
+          console.log("hereee", res.data);
           setBusinessinfo(res.data);
           return res.data;
         });
