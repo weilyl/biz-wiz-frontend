@@ -77,14 +77,25 @@ export default function SearchContent() {
   const history = useHistory();
   const [searchResults, setSearchResults] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [isPostChanged, setIsPostChanged] = useState(false);
   useEffect(() => {
     console.log(searchResults)
   }, [searchResults])
   useEffect(() => {
     if (searched) {
-        setSearched(!searched)
+      setSearched(!searched)
     }
   }, [searched])
+
+  useEffect(() => {
+    console.log(posts);
+    // console.log("initial", isPostChanged)
+    if (isPostChanged) {
+      setIsPostChanged(!isPostChanged);
+      // console.log("changed", isPostChanged)
+    }
+  }, [isPostChanged]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -152,6 +163,8 @@ export default function SearchContent() {
                 >
                 <PostCard
                     post={ele}
+                    setIsPostChanged={setIsPostChanged}
+                    isPostChanged={isPostChanged}
                 />
                 </Grid>
             ))}
