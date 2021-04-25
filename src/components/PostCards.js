@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
   commentField: {
     display: "block",
   },
-
+  commentStyle: {
+    display: "block",
+  },
   postCard: {
     maxWidth: "100vh",
   },
@@ -223,8 +225,9 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
           <CardContent>
             <List>
               {comments.map((comment) => (
-                <ListItem key={comment.id}>
+                <ListItem className={classes.commentStyle}key={comment.id}>
                   <Typography paragraph>{comment.content}</Typography>
+                  <Typography paragraph>By: {businessInfo.business_name}</Typography>
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />
                   </IconButton>
