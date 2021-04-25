@@ -69,9 +69,9 @@ function App() {
           <Route path="/login">
             <SignIn setLoggedIn={setLoggedIn} />
           </Route>
-          {/* <Route path="/search-posts">
+          <Route path="/search-posts">
             <SearchPosts />
-          </Route> */}
+          </Route>
           <Route exact path="/search">
             <SearchBusiness />
           </Route>

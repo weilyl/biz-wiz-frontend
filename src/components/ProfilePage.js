@@ -4,6 +4,7 @@ import PostCard from "./PostCards";
 import DrawerForProfile from "./DrawerForProfile";
 import { apiURL } from "../services/config";
 import axios from "axios";
+import { Redirect } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,6 +51,12 @@ export default function ProfilePage( { setLoggedIn }) {
   useEffect(() => {
     handleLoad();
   }, []);
+
+  let isSignedOut = [null, '', undefined].includes(window.localStorage.getItem("token"))
+
+  if (isSignedOut) {
+    return <Redirect to="/" />
+  }
 
   return (
     <div>
