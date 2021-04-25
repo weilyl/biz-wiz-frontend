@@ -58,18 +58,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function SignIn({ setLoggedIn }) {
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
 
   const history = useHistory();
 
   const handleLogin = async (event) => {
     event.preventDefault();
     console.log("handleLogin default prevented");
-    console.log({user_name: userName, password: password})
-    await login({user_name: userName, password: password});
+    console.log({ user_name: userName, password: password });
+    await login({ user_name: userName, password: password });
     console.log("2");
     setLoggedIn(true);
     history.push("/profile/home");

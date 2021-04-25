@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   List,
@@ -13,13 +13,16 @@ import {
   AddCircleOutlineOutlined,
 } from "@material-ui/icons";
 import { useHistory } from "react-router";
-import NavbarLoggedIn from './NavbarLoggedIn';
+import NavbarLoggedIn from "./NavbarLoggedIn";
+import { apiURL } from "../services/config";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({}));
 
-export default function DrawerForProfile({setLoggedIn}) {
+export default function DrawerForProfile({ setLoggedIn }) {
   const classes = useStyles();
   const history = useHistory();
+  const [businessInfo, setBusinessinfo] = useState([]);
   const itemList = [
     {
       text: "My Posts",
@@ -37,13 +40,36 @@ export default function DrawerForProfile({setLoggedIn}) {
       onClick: () => history.push("/account"),
     },
   ];
+  const profile = () => {
+    try {
+      return axios
+        .get(`${apiURL}business/home/profile`, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setBusinessinfo(res.data);
+          return res.data;
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  useEffect(() => {
+    profile();
+  }, []);
+
   return (
     <div className={classes.container}>
       <Drawer className={classes.drawer} variant="permanent" anchor="left">
-        <NavbarLoggedIn setLoggedIn={setLoggedIn}/>
+        <NavbarLoggedIn setLoggedIn={setLoggedIn} />
         <div>
           <Typography variant="h5" color="initial">
-            My Business
+            {businessInfo.business_name}
           </Typography>
         </div>
         <List>

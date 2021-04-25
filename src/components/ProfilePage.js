@@ -41,7 +41,6 @@ export default function ProfilePage({ setLoggedIn }) {
     handleLoad();
     console.log(posts);
     // console.log("initial", isPostChanged)
-    console.log("bug2");
     if (isPostChanged) {
       setIsPostChanged(!isPostChanged);
       // console.log("changed", isPostChanged)
@@ -65,7 +64,7 @@ export default function ProfilePage({ setLoggedIn }) {
               item
               key={ele.id}
               xs={8}
-              md={12}
+              md={10}
               spacing={3}
               className={classes.cards}
             >
