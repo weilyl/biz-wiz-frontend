@@ -100,12 +100,10 @@ export default function NavbarLoggedIn({ setLoggedIn }) {
             variant="text"
             color="inherit"
             className={classes.logoutBtn}
-            onClick={history.push("/search/posts")}
+            // onClick={history.push("/search/posts")}
           >
             {<SearchIcon />}
           </Button>
-
-          {/* <SearchIcon onClick={history.push("/search/posts")}/> */}
         </Toolbar>
       </AppBar>
     </div>

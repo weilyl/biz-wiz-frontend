@@ -73,6 +73,7 @@ export default function NavbarNew() {
 
           <Button
             href="/login"
+            // onClick={history.push('/login')}
             variant="text"
             color="inherit"
             className={classes.loginBtn}
@@ -81,7 +82,8 @@ export default function NavbarNew() {
           </Button>
 
           <Button
-            href="/register"
+            // href="/register"
+            onClick={history.push('/register')}
             variant="text"
             color="inherit"
             className={classes.registerBtn}

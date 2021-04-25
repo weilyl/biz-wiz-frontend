@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 import { apiURL } from '../services/config';
 import { useHistory } from 'react-router';
-import { PostCards } from './components/PostCards';
+import PostCard from './PostCards';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -73,15 +73,15 @@ export default function SearchContent() {
   const [searchInput, setSearchInput] = useState('');
   const history = useHistory();
   const [searchResults, setSearchResults] = useState([]);
-  const [searched, setSearched] = useState(false);
   useEffect(() => {
     console.log(searchResults)
   }, [searchResults])
   useEffect(() => {
-    console.log(searchResults)
-  }, [searched])
+    console.log(searchInput)
+  }, [searchInput])
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     try {
         return axios
         .get(`${apiURL}business/find/content/?content=${searchInput}`, {
@@ -115,7 +115,7 @@ export default function SearchContent() {
           <input className={classes.searchBar} 
             type="text" 
             value={searchInput}
-            onChange={setSearchInput}/>
+            onChange={(e) => setSearchInput(e.target.value)}/>
           <Button
             type="submit"
             className={classes.submitButton}
@@ -126,6 +126,25 @@ export default function SearchContent() {
           </Button>
         </form>
       </Grow>
+      <Container maxWidth="md" className={classes.container}>
+        <Grid container justify="flex-end">
+
+          {searchResults.map((ele) => (
+            <Grid
+              item
+              key={ele.id}
+              xs={8}
+              md={10}
+              spacing={3}
+              className={classes.cards}
+            >
+              <PostCard
+                post={ele}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </div>
   );
 }

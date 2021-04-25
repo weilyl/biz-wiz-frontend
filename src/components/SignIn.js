@@ -77,9 +77,10 @@ function SignIn({ setLoggedIn }) {
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setChecked(true);
+    console.log("token: ", window.localStorage.getItem("token") in [null, '', undefined])
   }, []);
 
-  let isSignedOut = true; //window.localStorage.getItem("token") in [null, ""];
+  let isSignedOut = window.localStorage.getItem("token") in [null, "", undefined];
 
   if (isSignedOut) {
     return (
@@ -161,7 +162,7 @@ function SignIn({ setLoggedIn }) {
       </div>
     );
   } else {
-    return <ProfilePage />;
+    return <Redirect to="/profile/home" />;
   }
 }
 
