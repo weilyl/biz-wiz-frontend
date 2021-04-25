@@ -225,9 +225,9 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
           <CardContent>
             <List>
               {comments.map((comment) => (
-                <ListItem className={classes.commentStyle}key={comment.id}>
-                  <Typography paragraph>{comment.content}</Typography>
-                  <Typography paragraph>By: {businessInfo.business_name}</Typography>
+                <ListItem key={comment.id}>
+                  <Typography paragraph>{businessInfo.business_name}: {comment.content}</Typography>
+                  {/* <Typography paragraph>{comment.content}</Typography> */}
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />
                   </IconButton>
