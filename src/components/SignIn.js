@@ -131,7 +131,7 @@ function SignIn({ setLoggedIn }) {
                     type="password"
                     placeholder="Enter Password"
                     fullWidth
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {setPassword(e.target.value)}}
                     defaultValue={password}
                     InputProps={{
                       startAdornment: (
