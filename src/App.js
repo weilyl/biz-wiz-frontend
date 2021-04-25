@@ -15,10 +15,7 @@ import NavbarNew from "./components/NavbarNew.js";
 import ProfilePage from "./components/ProfilePage.js";
 import NavbarLoggedIn from "./components/NavbarLoggedIn";
 import SearchContent from "./components/SearchContent";
-<<<<<<< HEAD
-=======
 import Account from "./components/Account.js";
->>>>>>> 5f56c1c07e3d5c01409861139a32b91e11048850
 
 // let isLoggedIn = !window.localStorage.getItem('token') in [null, ''];
 
@@ -44,7 +41,6 @@ function App() {
     }
   }
 
-<<<<<<< HEAD
   function SearchPosts() {
     if (loggedIn) {
       return <SearchContent />
@@ -54,13 +50,8 @@ function App() {
   }
 
   useEffect(()=> {
-      console.log(`am I logged in? ${loggedIn}`)
+      console.log(`am I logged in? ${loggedIn}`);
   }, [loggedIn])
-=======
-  useEffect(() => {
-    console.log(`am I logged in? ${loggedIn}`);
-  }, [loggedIn]);
->>>>>>> 5f56c1c07e3d5c01409861139a32b91e11048850
 
   //make a conditional statement to see if user is on the landing page or not
   return (
@@ -85,9 +76,6 @@ function App() {
           </Route>
           <Route path="/login">
             <SignIn setLoggedIn={setLoggedIn} />
-          </Route>
-          <Route exact path="/search/posts">
-            <SearchPosts />
           </Route>
           <Route exact path="/search/posts">
             <SearchPosts />
