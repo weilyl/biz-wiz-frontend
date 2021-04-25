@@ -46,9 +46,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavbarNew() {
 
-  // if (window.localStorage.getItem('token') in [null, '']) {
-  //   setLoggedIn(false)
-  // }
   const history = useHistory();
 
   const handleHome =(e) => {

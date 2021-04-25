@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
+import {
+    Button, 
+    Container,
+    Fade, 
+    Grid,
+    Grow, 
+    makeStyles 
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import axios from "axios";
+import { apiURL } from '../services/config';
+import { useHistory } from 'react-router';
+import { PostCards } from './components/PostCards';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -59,7 +70,34 @@ export default function SearchContent() {
   useEffect(() => {
     setChecked(true);
   }, []);
+  const [searchInput, setSearchInput] = useState('');
+  const history = useHistory();
+  const [searchResults, setSearchResults] = useState([]);
+  const [searched, setSearched] = useState(false);
+  useEffect(() => {
+    console.log(searchResults)
+  }, [searchResults])
+  useEffect(() => {
+    console.log(searchResults)
+  }, [searched])
 
+  const handleSearch = () => {
+    try {
+        return axios
+        .get(`${apiURL}business/find/content/?content=${searchInput}`, {
+            headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`
+            }
+        })
+        .then((res) => {
+            setSearchResults(res.data)
+        })
+    } catch (err) {
+        console.log(err.message)
+    }
+  }
 
   return (
     <div className="rootDiv">
@@ -68,19 +106,21 @@ export default function SearchContent() {
           <img
             className={classes.logo}
             src="/assets/BizWiz landing logo.PNG"
-            alt=""
+            alt="Logo of a wizard's hat over the 'B' in Biz Wiz with a wand for the 'i' in 'Wiz'"
           />
         </div>
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
-        <form action="">
-          <input className={classes.searchBar} type="text" />
+        <form action="" onSubmit={handleSearch}>
+          <input className={classes.searchBar} 
+            type="text" 
+            value={searchInput}
+            onChange={setSearchInput}/>
           <Button
             type="submit"
             className={classes.submitButton}
             variant="contained"
             size="small"
-            href="/search"
           >
             Search
           </Button>

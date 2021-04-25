@@ -59,9 +59,6 @@ function App() {
       <Router>
         <Nav setLoggedIn={setLoggedIn} />
         <Switch>
-          <Route exact path="/search">
-            <SearchBusiness />
-          </Route>
           <Route path="/create-post">
             <Post />
           </Route>
@@ -79,6 +76,9 @@ function App() {
           </Route>
           <Route exact path="/search/posts">
             <SearchPosts />
+          </Route>
+          <Route exact path="/search">
+            <SearchBusiness />
           </Route>
           <Route exact path="/">
             <Home />
