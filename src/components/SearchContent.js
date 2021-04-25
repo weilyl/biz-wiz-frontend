@@ -81,11 +81,15 @@ export default function SearchContent() {
     console.log(searchResults)
   }, [searchResults])
   useEffect(() => {
-    console.log(searchResults)
+    if (searched) {
+        setSearched(!searched)
+    }
   }, [searched])
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
     try {
+        console.log("inside try")
         return axios
         .get(`${apiURL}business/find/content/?content=${searchInput}`, {
             headers: {
@@ -95,7 +99,13 @@ export default function SearchContent() {
             }
         })
         .then((res) => {
-            setSearchResults(res.data)
+            console.log("response received")
+            // if (res.data.length === 0) {
+            //     return <div>No Results</div>
+            // } else {
+                console.log(res.data)
+                setSearchResults(res.data)
+            // }
         })
     } catch (err) {
         console.log(err.message)
@@ -118,7 +128,7 @@ export default function SearchContent() {
           <input className={classes.searchBar} 
             type="text" 
             value={searchInput}
-            onChange={setSearchInput}/>
+            onChange={(e) => setSearchInput(e.target.value)}/>
           <Button
             type="submit"
             className={classes.submitButton}
