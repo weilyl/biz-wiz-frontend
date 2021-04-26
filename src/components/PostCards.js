@@ -56,12 +56,91 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [comments, setComments] = useState([]);
   const [postComment, setPostComment] = useState("");
   const [businessInfo, setBusinessinfo] = useState({});
+  const [isPostAuthor, setIsPostAuthor] = useState(false);
+  const [isCommentAuthor, setIsCommentAuthor] = useState(false);
+
+  function PostTrash(){
+    if (isPostAuthor) {
+      return (
+        <div></div>
+      )
+    } else {
+      return <div></div>
+    }
+  }
+  
+
+  const checkPostAuthor = (postID) => {
+    // e.preventDefault();
+    console.log("initial post author: ", isPostAuthor);
+    try {
+      console.log("try")
+      return axios
+        .get(`${apiURL}business/post/author/${postID}`, 
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        }
+        })
+        .then((res) => {
+          console.log(res.data)
+          setIsPostAuthor(res.data.exists)
+          // return res.data
+          console.log(isPostAuthor)
+        }).then(() => {
+          setIsPostAuthor(!isPostAuthor)
+          console.log(isPostAuthor)
+        })
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  const checkCommentAuthor = (commentID) => {
+    // e.preventDefault();
+    console.log("initial comment author: ", isCommentAuthor);
+    try {
+      console.log("try")
+      return axios
+        .get(`${apiURL}business/comment/author/${commentID}`, 
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`
+        }
+        })
+        .then((res) => {
+          console.log(res.data)
+          setIsCommentAuthor(res.data.exists)
+          return res.data
+        })
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  useEffect(() => {
+    if (isPostAuthor === true) {
+      profile()
+      // setIsPostAuthor (!isPostAuthor)
+    }
+  }, [isPostAuthor])
+
+  useEffect(() => {
+    if (isCommentAuthor === true) {
+      // setIsCommentAuthor(!isCommentAuthor)
+    }
+  }, [isCommentAuthor])
 
   useEffect(() => {
     handleLoadComments();
@@ -183,8 +262,10 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
           }
         )
         .then((res) => {
+          checkPostAuthor(post.id);
           console.log("hereee", res.data);
           setBusinessinfo(res.data);
+          // setIsPostAuthor(false)
           return res.data;
         });
     } catch (error) {
@@ -200,11 +281,11 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
       <Card className={classes.postCard} elevation={10}>
         <CardHeader
           subheader={"By " + businessInfo.business_name}
-          action={
+          action={ !isPostAuthor ? (
             <IconButton onClick={handleDelete}>
-              <DeleteOutlined />
-            </IconButton>
-          }
+              <DeleteOutlined /> 
+            </IconButton> ) : (<div></div>)
+          } 
           title={post.title}
         />
         <CardContent>
@@ -227,7 +308,6 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
               {comments.map((comment) => (
                 <ListItem key={comment.id}>
                   <Typography paragraph>{businessInfo.business_name}: {comment.content}</Typography>
-                  {/* <Typography paragraph>{comment.content}</Typography> */}
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />
                   </IconButton>
