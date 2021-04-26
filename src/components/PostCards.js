@@ -18,6 +18,9 @@ import { apiURL } from "../services/config";
 import axios from "axios";
 import clsx from "clsx";
 
+import { getBusinessProfile } from "../services/auth";
+
+
 const useStyles = makeStyles((theme) => ({
   expand: {
     transform: "rotate(0deg)",
@@ -166,7 +169,6 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
     } catch (error) {
       console.log(error.message);
     }
-
   };
 
   const handleExpandClick = () => {
@@ -199,7 +201,6 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   useEffect(() => {
     profile();
   }, []);
-
 
   return (
     <div>

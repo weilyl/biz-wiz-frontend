@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
-    Button, 
-    Container,
-    Fade, 
-    Grid,
-    Grow, 
-    makeStyles 
+  Button,
+  Container,
+  Fade,
+  Grid,
+  Grow,
+  makeStyles,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
-import { apiURL } from '../services/config';
-import { useHistory } from 'react-router';
+import { apiURL } from "../services/config";
+import { useHistory } from "react-router";
 import PostCard from "./PostCards";
 
 const useStyles = makeStyles((theme) => ({
@@ -70,23 +70,23 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchContent() {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
-  useEffect(() => {
-    setChecked(true);
-  }, []);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
   const history = useHistory();
   const [searchResults, setSearchResults] = useState([]);
   const [searched, setSearched] = useState(false);
   const [posts, setPosts] = useState([]);
   const [isPostChanged, setIsPostChanged] = useState(false);
   useEffect(() => {
-    console.log(searchResults)
-  }, [searchResults])
+    setChecked(true);
+  }, []);
+  useEffect(() => {
+    console.log(searchResults);
+  }, [searchResults]);
   useEffect(() => {
     if (searched) {
-      setSearched(!searched)
+      setSearched(!searched);
     }
-  }, [searched])
+  }, [searched]);
 
   useEffect(() => {
     console.log(posts);
@@ -100,28 +100,28 @@ export default function SearchContent() {
   const handleSearch = (e) => {
     e.preventDefault();
     try {
-        console.log("inside try")
-        return axios
+      console.log("inside try");
+      return axios
         .get(`${apiURL}business/find/content/?content=${searchInput}`, {
-            headers: {
+          headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`
-            }
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
         })
         .then((res) => {
-            console.log("response received")
-            // if (res.data.length === 0) {
-            //     return <div>No Results</div>
-            // } else {
-            console.log(res.data)
-            setSearchResults(res.data)
-            // }
-        })
+          console.log("response received");
+          // if (res.data.length === 0) {
+          //     return <div>No Results</div>
+          // } else {
+          console.log(res.data);
+          setSearchResults(res.data);
+          // }
+        });
     } catch (err) {
-        console.log(err.message)
+      console.log(err.message);
     }
-  }
+  };
 
   return (
     <div className="rootDiv">
@@ -136,10 +136,12 @@ export default function SearchContent() {
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
         <form action="" onSubmit={handleSearch}>
-          <input className={classes.searchBar} 
-            type="text" 
+          <input
+            className={classes.searchBar}
+            type="text"
             value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}/>
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
           <Button
             type="submit"
             className={classes.submitButton}
@@ -152,21 +154,21 @@ export default function SearchContent() {
       </Grow>
       <Container maxWidth="md" className={classes.container}>
         <Grid container justify="flex-end">
-            {searchResults.map((ele) => (
-                <Grid
-                item
-                key={ele.id}
-                xs={8}
-                md={10}
-                className={classes.cards}
-                >
+          {searchResults.map((ele) => (
+            <Grow
+              in={checked}
+              style={{ transformOrigin: "0 0 0" }}
+              {...(checked ? { timeout: 2000 } : { timeout: 2000 })}
+            >
+              <Grid item key={ele.id} xs={8} md={10} className={classes.cards}>
                 <PostCard
-                    post={ele}
-                    setIsPostChanged={setIsPostChanged}
-                    isPostChanged={isPostChanged}
+                  post={ele}
+                  setIsPostChanged={setIsPostChanged}
+                  isPostChanged={isPostChanged}
                 />
-                </Grid>
-            ))}
+              </Grid>
+            </Grow>
+          ))}
         </Grid>
       </Container>
     </div>
