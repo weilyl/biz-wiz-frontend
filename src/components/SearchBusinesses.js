@@ -2,7 +2,19 @@ import axios from 'axios';
 import { useHistory, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import SearchIcon from "@material-ui/icons/Search";
-import { Button, Container, Fade, Grow, makeStyles } from "@material-ui/core";
+import {
+    Button, 
+    Container, 
+    Fade, 
+    Grow, 
+    makeStyles, 
+    Card,
+    CardContent,
+    CardHeader, 
+    List,
+    ListItem,
+    Typography
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     rootDiv: {
@@ -74,11 +86,9 @@ const useStyles = makeStyles((theme) => ({
   
 
 export default function SearchBusinesses() {
-    // console.log("type: ", results, typeof results)
     const classes = useStyles();
     const history = useHistory();
     const location = useLocation();
-    console.log(location.state.from);
     const [checked, setChecked] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [newSearchInput, setNewSearchInput] = useState('');
@@ -86,9 +96,9 @@ export default function SearchBusinesses() {
 
     useEffect(() => {
         setChecked(true);
-        // setSearchResults(results);
-        // console.log("input: ", searchInput);
+        if (location.state) {
         handleLoadResults(location.state.from);
+        }    
     }, []);
 
     useEffect(() => {
@@ -115,11 +125,7 @@ export default function SearchBusinesses() {
             })
             .then((res) => {
                 setSearchResults(res.data);
-                console.log(1, searchResults);
-                console.log(2, resultsChanged)
                 setResultsChanged(!resultsChanged);
-                console.log(3, resultsChanged)
-                // history.push('/search-businesses');
                 return searchResults
             })
         } catch (err) {
@@ -187,10 +193,28 @@ export default function SearchBusinesses() {
     </Container>
 
     <Container className={classes.resultsContainer}>
-        { searchResults.length !== 0 ?
-        searchResults.map((result) => {
-             return <div>{result["business_name"]}</div>
-        }) : <div>No matches</div>}
+        { searchResults.length !== 0 ? 
+            searchResults.map((result) => {
+                return (
+                    <Card>
+                        <CardHeader 
+                        title={result["business_name"]}
+                        subheader={result["business_type"]}
+                        />
+                        <CardContent>
+                            <Typography >
+                            Location: {' '}
+                            {result["street_address"]}{' '}
+                            {result["city"]}, {result["state"]}, {result["zip"]}{' '}
+                            </Typography>
+                        </CardContent>
+
+                    </Card>
+                )
+            }) : <Card><CardHeader title="No matches" /></Card>
+        }
+
+        
     </Container>
 
     </div>
