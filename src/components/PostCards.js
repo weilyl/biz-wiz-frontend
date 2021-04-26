@@ -232,7 +232,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
             <List>
               {comments.map((comment) => (
                 <ListItem key={comment.id} >
-                  <Typography paragraph>By: {comment.first_name} from {comment.business_name}: {comment.content}</Typography>
+                  <Typography paragraph>By {comment.first_name} from {comment.business_name}: {comment.content}</Typography>
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />
                   </IconButton>
