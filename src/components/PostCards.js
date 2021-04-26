@@ -92,6 +92,8 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
         )
         .then(() => {
           console.log(isPostChanged);
+          setPostComment("");
+          e.target.defaultValue = '';
           setIsPostChanged(!isPostChanged);
           console.log(isPostChanged);
         });

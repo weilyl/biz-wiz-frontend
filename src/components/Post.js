@@ -3,6 +3,7 @@ import "./Post.css";
 import {
   Button,
   Container,
+  Paper,
   makeStyles,
   TextField,
   Typography,
@@ -14,6 +15,14 @@ import { apiURL } from "../services/config";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: "20px",
+    minHeight: "500px",
+    maxHeight: "100vh",
+    width: " 100vh",
+    height: "80vh",
+    margin: "20px auto",
+  },
   postBtn: {
     "&:hover": {
       borderColor: "#adcaec",
@@ -82,6 +91,7 @@ export default function Post() {
   };
   return (
     <div>
+      <Paper elevation={10} className={classes.paper}>
       <Container className={classes.container}>
         <Grid
           container
@@ -135,6 +145,7 @@ export default function Post() {
           </Grid>
         </Grid>
       </Container>
+      </Paper>
     </div>
   );
 }
