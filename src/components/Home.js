@@ -1,7 +1,7 @@
+import axios from 'axios';
+import { useHistory } from 'react-router';
 import React, { useEffect, useState } from "react";
 import { Button, Container, Fade, Grow, makeStyles } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   rootDiv: {
@@ -57,13 +57,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
+export default function Home({setInput, setNewSearchResults}) {
   const classes = useStyles();
   const history = useHistory();
+  const [searchInput, setSearchInput] = useState("");
+  const [results, setResults] = useState([]);
+
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setChecked(true);
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      return axios
+        .get(`https://biz-wiz.herokuapp.com/business/find/name/${searchInput}`, {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json"
+              }
+        })
+        .then((res) => {
+          console.log('home promise: ', res.data)
+          setInput(searchInput);
+          const businesses = setResults(res.data);
+          setNewSearchResults(businesses);
+        })
+        .then(()=> {
+          console.log("results state set? ", results);
+        })
+        .then(() => {
+          history.push("/search-businesses", {results})
+        })
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
 
   return (
     <Container className={classes.rootDiv}>
@@ -77,19 +107,23 @@ export default function Home() {
         </div>
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
-        <form action="">
-          <input className={classes.searchBar} type="text" />
+        <form action="" onSubmit={(e) => handleSubmit(e)}>
+          <input 
+            className={classes.searchBar} 
+            type="text" 
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)} />
           <Button
             type="submit"
             className={classes.submitButton}
             variant="contained"
             size="small"
-            onClick={(e) => history.push("/")}
           >
             Search
           </Button>
         </form>
       </Grow>
     </Container>
+
   );
 }

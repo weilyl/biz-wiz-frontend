@@ -17,7 +17,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { apiURL } from "../services/config";
 import axios from "axios";
 import clsx from "clsx";
-import { getBusinessProfile } from '../services/auth';
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -38,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     },
     color: "#f6f8f9",
     background: "#2c63a6",
-    // padding: "12px 18px",
     fontSize: "14px",
     lineHeight: "16px",
     height: "auto",
