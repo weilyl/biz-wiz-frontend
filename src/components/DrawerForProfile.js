@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Container,
   Drawer,
   List,
   ListItem,
@@ -17,7 +18,14 @@ import NavbarLoggedIn from "./NavbarLoggedIn";
 import { apiURL } from "../services/config";
 import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  business_name: {
+    margin: "10 auto",
+  },
+  listContainer: {
+    display: "inline",
+  },
+}));
 
 export default function DrawerForProfile({ setLoggedIn }) {
   const classes = useStyles();
@@ -64,26 +72,33 @@ export default function DrawerForProfile({ setLoggedIn }) {
   }, []);
 
   return (
-    <div className={classes.container}>
+    <Container className={classes.container}>
       <Drawer className={classes.drawer} variant="permanent" anchor="left">
         <NavbarLoggedIn setLoggedIn={setLoggedIn} />
-        <div>
-          <Typography variant="h5" color="initial">
-            {businessInfo.business_name}
-          </Typography>
-        </div>
+        <div className={classes.businessName}></div>
         <List>
+          <ListItem>
+            <Typography
+              className={classes.businessName}
+              variant="h5"
+              color="initial"
+            >
+              {businessInfo.business_name}
+            </Typography>
+          </ListItem>
           {itemList.map((item, index) => {
             const { text, icon, onClick } = item;
             return (
               <ListItem button key={text} onClick={onClick}>
-                {icon}
-                <ListItemText primary={text} />
+                <div className={classes.listContainer}>
+                  {icon}
+                  <ListItemText primary={text} />
+                </div>
               </ListItem>
             );
           })}
         </List>
       </Drawer>
-    </div>
+    </Container>
   );
 }

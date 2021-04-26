@@ -44,14 +44,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Account({ setLoggedIn }) {
   const classes = useStyles();
   const [isBeingEdited, setIsBeingEdited] = useState(false);
   const [businessInfo, setBusinessInfo] = useState({});
-
   const [isSending, setIsSending] = useState(false);
-
   const [newBusinessInfo, setNewBusinessInfo] = useFormFields({
     ...businessInfo,
     acct_type: "Business",
@@ -93,9 +90,7 @@ export default function Account({ setLoggedIn }) {
         .then((res) => {
           console.log(res.data);
           setIsBeingEdited(false);
-
           setIsSending(false);
-
         });
     } catch (error) {
       console.log(error.message);
@@ -112,7 +107,6 @@ export default function Account({ setLoggedIn }) {
     <div>
       <Container className={classes.container}>
         <Grid container spacing={1}>
-
           <Grid item>
             <DrawerForProfile setLoggedIn={setLoggedIn} />
           </Grid>
@@ -445,20 +439,17 @@ export default function Account({ setLoggedIn }) {
                   </Typography>
                 </Grid>
               </Grid>
-
               {isBeingEdited ? (
                 <div>
                   <Button disabled onClick={() => setIsBeingEdited(true)}>
                     Edit
                   </Button>
                   <Button
-
                     className={classes.accountBtn}
                     type="submit"
                     onClick={(e) => {
                       setIsSending(true);
                       handleSave(e);
-
                     }}
                   >
                     Save
@@ -466,20 +457,17 @@ export default function Account({ setLoggedIn }) {
                 </div>
               ) : (
                 <div>
-
                   <Button
                     className={classes.accountBtn}
                     onClick={() => setIsBeingEdited(true)}
                   >
                     Edit
                   </Button>
-
                   <Button disabled onClick={() => setIsBeingEdited(false)}>
                     Save
                   </Button>
                 </div>
               )}
-
             </form>
           </Paper>
         </Grid>

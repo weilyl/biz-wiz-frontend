@@ -63,7 +63,6 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const [comments, setComments] = useState([]);
   const [postComment, setPostComment] = useState("");
   const [businessInfo, setBusinessinfo] = useState({});
-  const [commentAuthorName, setCommentAuthorName] = useState("")
 
   useEffect(() => {
     handleLoadComments();
@@ -76,31 +75,33 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const handlePostComment = (e) => {
     e.preventDefault();
     console.log(isPostChanged);
-    try {
-      console.log("try");
-      return axios
-        .post(
-          `${apiURL}business/posts/post/${post.id}/comment/create`,
-          {
-            content: postComment,
-          },
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    if (postComment !== "") {
+      try {
+        console.log("try");
+        return axios
+          .post(
+            `${apiURL}business/posts/post/${post.id}/comment/create`,
+            {
+              content: postComment,
             },
-          }
-        )
-        .then(() => {
-          console.log(isPostChanged);
-          setPostComment("");
-          e.target.defaultValue = '';
-          setIsPostChanged(!isPostChanged);
-          console.log(isPostChanged);
-        });
-    } catch (error) {
-      console.log(error.message);
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              },
+            }
+          )
+          .then(() => {
+            console.log(isPostChanged);
+            setPostComment("");
+            e.target.defaultValue = "";
+            setIsPostChanged(!isPostChanged);
+            console.log(isPostChanged);
+          });
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
   const handleCommentDelete = (id) => {
@@ -168,11 +169,6 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
       console.log(error.message);
     }
 
-    // try {
-
-    // } catch (err) {
-
-    // }
   };
 
   const handleExpandClick = () => {
@@ -205,18 +201,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   useEffect(() => {
     profile();
   }, []);
-  /*
-  const getBusinessName = async (business_id) => {
-    console.log("promise: ", getBusinessProfile(business_id))
-    const businessID = await getBusinessProfile(business_id)
-    try {
-      const businessName = await businessID
-      return businessName;
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
-  */
+
 
   return (
     <div>
@@ -248,8 +233,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
           <CardContent>
             <List>
               {comments.map((comment) => (
-                <ListItem key={comment.id}>
-                  {console.log("comment: ", comment)}
+                <ListItem key={comment.id} >
                   <Typography paragraph>{comment.business_name}: {comment.content}</Typography>
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />

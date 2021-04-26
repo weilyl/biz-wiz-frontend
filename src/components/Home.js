@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
+import { Button, Container, Fade, Grow, makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
+  rootDiv: {
+    margin: "0px auto",
+  },
   logo: {
     width: "400px",
     marginLeft: "-39px",
@@ -62,9 +65,8 @@ export default function Home() {
     setChecked(true);
   }, []);
 
-
   return (
-    <div className="rootDiv">
+    <Container className={classes.rootDiv}>
       <Fade in={checked} {...(checked ? { timeout: 3000 } : {})}>
         <div className={classes.logoContainer}>
           <img
@@ -88,6 +90,6 @@ export default function Home() {
           </Button>
         </form>
       </Grow>
-    </div>
+    </Container>
   );
 }

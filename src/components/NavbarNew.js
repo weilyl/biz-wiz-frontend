@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 
 import HomeIcon from "@material-ui/icons/Home";
-import {useHistory} from 'react-router';
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -45,12 +45,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NavbarNew() {
-
   const history = useHistory();
 
-  const handleHome =(e) => {
-    history.push('/');
-  }
+  const handleHome = (e) => {
+    history.push("/");
+  };
 
   const classes = useStyles();
   return (
@@ -88,7 +87,6 @@ export default function NavbarNew() {
           >
             Register
           </Button>
-
         </Toolbar>
       </AppBar>
     </div>
