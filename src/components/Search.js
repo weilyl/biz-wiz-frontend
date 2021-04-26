@@ -234,7 +234,7 @@ function SearchBusiness() {
         {/* <formdiv>
         
           <form onSubmit={nameFilter}>
-            <Form.Control className={classes.searchBar} type="text" id='searchField'/>
+            <Form.Control className={classes.searchBar} type= "text" id='searchField'/>
             <Button
               fullWidth="10px"
               type="submit"
