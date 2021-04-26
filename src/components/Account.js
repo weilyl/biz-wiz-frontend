@@ -38,9 +38,15 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: "20px",
     margin: "10px",
   },
-
+  btns: {
+    marginTop: "-10px",
+  },
+  inputField: {
+    fontSize: "1em",
+  },
   logo: {
     width: 200,
+    marginTop: "-20px",
   },
 }));
 
@@ -127,7 +133,7 @@ export default function Account({ setLoggedIn }) {
               />
             </Grid>
             <form action="" onSubmit={handleSave}>
-              <Grid container spacing={1}>
+              <Grid container spacing={1} justify="space-around">
                 <Grid item className={classes.fields} xs={4}>
                   <Typography
                     className={classes.keys}
@@ -440,7 +446,7 @@ export default function Account({ setLoggedIn }) {
                 </Grid>
               </Grid>
               {isBeingEdited ? (
-                <div>
+                <div className={classes.btns}>
                   <Button disabled onClick={() => setIsBeingEdited(true)}>
                     Edit
                   </Button>
@@ -456,7 +462,7 @@ export default function Account({ setLoggedIn }) {
                   </Button>
                 </div>
               ) : (
-                <div>
+                <div className={classes.btns}>
                   <Button
                     className={classes.accountBtn}
                     onClick={() => setIsBeingEdited(true)}
