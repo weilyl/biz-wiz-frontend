@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import SearchIcon from "@material-ui/icons/Search";
 import { Button, Container, Fade, Grow, makeStyles } from "@material-ui/core";
@@ -73,10 +73,12 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 
-export default function SearchBusinesses({newSearchResults}) {
-    console.log("type: ", typeof newSearchResults, newSearchResults)
+export default function SearchBusinesses() {
+    // console.log("type: ", results, typeof results)
     const classes = useStyles();
     const history = useHistory();
+    const location = useLocation();
+    console.log(location.state.from);
     const [checked, setChecked] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [newSearchInput, setNewSearchInput] = useState('');
@@ -86,7 +88,7 @@ export default function SearchBusinesses({newSearchResults}) {
         setChecked(true);
         // setSearchResults(results);
         // console.log("input: ", searchInput);
-        // handleLoadResults(searchInput);
+        handleLoadResults(location.state.from);
     }, []);
 
     useEffect(() => {
@@ -117,7 +119,7 @@ export default function SearchBusinesses({newSearchResults}) {
                 console.log(2, resultsChanged)
                 setResultsChanged(!resultsChanged);
                 console.log(3, resultsChanged)
-                history.push('/search-businesses');
+                // history.push('/search-businesses');
                 return searchResults
             })
         } catch (err) {

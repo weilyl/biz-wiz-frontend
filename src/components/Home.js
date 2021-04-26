@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import React, { useEffect, useState } from "react";
 import { Button, Container, Fade, Grow, makeStyles } from "@material-ui/core";
 
@@ -57,9 +57,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home({setInput, setNewSearchResults}) {
+export default function Home() {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
   const [searchInput, setSearchInput] = useState("");
   const [results, setResults] = useState([]);
 
@@ -70,6 +71,7 @@ export default function Home({setInput, setNewSearchResults}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let businesses;
     try {
       return axios
         .get(`https://biz-wiz.herokuapp.com/business/find/name/${searchInput}`, {
@@ -80,15 +82,10 @@ export default function Home({setInput, setNewSearchResults}) {
         })
         .then((res) => {
           console.log('home promise: ', res.data)
-          setInput(searchInput);
-          const businesses = setResults(res.data);
-          setNewSearchResults(businesses);
+          businesses = setResults(res.data);
         })
         .then(()=> {
-          console.log("results state set? ", results);
-        })
-        .then(() => {
-          history.push("/search-businesses", {results})
+          console.log("results state set? ", businesses);
         })
     } catch (err) {
       console.log(err.message)
@@ -107,14 +104,14 @@ export default function Home({setInput, setNewSearchResults}) {
         </div>
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
-        <form action="">
+        <form action="" /*onSubmit={(e) => history.push(`/search-businesses/?query=${searchInput}`, {results: results})}*/>
           <input className={classes.searchBar} type="text" onChange={(e) => setSearchInput(e.target.value)} />
           <Button
-            type="submit"
+            // type="submit"
             className={classes.submitButton}
             variant="contained"
             size="small"
-            onClick={(e) => history.push({pathname: "/search-businesses/?query=", state: {}})}
+            onClick={() => history.push("/search-businesses", {from: searchInput})}
           >
             Search
           </Button>
