@@ -114,8 +114,8 @@ export default function SearchContent() {
             // if (res.data.length === 0) {
             //     return <div>No Results</div>
             // } else {
-                console.log(res.data)
-                setSearchResults(res.data)
+            console.log(res.data)
+            setSearchResults(res.data)
             // }
         })
     } catch (err) {
@@ -158,7 +158,6 @@ export default function SearchContent() {
                 key={ele.id}
                 xs={8}
                 md={10}
-                spacing={3}
                 className={classes.cards}
                 >
                 <PostCard

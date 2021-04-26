@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePage({ setLoggedIn }) {
+export default function ProfilePage( { setLoggedIn }) {
   const handleLoad = () => {
     try {
       return axios
@@ -62,14 +62,20 @@ export default function ProfilePage({ setLoggedIn }) {
 
   return (
     <div>
-      <Container maxWidth="md" className={classes.container}>
+      <Container maxWidth="md" className={classes.container} >
         <Grid container justify="flex-end">
           <Grid item>
             <DrawerForProfile setLoggedIn={setLoggedIn} />
           </Grid>
 
           {posts.map((ele) => (
-            <Grid item key={ele.id} xs={8} md={10} className={classes.cards}>
+            <Grid
+              item
+              key={ele.id}
+              xs={8}
+              md={10}
+              className={classes.cards}
+            >
               <PostCard
                 post={ele}
                 setIsPostChanged={setIsPostChanged}

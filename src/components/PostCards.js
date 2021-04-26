@@ -48,7 +48,9 @@ const useStyles = makeStyles((theme) => ({
   commentField: {
     display: "block",
   },
-
+  commentStyle: {
+    display: "block",
+  },
   postCard: {
     maxWidth: "100vh",
   },
@@ -90,6 +92,8 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
         )
         .then(() => {
           console.log(isPostChanged);
+          setPostComment("");
+          e.target.defaultValue = '';
           setIsPostChanged(!isPostChanged);
           console.log(isPostChanged);
         });
@@ -224,7 +228,8 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
             <List>
               {comments.map((comment) => (
                 <ListItem key={comment.id}>
-                  <Typography paragraph>{comment.content}</Typography>
+                  <Typography paragraph>{businessInfo.business_name}: {comment.content}</Typography>
+                  {/* <Typography paragraph>{comment.content}</Typography> */}
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />
                   </IconButton>
