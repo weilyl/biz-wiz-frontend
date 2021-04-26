@@ -91,61 +91,61 @@ export default function Post() {
   };
   return (
     <div>
-      <Paper elevation={10} className={classes.paper}>
       <Container className={classes.container}>
-        <Grid
-          container
-          spacing={1}
-          direction="row"
-          justify="center"
-          alignItems="center"
-          alignContent="center"
-          wrap="nowrap"
-        >
-          <DrawerForProfile />
-          <Grid item xs={8} md={10}>
-            <Typography
-              variant="h6"
-              color="initial"
-              component="h2"
-              gutterBottom
-            >
-              Create A Post
-            </Typography>
-            <form autoComplete="off" noValidate onSubmit={handleCreatePost}>
-              <TextField
-                variant="outlined"
-                label="Title"
-                fullWidth
-                className={classes.titleField}
-                require
-                onChange={(e) => setTitle(e.target.value)}
-                error={titleError}
-              />
-              <TextField
-                id="outlined-multiline-static"
-                label="Content"
-                multiline
-                rows={10}
-                variant="outlined"
-                fullWidth
-                className={classes.contentField}
-                required
-                onChange={(e) => setContent(e.target.value)}
-                error={contentError}
-              />
-              <Button
-                className={classes.postBtn}
-                type="submit"
-                variant="contained"
+        <Paper elevation={10} className={classes.paper}>
+          <Grid
+            container
+            spacing={1}
+            direction="row"
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+            wrap="nowrap"
+          >
+            <Grid item xs={8} md={10}>
+              <DrawerForProfile />
+              <Typography
+                variant="h6"
+                color="initial"
+                component="h2"
+                gutterBottom
               >
-                Create Post
-              </Button>
-            </form>
+                Create A Post
+              </Typography>
+              <form autoComplete="off" noValidate onSubmit={handleCreatePost}>
+                <TextField
+                  variant="outlined"
+                  label="Title"
+                  fullWidth
+                  className={classes.titleField}
+                  require
+                  onChange={(e) => setTitle(e.target.value)}
+                  error={titleError}
+                />
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Content"
+                  multiline
+                  rows={10}
+                  variant="outlined"
+                  fullWidth
+                  className={classes.contentField}
+                  required
+                  onChange={(e) => setContent(e.target.value)}
+                  error={contentError}
+                />
+                <Button
+                  className={classes.postBtn}
+                  type="submit"
+                  variant="contained"
+                >
+                  Create Post
+                </Button>
+              </form>
+            </Grid>
           </Grid>
-        </Grid>
+        </Paper>
       </Container>
-      </Paper>
     </div>
   );
 }

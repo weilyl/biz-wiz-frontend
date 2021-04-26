@@ -1,228 +1,238 @@
-import React from 'react';
+import React from "react";
 //import Form from 'react-bootstrap/Form';
 // import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {register} from '../services/auth';
-// import {useState, useEffect} from 'react';
-import {useFormFields} from '../lib/customHooks';
-//import {Redirect} from 'react-router';
-import "./SignUp.css";
-import {useHistory} from 'react-router';
+// import "bootstrap/dist/css/bootstrap.min.css";
+import { register } from "../services/auth";
+import { useState, useEffect } from "react";
+import { useFormFields } from "../lib/customHooks";
+import {
+  Grid,
+  Paper,
+  makeStyles,
+  TextField,
+  Button,
+  Typography,
+  Link,
+  Collapse,
+  Container,
+} from "@material-ui/core";
 
-export default function SignUp ({setLoggedIn, loggedIn}) {
+import "./SignUp.css";
+import { useHistory } from "react-router";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: "20px",
+    minHeight: "500px",
+    height: "70vh",
+    width: "100vh",
+    margin: "0 auto",
+  },
+  logo: {
+    width: 200,
+  },
+
+  signUp: {
+    "&:hover": {
+      borderColor: "#adcaec",
+      boxShadow: "0 1px 6px #adcaec",
+      backgroundColor: "#12417b",
+    },
+    color: "#f6f8f9",
+    background: "#2c63a6",
+    padding: "12px 18px",
+    fontSize: "14px",
+    lineHeight: "16px",
+    height: "auto",
+    borderWidth: "0",
+    borderRadius: "20px",
+    top: 20,
+    marginBottom: 40,
+  },
+  container: {},
+}));
+
+export default function SignUp({ setLoggedIn, loggedIn }) {
   const history = useHistory();
-  
+
+  const classes = useStyles();
+  const [checked, setChecked] = useState(false);
   const [business, setBusinessState] = useFormFields({
-    first_name: '',
-    last_name: '',
-    business_name: '',
-    user_name: '',
-    password: '',
-    email: '',
-    street_address: '',
-    city: '',
-    state: '',
-    zip: '',
-    logo: '',
-    business_type: '',
-    acct_type: ''
+    first_name: "",
+    last_name: "",
+    business_name: "",
+    user_name: "",
+    password: "",
+    email: "",
+    street_address: "",
+    city: "",
+    state: "",
+    zip: "",
+    logo: "",
+    business_type: "",
+    acct_type: "Business",
   });
-  
+
   const handleRegister = (event) => {
-    event.preventDefault();  
+    event.preventDefault();
     register(business);
     setLoggedIn(true);
     history.push("/profile/home");
-  }
+  };
 
+  useEffect(() => {
+    setChecked(true);
+  }, []);
   return (
-    
-    <form>
-        <h3>Register Business</h3>
-        <div className="form-group">
-    <div 
-      className="custom-control custom-radio custom-control-inline">
-      <input 
-        type="radio" 
-        id="acct-type-business" 
-        name="acct_type" 
-        className="custom-control-input"
-        value="Business"
-        onClick={setBusinessState}/>
-      <label 
-        className="custom-control-label" 
-        htmlFor="acct-type-business"
-      >Business</label>
-    </div>
-    <div 
-      className="custom-control custom-radio custom-control-inline">
-      <input 
-        type="radio" 
-        id="acct-type-customer" 
-        name="acct_type" 
-        className="custom-control-input"
-        value="Customer"
-        onClick={setBusinessState}/>
-      <label 
-        className="custom-control-label" 
-        htmlFor="acct-type-customer"
-      >Customer</label>
-    </div>  
-  </div>
+    <div>
+      <Container className={classes.container}>
+        <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
+          <Paper elevation={20} className={classes.paper}>
+            <Grid
+              container
+              spacing={1}
+              direction="row"
+              justify="center"
+              alignItems="center"
+              alignContent="center"
+              wrap="nowrap"
+            >
+              <img
+                className={classes.logo}
+                src="/assets/BizWiz landing logo.PNG"
+                alt=""
+              />
+            </Grid>
+            <form autoComplete="off" onSubmit={handleRegister}>
+              <Grid container justify="space-around" spacing={1}>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="First Name"
+                    name="first_name"
+                    defaultValue={business.first_name}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Last Name"
+                    name="last_name"
+                    defaultValue={business.last_name}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    className={classes.inputUsername}
+                    label="Username"
+                    name="user_name"
+                    defaultValue={business.user_name}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
 
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="first_name">First name</label>
-        <input 
-          type="text" 
-          placeholder="Foo" 
-          name="first_name"
-          value={business.first_name}
-          onChange={setBusinessState}
-        />
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Password"
+                    type="password"
+                    name="password"
+                    defaultValue={business.password}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Email"
+                    name="email"
+                    defaultValue={business.email}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Business Name"
+                    name="business_name"
+                    defaultValue={business.business_name}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Business Type"
+                    name="business_type"
+                    defaultValue={business.business_type}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Address"
+                    name="street_address"
+                    defaultValue={business.street_address}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="City"
+                    name="city"
+                    defaultValue={business.city}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="State"
+                    name="state"
+                    defaultValue={business.state}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    margin="small"
+                    size="small"
+                    label="Zip"
+                    name="zip"
+                    defaultValue={business.zip}
+                    onChange={setBusinessState}
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                className={classes.signUp}
+                type="submit"
+                variant="contained"
+              >
+                Sign up
+              </Button>
+              <Typography variant="subtitle2">
+                <Link href="/login">Already have an account? Sign In</Link>
+              </Typography>
+            </form>
+          </Paper>
+        </Collapse>
+      </Container>
     </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="last_name">Last name</label>
-        <input 
-          type="text" 
-          placeholder="Bar" 
-          name="last_name"
-          value={business.last_name}
-          onChange={setBusinessState}
-        />
-    </div>
-    
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="business_type">Business Type</label>
-        <select 
-          className="browser-default custom-select dropdown"
-          name="business_type"
-          onChange={setBusinessState}
-        >
-          <option>Categories</option>
-          <option value="Technology">Technology</option>
-          <option value="Crafts">Crafts</option>
-          <option value="Beauty">Beauty</option>
-          <option value="Educational">Educational</option>
-          <option value="Local Market">Local Market</option>
-          <option value="Decor">Decor</option>
-        </select>
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="business_name"
-        >Business Name</label>
-        <input 
-          type="text" 
-          placeholder="FooBarElectronics" 
-          name="business_name"
-          value={business.business_name}
-          onChange={setBusinessState}/>
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="user_name">User Name</label>
-        <input 
-          type="text" 
-          placeholder="User Name" 
-          name="user_name"
-          value={business.user_name}
-          onChange={setBusinessState}
-        />
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="street_address">Address</label>
-        <input 
-          type="text" 
-          placeholder="Address" 
-          name="street_address"
-          value={business.street_address}
-          onChange={setBusinessState}/>
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="city">City</label>
-        <input 
-          type="text" 
-          placeholder="City" 
-          name="city"
-          value={business.city}
-          onChange={setBusinessState}
-        />
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="state">State</label>
-        <input 
-          type="text" 
-          placeholder="State" 
-          name="state"
-          value={business.state}
-          onChange={setBusinessState}
-        />
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="zip">Zip Code</label>
-        <input 
-          type="text" 
-          placeholder="00000" 
-          name="zip"
-          value={business.zip}
-          onChange={setBusinessState}
-        />
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="email">Email</label>
-        <input 
-          type="email" 
-          placeholder="Enter email" 
-          name="email"
-          value={business.email}
-          onChange={setBusinessState}
-        />
-    </div>
-
-    <div className="form-group">
-        <label 
-          className='labels' 
-          htmlFor="password">Password</label>
-        <input 
-          type="password" 
-          placeholder="Enter password" 
-          name="password"
-          value={business.password}
-          onChange={setBusinessState}
-        />
-    </div>
-
-    <button 
-      type="submit" 
-      className="btn btn-dark btn-lg btn-block" 
-      onClick={handleRegister}
-    >Register</button>
-    </form>
   );
 }

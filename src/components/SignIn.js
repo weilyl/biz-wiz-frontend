@@ -10,6 +10,7 @@ import {
   Typography,
   Link,
   Collapse,
+  Container,
 } from "@material-ui/core";
 import { AccountCircle, LockRounded } from "@material-ui/icons";
 import { useState, useEffect } from "react";
@@ -17,6 +18,9 @@ import { Redirect, useHistory } from "react-router";
 import ProfilePage from "./ProfilePage";
 
 const useStyles = makeStyles((theme) => ({
+  rootDiv: {
+    margin: "20px auto",
+  },
   paper: {
     padding: "20px",
     minHeight: "500px",
@@ -79,11 +83,13 @@ function SignIn({ setLoggedIn }) {
     setChecked(true);
   }, []);
 
-  let isSignedOut = [null, '', undefined].includes(window.localStorage.getItem("token")) // in [null, ""];
+  let isSignedOut = [null, "", undefined].includes(
+    window.localStorage.getItem("token")
+  ); // in [null, ""];
 
   if (isSignedOut) {
     return (
-      <div>
+      <Container className={classes.rootDiv}>
         <Grid>
           <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
             <Paper elevation={10} className={classes.paper}>
@@ -158,7 +164,7 @@ function SignIn({ setLoggedIn }) {
             </Paper>
           </Collapse>
         </Grid>
-      </div>
+      </Container>
     );
   } else {
     return <ProfilePage />;

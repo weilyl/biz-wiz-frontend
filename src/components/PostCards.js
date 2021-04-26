@@ -74,31 +74,33 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
   const handlePostComment = (e) => {
     e.preventDefault();
     console.log(isPostChanged);
-    try {
-      console.log("try");
-      return axios
-        .post(
-          `${apiURL}business/posts/post/${post.id}/comment/create`,
-          {
-            content: postComment,
-          },
-          {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+    if (postComment !== "") {
+      try {
+        console.log("try");
+        return axios
+          .post(
+            `${apiURL}business/posts/post/${post.id}/comment/create`,
+            {
+              content: postComment,
             },
-          }
-        )
-        .then(() => {
-          console.log(isPostChanged);
-          setPostComment("");
-          e.target.defaultValue = '';
-          setIsPostChanged(!isPostChanged);
-          console.log(isPostChanged);
-        });
-    } catch (error) {
-      console.log(error.message);
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+              },
+            }
+          )
+          .then(() => {
+            console.log(isPostChanged);
+            setPostComment("");
+            e.target.defaultValue = "";
+            setIsPostChanged(!isPostChanged);
+            console.log(isPostChanged);
+          });
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
   const handleCommentDelete = (id) => {
@@ -228,7 +230,9 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
             <List>
               {comments.map((comment) => (
                 <ListItem key={comment.id}>
-                  <Typography paragraph>{businessInfo.business_name}: {comment.content}</Typography>
+                  <Typography paragraph>
+                    {businessInfo.business_name}: {comment.content}
+                  </Typography>
                   {/* <Typography paragraph>{comment.content}</Typography> */}
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />

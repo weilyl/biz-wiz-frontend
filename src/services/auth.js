@@ -2,7 +2,7 @@ import axios from "axios";
 import { apiURL } from "./config";
 
 export const register = (userInfo) => {
-  console.log("USER INFO: ", userInfo);
+  // console.log("USER INFO: ", userInfo);
   return axios
     .post(`${apiURL}business/register`, userInfo, {
       headers: {
