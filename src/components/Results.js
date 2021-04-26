@@ -7,11 +7,11 @@ export default function Results() {
     const [input, setInput] = useState('');
     const [newSearchResults, setNewSearchResults] = useState([]);
 
-    console.log("num: ", newSearchResults.length)
+    // console.log("num: ", newSearchResults.length)
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         try {
-            return axios
+            return await axios
             .get(`https://biz-wiz.herokuapp.com/business/find/name/${input}`, {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
@@ -19,6 +19,7 @@ export default function Results() {
                   }
             })
             .then((res) => {
+                console.log("data: ", res.data);
                 setNewSearchResults(res.data);
                 console.log(1, newSearchResults);
                 // console.log(2, resultsChanged)
@@ -34,19 +35,22 @@ export default function Results() {
     }
 
     useEffect(() => {
+        handleSearch(input);
 
-        if (newSearchResults.length !== 0) {
+        if (newSearchResults !== undefined || !newSearchResults || newSearchResults.length === 0) {
             return <Home setNewSearchResults={setNewSearchResults} setInput={setInput} />
         } else {
             return <SearchBusinesses newSearchResults={newSearchResults} />
         }
 
-    }, newSearchResults)
+    }, [newSearchResults])
 
-    if (newSearchResults.length !== 0) {
-        return <Home setNewSearchResults={setNewSearchResults} setInput={setInput} />
-    } else {
-        return <SearchBusinesses newSearchResults={newSearchResults} />
-    }
+
+    return (
+        <div>
+            {!newSearchResults ? <SearchBusinesses newSearchResults={newSearchResults} /> : <Home setNewSearchResults={setNewSearchResults} setInput={setInput} />}
+        </div>
+    )
+
 
 }
