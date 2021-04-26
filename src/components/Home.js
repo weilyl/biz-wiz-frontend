@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   const classes = useStyles();
   const history = useHistory();
+  const [searchInput, setSearchInput] = useState("");
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setChecked(true);
@@ -78,13 +79,13 @@ export default function Home() {
       </Fade>
       <Grow in={checked} {...(checked ? { timeout: 3000 } : {})}>
         <form action="">
-          <input className={classes.searchBar} type="text" />
+          <input className={classes.searchBar} type="text" onChange={(e) => setSearchInput(e.target.value)} />
           <Button
             type="submit"
             className={classes.submitButton}
             variant="contained"
             size="small"
-            onClick={(e) => history.push("/")}
+            onClick={(e) => history.push({pathname: "/search-businesses/?query=", state: {}})}
           >
             Search
           </Button>
