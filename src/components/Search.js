@@ -184,7 +184,7 @@ function SearchBusiness() {
 //filter by type alone
     else{
       if(!businessLocation && businessType){                                    
-        axios.get('http://biz-wiz.herokuapp.com/business/category/'+businessType)
+        axios.get('https://biz-wiz.herokuapp.com/business/category/'+businessType)
         .then(res =>{
           const businesses = res.data;
           const businessList=businesses.map((business)=><Grid><Card style={{backgroundColor:'#3168b0'}}>{business.business_name}<p> </p>{business.business_type}</Card></Grid>)

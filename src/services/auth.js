@@ -44,3 +44,27 @@ export const logout = () => {
   window.localStorage.removeItem("token");
   // window.location.assign("/");
 };
+
+export const getBusinessProfile = async (business_id) => {
+  let result;
+  try {
+    return await axios
+      .post(
+        `${apiURL}business/business-info/${business_id}`,
+        { business_id: business_id },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log("data from business-info: ", res.data)
+        // res.data is a promise
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
+  return result
+}

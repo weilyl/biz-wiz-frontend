@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Fade, Grow, makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
   logo: {
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
+  const history = useHistory();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setChecked(true);
@@ -80,7 +82,7 @@ export default function Home() {
             className={classes.submitButton}
             variant="contained"
             size="small"
-            href="/search"
+            onClick={(e) => history.push("/")}
           >
             Search
           </Button>
