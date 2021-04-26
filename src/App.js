@@ -16,21 +16,21 @@ import SearchContent from "./components/SearchContent";
 import Account from "./components/Account.js";
 import { logout } from "./services/auth";
 import SearchBusinesses from "./components/SearchBusinesses";
-import Results from './components/Results';
+import Results from "./components/Results";
 
 //landing page
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    logout()
-  }, [])
+    logout();
+  }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log(`am I logged in? ${loggedIn}`);
-}, [loggedIn])
+  }, [loggedIn]);
 
-  function Nav({setLoggedIn}) {
+  function Nav({ setLoggedIn }) {
     return loggedIn ? (
       <NavbarLoggedIn setLoggedIn={setLoggedIn} />
     ) : (
@@ -77,7 +77,7 @@ function App() {
             <SearchBusiness />
           </Route>
           <Route exact path="/">
-            <Results />
+            <Home />
           </Route>
         </Switch>
       </Router>
