@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles, Grid, Container } from "@material-ui/core";
+import { makeStyles, Grid, Container, Grow } from "@material-ui/core";
 import PostCard from "./PostCards";
 import DrawerForProfile from "./DrawerForProfile";
 import { apiURL } from "../services/config";
@@ -37,9 +37,11 @@ export default function ProfilePage({ setLoggedIn }) {
   const classes = useStyles();
   const [posts, setPosts] = useState([]);
   const [isPostChanged, setIsPostChanged] = useState(false);
+  const [checked, setChecked] = React.useState(false);
 
   useEffect(() => {
     handleLoad();
+    setChecked(true);
     console.log(posts);
     // console.log("initial", isPostChanged)
     if (isPostChanged) {
@@ -69,13 +71,19 @@ export default function ProfilePage({ setLoggedIn }) {
           </Grid>
 
           {posts.map((ele) => (
-            <Grid item key={ele.id} xs={8} md={10} className={classes.cards}>
-              <PostCard
-                post={ele}
-                setIsPostChanged={setIsPostChanged}
-                isPostChanged={isPostChanged}
-              />
-            </Grid>
+            <Grow
+              in={checked}
+              style={{ transformOrigin: "0 0 0" }}
+              {...(checked ? { timeout: 2000 } : {})}
+            >
+              <Grid item key={ele.id} xs={8} md={10} className={classes.cards}>
+                <PostCard
+                  post={ele}
+                  setIsPostChanged={setIsPostChanged}
+                  isPostChanged={isPostChanged}
+                />
+              </Grid>
+            </Grow>
           ))}
         </Grid>
       </Container>
