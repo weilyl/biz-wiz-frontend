@@ -205,7 +205,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
     <div>
       <Card className={classes.postCard} elevation={10}>
         <CardHeader
-          subheader={"By " + businessInfo.business_name}
+          subheader={`By ${businessInfo.first_name} from ${businessInfo.business_name}`}
           action={
             <IconButton onClick={handleDelete}>
               <DeleteOutlined />
@@ -232,7 +232,7 @@ export default function PostCard({ post, setIsPostChanged, isPostChanged }) {
             <List>
               {comments.map((comment) => (
                 <ListItem key={comment.id} >
-                  <Typography paragraph>{comment.business_name}: {comment.content}</Typography>
+                  <Typography paragraph>By: {comment.first_name} from {comment.business_name}: {comment.content}</Typography>
                   <IconButton onClick={() => handleCommentDelete(comment.id)}>
                     <DeleteOutlined />
                   </IconButton>
